@@ -1,7 +1,7 @@
 <?php
 
 /* Start session and load library. */
-require_once('common/twitteroauth.php');
+require_once('core/twitteroauth.php');
 require_once('util/url.php');
 require_once('config.php');
 
@@ -44,7 +44,7 @@ function handle_login() {
   $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
  
   /* Get temporary credentials. */
-  $request_token = $connection->getRequestToken(path_join(BASE_URL, 'login.php?callback=1'));
+  $request_token = $connection->getRequestToken(join_path(BASE_URL, 'login.php?callback=1'));
 
   /* Save temporary credentials to session. */
   $_SESSION['oauth_token'] = $token = $request_token['oauth_token'];
@@ -54,7 +54,9 @@ function handle_login() {
   switch ($connection->http_code) {
     case 200:
       /* Build authorize URL and redirect user to Twitter. */
+      error_log($token);
       $url = $connection->getAuthorizeURL($token);
+      error_log($url);
       header('Location: ' . $url); 
       break;
     default:
@@ -71,11 +73,14 @@ function handle_clear() {
   header('Location: ./login.php');
 }
 
-if ($_GET['callback'] == 1) {
+if (in_array('callback', $_GET)) {
+  error_log('callback');
   handle_login();
-} elseif ($_GET['clear'] == 1) {
+} elseif (in_array('clear', $_GET)) {
+  error_log('clear');
   handle_clear();
 } else {
+  error_log('login');
   handle_login();
 }
 
