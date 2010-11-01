@@ -14,7 +14,7 @@ function handle_callback() {
   }
 
   /* Create TwitteroAuth object with app key/secret and token key/secret from default phase */
-  $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
+  $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret'], OAUTH_PROXY);
 
   /* Request access tokens from twitter */
   $access_token = $connection->getAccessToken($_REQUEST['oauth_verifier']);
@@ -41,7 +41,7 @@ function handle_login() {
   session_start();
 
   /* Build TwitterOAuth object with client credentials. */
-  $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
+  $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, NULL, NULL, OAUTH_PROXY);
  
   /* Get temporary credentials. */
   $request_token = $connection->getRequestToken(path_join(BASE_URL, 'login.php?callback=1'));
