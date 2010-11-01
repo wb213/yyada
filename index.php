@@ -6,7 +6,7 @@
 
 /* Load required lib files. */
 session_start();
-require_once('common/twitteroauth.php');
+require_once('core/twitteroauth.php');
 require_once('config.php');
 
 /* If access tokens are not available redirect to connect page. */
@@ -23,6 +23,6 @@ $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oau
 $content = $connection->get('account/verify_credentials');
 
 /* Some example calls */
-$connection->get('users/show', array('screen_name' => 'abraham')));
+$connection->get('users/show', array('screen_name' => 'googollee'));
 
 ?>
