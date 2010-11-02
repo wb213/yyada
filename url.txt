@@ -5,6 +5,8 @@
 /user/mention -> user.php?action=mention
 /user/show/:name -> user.php?name=:name
 /user/search/:name -> user.php?name=:name&action=search, post search data
+/user/follower/:name -> user.php?name=:name&action=follower, if no name, show current user's
+/user/following/:name -> user.php?name=:name&action=following, if no name, show current user's
 
 /tweet -> tweet.php current user's tweet
 /tweet/show/:id -> tweet.php?id=:id&action=show, including reply
