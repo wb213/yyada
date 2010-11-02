@@ -16,7 +16,7 @@
 /direct -> direct.php, current user's direct message
 /direct/sent -> direct.php?action=sent, current user's sent direct message
 /direct/new -> direct.php?action=new, post
-/direct/delete/xxx -> direct.php?id=xxx&action=delete
+/direct/delete/:id -> direct.php?id=:id&action=delete
 
 /favor -> favor.php
 /favor/add/:id -> favor.php?action=add&id=:id
