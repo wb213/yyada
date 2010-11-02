@@ -1,0 +1,32 @@
+/ -> login.php without auth
+  -> home.php
+
+/user -> user.php show current user
+/user/mention -> user.php?action=mention
+/user/show/:name -> user.php?name=:name
+/user/search/:name -> user.php?name=:name&action=search, post search data
+
+/tweet -> tweet.php current user's tweet
+/tweet/show/:id -> tweet.php?id=:id&action=show, including reply
+/tweet/delete/:id -> tweet.php?id=:id&action=delete
+/tweet/retweet/:id -> tweet.php?id=:id&action=retweet
+
+/direct -> direct.php, current user's direct message
+/direct/sent -> direct.php?action=sent, current user's sent direct message
+/direct/new -> direct.php?action=new, post
+/direct/delete/xxx -> direct.php?id=xxx&action=delete
+
+/favor -> favor.php
+/favor/add/:id -> favor.php?action=add&id=:id
+/favor/remove/:id -> favor.php?action=remove&id=:id
+/favor/show/:user -> favor.php?user=:user&action=show
+/favor/search/:user -> favor.php?action=search&user=:user, search in one's favor tweets. don't know if can implement.
+
+/list -> list.php
+/list/show/:user/:list -> list.php?id=:user/:list&action=show
+/list/add/:user/:list -> list.php?id=:user/:list&action=add, post, can add multi
+/list/delete/:user/:list -> list.php?id=:user/:list&action=delete, post, only one
+/list/sub/:user/:list -> list.php?id=:user/:list&action=sub, subscript a list
+/list/subers/:user/:list -> list.php?id=:user/:list&action=subers, show the subscriber of a list
+
+/search -> search.php
