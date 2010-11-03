@@ -11,7 +11,17 @@ require_once('config.php');
 
 /* If access tokens are not available redirect to connect page. */
 if (empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_token']) || empty($_SESSION['access_token']['oauth_token_secret'])) {
-    header('Location: ./login.php?clear=1');
+  echo "not login<pre>\n";
+  print_r($_SESSION);
+  print_r($_COOKIE);
+  echo "\n";
+  print_r($_SERVER);
+  echo "\n";
+  print_r($_GET);
+  echo "\n";
+  print_r($_REQUEST);
+  echo "</pre>";
+  return;
 }
 /* Get user access tokens out of the session. */
 $access_token = $_SESSION['access_token'];
@@ -43,7 +53,11 @@ $content = $connection->get('account/verify_credentials');
       <hr />
     <p>
       <pre>
-        <?php print_r($content); ?>
+        <?php
+print_r($_SESSION);
+print_r($_COOKIE);
+print_r($content);
+        ?>
       </pre>
     </p>
 
