@@ -1,11 +1,9 @@
 <?php
-require_once '../config.php';
 
 class settings {
 
-  public $ignore_keys = array(
-    'AUTH',
-    'UTC_OFFSET',
+  public static $ignore_keys = array(
+    'PHPSESSID',
   );
 
   public function get($key, $default = NULL) {
@@ -26,11 +24,11 @@ class settings {
     mcrypt_generic_init($td, SECRET_KEY, $iv);
     $crypt_text = mcrypt_generic($td, $value);
     mcrypt_generic_deinit($td);
-    $self->set($key, base64_encode($iv . $crypt_text));
+    $this->set($key, base64_encode($iv . $crypt_text));
   }
 
   public function get_secret($key, $default = NULL) {
-    $value = $self->get($key, $default);
+    $value = $this->get($key, $default);
     $crypt_text = base64_decode($value);
     $td = mcrypt_module_open('blowfish', '', 'cfb', '');
     $ivsize = mcrypt_enc_get_iv_size($td);
@@ -43,13 +41,14 @@ class settings {
     return $ret;
   }
 
-  public function clean() {
+  public static function clear() {
     $duration = time() - 3600;
     foreach (array_keys($_COOKIE) as $key) {
-      if (!in_array($key, $ignore_keys)) {
-        setcookie($key, NULL, $duration, '/');
-        setcookie($key, NULL, $duration);
-      }
+      if (in_array($key, self::$ignore_keys)) continue;
+      setcookie($key, NULL, $duration, '/');
+      setcookie($key, NULL, $duration);
     }
   }
 }
+
+?>
