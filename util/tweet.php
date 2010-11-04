@@ -31,19 +31,19 @@ function format_time($time, $offset) {
 }
 
 function format_tweet($tweet) {
-  $user_pattern = '@([a-zA-Z0-9_]*)(/[a-zA-Z0-9_]*){0,1}';
+  $user_pattern = '/@([a-zA-Z0-9_]*)(\/[a-zA-Z0-9_]*){0,1}/';
   $user_replace = '@<a href="/user/\1\2">\1\2</a>';
-  $tag_pattern = '#([a-zA-Z0-9_]*)';
+  $tag_pattern = '/#([a-zA-Z0-9_]*)/';
   $tag_replace = '#<a href="/search?data=\1">\1</a>';
 
-  $tweet = ereg_replace($user_pattern, $user_replace, $tweet);
-  $tweet = ereg_replace($tag_pattern, $tag_replace, $tweet);
+  $tweet = preg_replace($user_pattern, $user_replace, $tweet);
+  $tweet = preg_replace($tag_pattern, $tag_replace, $tweet);
 
   return $tweet;
 }
 
 function is_user_mention_in_tweet($user, $tweet) {
-  return eregi('@' . $user . '([^a-zA-Z0-9_]|$)', $tweet);
+  return preg_match('/@' . $user . '([^a-zA-Z0-9_]|$)/', $tweet);
 }
 
 ?>
