@@ -18,7 +18,7 @@ function cookie_set_secret($key, $value) {
   mcrypt_generic_init($td, SECRET_KEY, $iv);
   $crypt_text = mcrypt_generic($td, $value);
   mcrypt_generic_deinit($td);
-  $this->set($key, base64_encode($iv . $crypt_text));
+  cookie_set($key, base64_encode($iv . $crypt_text));
 }
 
 function cookie_get_secret($key, $default = NULL) {

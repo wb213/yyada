@@ -15,7 +15,9 @@ function handle_clear() {
 }
 
 function handle_callback() {
-  if (isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
+  if (empty($_SESSION['oauth_token']) ||
+      empty($_REQUEST['oauth_token']) ||
+      $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
     handle_clear();
     return;
   }
@@ -56,7 +58,7 @@ function handle_login() {
   default:
     $_SESSION['status'] = 'login_fail';
     handle_clear();
-    header('Location: ./index.php');
+    header('Location: /');
     break;
   }
 }
@@ -65,11 +67,11 @@ if (!isset($_REQUEST['action'])) $_REQUEST['action'] = 'login';
 switch ($_REQUEST['action']) {
 case 'callback':
   handle_callback();
-  header('Location: ./index.php');
+  header('Location: /');
   break;
 case 'clear':
   handle_clear();
-  header('Location: ./index.php');
+  header('Location: /');
   break;
 default:
   handle_login();

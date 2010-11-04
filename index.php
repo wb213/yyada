@@ -13,7 +13,7 @@ $access_token = load_access_token();
 function show_login() {
   global $theme;
 
-  if (empty($_SESSION['status']) $_SESSION['status'] = '';
+  if (empty($_SESSION['status'])) $_SESSION['status'] = '';
 
   switch ($_SESSION['status']) {
   case 'login_fail':
@@ -37,9 +37,9 @@ function show_timeline() {
   $tweets = $conn->get('statuses/home_timeline');
   $parser = new Parser(settings_get_configue());
   #$content = $parser->parse_tweets($tweets);
+  $content = $tweets;
 
-  print_r($tweets);
-  #include($theme->get_html_path('tweets'));
+  include($theme->get_html_path('tweets'));
 }
 
 if (isset($access_token)) {
