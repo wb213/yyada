@@ -13,6 +13,8 @@ $access_token = load_access_token();
 function show_login() {
   global $theme;
 
+  if (empty($_SESSION['status']) $_SESSION['status'] = '';
+
   switch ($_SESSION['status']) {
   case 'login_fail':
     $content = 'Sign in failed, please try again.';
@@ -21,7 +23,7 @@ function show_login() {
     $content = 'You are not invited by administrator.';
     break;
   default:
-    $content = 'Please sign in.';
+    $content = null;
     break;
   }
   
