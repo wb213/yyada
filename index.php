@@ -8,8 +8,11 @@ require_once('util/settings.php');
 
 session_start();
 $theme = get_theme();
+$access_token = load_access_token();
 
 function show_login() {
+  global $theme;
+
   switch ($_SESSION['status']) {
   case 'login_fail':
     $content = 'Sign in failed, please try again.';
@@ -26,15 +29,18 @@ function show_login() {
 }
 
 function show_timeline() {
+  global $theme;
+
   $conn = get_twitter_conn();
   $tweets = $conn->get('statuses/home_timeline');
   $parser = new Parser(settings_get_configue());
-  $content = $parser->parse_tweets($tweets);
+  #$content = $parser->parse_tweets($tweets);
 
-  include($theme->get_html_path('tweets'));
+  print_r($tweets);
+  #include($theme->get_html_path('tweets'));
 }
 
-if (isset(load_access_token())) {
+if (isset($access_token)) {
   show_timeline();
 } else {
   show_login();

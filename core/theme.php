@@ -10,7 +10,7 @@ class Theme {
   public function get_path() {
     chdir(__DIR__);
     chdir('../theme');
-    $path = implode('/', array(getcwd(), $name . '.theme'));
+    $path = implode('/', array(getcwd(), $this->name . '.theme'));
     chdir(__DIR__);
     return $path;
   }

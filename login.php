@@ -11,7 +11,7 @@ session_start();
 
 function handle_clear() {
   session_unset();
-  settings::clear();
+  cookie_clear();
 }
 
 function handle_callback() {

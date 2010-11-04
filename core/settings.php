@@ -9,7 +9,8 @@ class Settings {
   public $rt_format = "RT %u: %t";
 
   public function __construct($s = null) {
-    if (isset($s)) {
+    if (isset($s) && $s != "") {
+      error_log("s: ".$s);
       $this->load($s);
     }
   }

@@ -22,7 +22,9 @@ function cookie_set_secret($key, $value) {
 }
 
 function cookie_get_secret($key, $default = NULL) {
-  $value = $this->get($key, $default);
+  $value = cookie_get($key, $default);
+  if (empty($value)) return null;
+
   $crypt_text = base64_decode($value);
   $td = mcrypt_module_open('blowfish', '', 'cfb', '');
   $ivsize = mcrypt_enc_get_iv_size($td);
@@ -70,7 +72,7 @@ function load_access_token() {
                    'screen_name' => $screen_name);
     }
   }
-  return ret;
+  return $ret;
 }
 
 function get_twitter_conn() {
