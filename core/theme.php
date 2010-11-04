@@ -1,17 +1,22 @@
 <?php
 
 class Theme {
-  public $path = "";
+  public $name = "basic";
 
   public function __construct($name) {
+    $this->name = $name;
+  }
+
+  public function get_path() {
     chdir(__DIR__);
     chdir('../theme');
-    $this->path = implode('/', array(getcwd(), $name . '.theme'));
+    $path = implode('/', array(getcwd(), $name . '.theme'));
     chdir(__DIR__);
+    return $path;
   }
 
   public function get_html_path($name) {
-    return implode('/', array($this->path, $name . '.html'));
+    return implode('/', array($this->get_path(), $name . '.html'));
   }
 
   public static function list_all() {

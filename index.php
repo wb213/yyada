@@ -7,6 +7,7 @@ require_once('core/theme.php');
 require_once('util/settings.php');
 
 session_start();
+$theme = get_theme();
 
 function show_login() {
   switch ($_SESSION['status']) {
@@ -21,7 +22,7 @@ function show_login() {
     break;
   }
   
-  include(theme_get('sign'));
+  include($theme->get_html_path('sign'));
 }
 
 function show_timeline() {
@@ -30,7 +31,7 @@ function show_timeline() {
   $parser = new Parser(settings_get_configue());
   $content = $parser->parse_tweets($tweets);
 
-  include(theme_get('tweets'));
+  include($theme->get_html_path('tweets'));
 }
 
 if (isset(load_access_token())) {
