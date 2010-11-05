@@ -4,12 +4,15 @@ require_once('core/twitteroauth.php');
 require_once('core/settings.php');
 require_once('core/theme.php');
 require_once('util/settings.php');
+require_once('util/url.php');
+require_once('util/tweet.php');
 require_once('util/tag.php');
 
 session_start();
 $theme = get_theme();
 $access_token = load_access_token();
 $content = array();
+$settings = get_settings();
 
 function show_login() {
   global $theme;
@@ -37,7 +40,7 @@ function show_timeline() {
 
   $conn = get_twitter_conn();
   $tweets = $conn->get('statuses/home_timeline');
-  array_push($content, 'tweets' => $tweets);
+  $content = array_merge($content, array('tweets' => $tweets));
 
   include($theme->get_html_path('tweets'));
 }
