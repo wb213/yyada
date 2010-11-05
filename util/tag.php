@@ -64,7 +64,7 @@ function parse_tweet($tweet) {
   $ret .= "<span class='content'>".format_tweet($tweet->text)."</span>";
   $ret .= "<span class='via'>via ".$tweet->source."</span>";
   if (isset($tweet->in_reply_to_status_id_str))
-    $ret .= "<a class='reply' href='".path_join(BASE_URL, "tweet/show_reply", $tweet->id_str).">in reply to ".$tweet->in_reply_to_screen_name."</a>";
+    $ret .= "<a class='reply' href='".path_join(BASE_URL, "tweet/show_reply", $tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
   $ret .= "</p>";
   return $ret;
 }
