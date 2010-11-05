@@ -42,8 +42,9 @@ function format_tweet($tweet) {
   return $tweet;
 }
 
-function is_user_mention_in_tweet($user, $tweet) {
-  return preg_match('/@' . $user . '([^a-zA-Z0-9_]|$)/', $tweet);
+function get_mentioned_users($tweet) {
+  preg_match_all('/@(?P<name>[a-zA-Z0-9_]*)/', $tweet, $ret);
+  return array_map(strtolower, $ret['name']);
 }
 
 ?>

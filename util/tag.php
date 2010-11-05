@@ -57,6 +57,8 @@ function parse_tweet($tweet) {
   }
   $ret .= "<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>".$tweet->user->name."</a>";
   $ret .= "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>reply</a>";
+  if (count(get_mentioned_users($tweet) > 1))
+    $ret .= "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>reply</a>";
   $ret .= "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->id_str)."'>direct</a>";
   if ($tweet->favorited)
     $ret .= "<a class='unfavor' href='".path_join(BASE_URL, "favor/remove", $tweet->id_str)."'>unfavor</a>";
@@ -75,9 +77,10 @@ function parse_tweet($tweet) {
 function echo_tweets() {
   global $content, $access_token;
   echo "<ul class='tweets'>";
+  $current_user = strtolower($access_token['screen_name']);
   foreach ($content['tweets'] as $tweet) {
     echo "<li";
-    if (is_user_mention_in_tweet($access_token['screen_name'], $tweet->text))
+    if (in_array($current_user, get_mentioned_users($tweet)))
       echo " class='mentioned'";
     echo ">";
     echo parse_tweet($tweet);
