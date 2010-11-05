@@ -5,14 +5,8 @@ require_once('core/twitteroauth.php');
 require_once('core/settings.php');
 require_once('util/url.php');
 require_once('util/settings.php');
-require_once('util/invite.php');
 
 session_start();
-
-function handle_clear() {
-  session_unset();
-  cookie_clear();
-}
 
 function handle_callback() {
   if (empty($_SESSION['oauth_token']) ||
@@ -34,12 +28,6 @@ function handle_callback() {
     $_SESSION['status'] = 'login_fail';
     return;
   }
-  if (!check_invite($access_token['screen_name'], './invite.txt')) {
-    handle_clear();
-    $_SESSION['status'] = 'invite_fail';
-    return;
-  }
-  $_SESSION['status'] = 'verified';
   save_access_token($access_token);
 }
 
@@ -70,7 +58,7 @@ case 'callback':
   header('Location: /');
   break;
 case 'clear':
-  handle_clear();
+  logout();
   header('Location: /');
   break;
 default:

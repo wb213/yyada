@@ -12,6 +12,7 @@ $access_token = load_access_token();
 
 function show_login() {
   global $theme;
+  logout();
 
   if (empty($_SESSION['status'])) $_SESSION['status'] = '';
 
