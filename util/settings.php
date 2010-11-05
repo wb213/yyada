@@ -61,7 +61,7 @@ function get_theme() {
 }
 
 function check_invite($user) {
-  $invite_file = __DIR__ . '../invite.txt';
+  $invite_file = __DIR__ . '/' . '../invite.txt';
   if (ENABLE_INVITE != 'true') return true;
   if (!is_file($invite_file)) return false;
 
