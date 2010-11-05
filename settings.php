@@ -14,6 +14,17 @@ $access_token = load_access_token();
 $content = array();
 $settings = get_settings();
 
-include($theme->get_html_path('settings'));
+if (empty($_REQUEST)) {
+  include($theme->get_html_path('settings'));
+} else {
+  if (isset($_REQUEST['theme'])) $settings->theme = $_REQUEST['theme'];
+  $settings->show_avatar = isset($_REQUEST['avatar']);
+  $settings->is_reverse_thread = isset($_REQUEST['reverse']);
+  $settings->show_img = isset($_REQUEST['img']);
+  if (isset($_REQUEST['rt_format'])) $settings->rt_format = $_REQUEST['rt_format'];
+
+  save_settings();
+  header('Location: /');
+}
 
 ?>

@@ -10,7 +10,6 @@ class Settings {
 
   public function __construct($s = null) {
     if (isset($s) && $s != "") {
-      error_log("s: ".$s);
       $this->load($s);
     }
   }

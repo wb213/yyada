@@ -65,6 +65,11 @@ function get_settings() {
   return $s;
 }
 
+function save_settings() {
+  global $settings;
+  cookie_set('config', $settings->str());
+}
+
 function check_invite($user) {
   $invite_file = __DIR__ . '/' . '../invite.txt';
   if (ENABLE_INVITE != 'true') return true;

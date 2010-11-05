@@ -18,20 +18,20 @@ function echo_settings() {
     }
     echo '>' . $theme_name . '</option>';
   }
-  echo '</p>';
+  echo '</select></p>';
 
-  echo '<p><input type="checkbox" name="avatar" value="';
-  echo $s->show_avatar?'yes':'no';
+  echo '<p><input type="checkbox" name="avatar" value="yes"';
+  echo $s->show_avatar?' checked="checked"':'';
   echo '" />Show avatar.';
   echo '</p>';
 
-  echo '<p><input type="checkbox" name="reverse" value="';
-  echo $s->is_reverse_thread?'yes':'no';
+  echo '<p><input type="checkbox" name="reverse" value="yes"';
+  echo $s->is_reverse_thread?' checked="checked"':'';
   echo '" />Reverse the conversation thread.';
   echo '</p>';
 
-  echo '<p><input type="checkbox" name="img" value="';
-  echo $s->show_img?'yes':'no';
+  echo '<p><input type="checkbox" name="img" value="yes"';
+  echo $s->show_img?' checked="checked"':'';
   echo '" />Show image.';
   echo '</p>';
 
@@ -39,6 +39,9 @@ function echo_settings() {
   echo $s->rt_format;
   echo '" />';
   echo '</p>';
+
+  echo '<input type="submit" value="Submit">';
+  echo '</form>';
 }
 
 function echo_menu() {
