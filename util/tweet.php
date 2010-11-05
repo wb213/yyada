@@ -44,7 +44,7 @@ function format_tweet($tweet) {
 
 function get_mentioned_users($tweet) {
   preg_match_all('/@(?P<name>[a-zA-Z0-9_]*)/', $tweet, $ret);
-  return array_map(strtolower, $ret['name']);
+  return array_map('strtolower', $ret['name']);
 }
 
 ?>

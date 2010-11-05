@@ -57,8 +57,8 @@ function parse_tweet($tweet) {
   }
   $ret .= "<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>".$tweet->user->name."</a>";
   $ret .= "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>reply</a>";
-  if (count(get_mentioned_users($tweet) > 1))
-    $ret .= "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>reply</a>";
+  if (count(get_mentioned_users($tweet->text)) > 1)
+    $ret .= "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>reply all</a>";
   $ret .= "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->id_str)."'>direct</a>";
   if ($tweet->favorited)
     $ret .= "<a class='unfavor' href='".path_join(BASE_URL, "favor/remove", $tweet->id_str)."'>unfavor</a>";
@@ -66,11 +66,12 @@ function parse_tweet($tweet) {
     $ret .= "<a class='favor' href='".path_join(BASE_URL, "direct/new", $tweet->id_str)."'>favor</a>";
   $ret .= "<a class='retweet' href='".path_join(BASE_URL, "tweet/retweet", $tweet->id_str)."'>retweet</a>";
   $ret .= "<a class='time' href='".path_join(BASE_URL, "tweet/show", $tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
+  $ret .= "<p>";
   $ret .= "<span class='content'>".format_tweet($tweet->text)."</span>";
   $ret .= "<span class='via'>via ".$tweet->source."</span>";
   if (isset($tweet->in_reply_to_status_id_str))
     $ret .= "<a class='reply' href='".path_join(BASE_URL, "tweet/show_reply", $tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
-  $ret .= "</p>";
+  $ret .= "</p></p>";
   return $ret;
 }
 
@@ -80,7 +81,7 @@ function echo_tweets() {
   $current_user = strtolower($access_token['screen_name']);
   foreach ($content['tweets'] as $tweet) {
     echo "<li";
-    if (in_array($current_user, get_mentioned_users($tweet)))
+    if (in_array($current_user, get_mentioned_users($tweet->text)))
       echo " class='mentioned'";
     echo ">";
     echo parse_tweet($tweet);
