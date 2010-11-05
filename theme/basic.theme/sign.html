@@ -1,31 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <title>yyada</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <style type="text/css">
-      img {border-width: 0}
-      * {font-family:'Lucida Grande', sans-serif;}
-    </style>
-  </head>
-  <body>
-    <div>
-      <h2>Welcome to yyada, Yet Yyada Another DAbr.</h2>
+<head>
+  <title>yyada</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <style type="text/css">
+    img {border-width: 0}
+    * {font-family:'Lucida Grande', sans-serif;}
+  </style>
+</head>
+<body>
+  <div>
+    <h2>Welcome to yyada, Yet Yyada Another DAbr.</h2>
+    <?php if (isset($warning)) echo "<p>" . $warning . "</p>"; ?>
+    <a href="/login.php"><img src="<?php echo_theme_path() ?>/twitter_button.gif" alt="Sign in with Twitter/OAuth" width="165" height="28" /></a>
 
-<?php
-  if (isset($content)) echo "<p>" . $content . "</p>";
-?>
-
-      <a href="/login.php"><img src="theme/basic.theme/twitter_button.gif" alt="Sign in with Twitter/OAuth" width="165" height="28" /></a>
     <p>
       <pre>
         <?php
 print_r($_SESSION);
 print_r($_COOKIE);
-print_r($content);
         ?>
       </pre>
     </p>
 
-  </body>
+</body>
 </html>

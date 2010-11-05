@@ -60,6 +60,11 @@ function get_theme() {
   return new Theme($s->theme);
 }
 
+function get_settings() {
+  $s = new Settings(cookie_get('config'));
+  return $s;
+}
+
 function check_invite($user) {
   $invite_file = __DIR__ . '/' . '../invite.txt';
   if (ENABLE_INVITE != 'true') return true;

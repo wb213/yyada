@@ -12,6 +12,7 @@
 /tweet/show/:id -> tweet.php?id=:id&action=show, including reply
 /tweet/delete/:id -> tweet.php?id=:id&action=delete
 /tweet/retweet/:id -> tweet.php?id=:id&action=retweet
+/tweet/show_thread/:id
 
 /direct -> direct.php, current user's direct message
 /direct/sent -> direct.php?action=sent, current user's sent direct message
