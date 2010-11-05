@@ -66,9 +66,8 @@ function parse_tweet($tweet) {
     $ret .= "<a class='favor' href='".path_join(BASE_URL, "direct/new", $tweet->id_str)."'>favor</a>";
   $ret .= "<a class='retweet' href='".path_join(BASE_URL, "tweet/retweet", $tweet->id_str)."'>retweet</a>";
   $ret .= "<a class='time' href='".path_join(BASE_URL, "tweet/show", $tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
-  $ret .= "<p>";
-  $ret .= "<span class='content'>".format_tweet($tweet->text)."</span>";
-  $ret .= "<span class='via'>via ".$tweet->source."</span>";
+  $ret .= "<p>".format_tweet($tweet->text)." ";
+  $ret .= "<span class='via'>via ".$tweet->source."</span> ";
   if (isset($tweet->in_reply_to_status_id_str))
     $ret .= "<a class='reply' href='".path_join(BASE_URL, "tweet/show_reply", $tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
   $ret .= "</p></p>";
