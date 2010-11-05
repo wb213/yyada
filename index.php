@@ -27,6 +27,7 @@ function show_login() {
     $content = null;
     break;
   }
+  unset($_SESSION['status']);
   
   include($theme->get_html_path('sign'));
 }
