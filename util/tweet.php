@@ -31,13 +31,19 @@ function format_time($time, $offset) {
 }
 
 function format_tweet($tweet) {
-  $user_pattern = '/@([a-zA-Z0-9_]*)(\/[a-zA-Z0-9_]*){0,1}/';
-  $user_replace = '@<a href="/user/\1\2">\1\2</a>';
+  $list_pattern = '/@([a-zA-Z0-9_]*)\/([a-zA-Z0-9_]*)/';
+  $list_replace = '@\1/<a href="/list/\1/\2">\2</a>';
+  $user_pattern = '/@([a-zA-Z0-9_]*)/';
+  $user_replace = '@<a href="/user/\1">\1</a>';
   $tag_pattern = '/#([a-zA-Z0-9_]*)/';
   $tag_replace = '#<a href="/search?data=\1">\1</a>';
+  $url_pattern = '/((http|https)\:\/\/[a-zA-Z0-9_\-\+\.\/\?\&\$\@\:]+)/';
+  $url_replace = '<a href="\1">\1</a>';
 
+  $tweet = preg_replace($list_pattern, $list_replace, $tweet);
   $tweet = preg_replace($user_pattern, $user_replace, $tweet);
   $tweet = preg_replace($tag_pattern, $tag_replace, $tweet);
+  $tweet = preg_replace($url_pattern, $url_replace, $tweet);
 
   return $tweet;
 }
@@ -46,5 +52,7 @@ function get_mentioned_users($tweet) {
   preg_match_all('/@(?P<name>[a-zA-Z0-9_]*)/', $tweet, $ret);
   return array_map('strtolower', $ret['name']);
 }
+
+echo format_tweet('http://www.g.cn fdsafds @googol/nthcode')."\n";
 
 ?>
