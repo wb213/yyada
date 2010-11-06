@@ -53,6 +53,4 @@ function get_mentioned_users($tweet) {
   return array_map('strtolower', $ret['name']);
 }
 
-echo format_tweet('http://www.g.cn fdsafds @googol/nthcode')."\n";
-
 ?>
