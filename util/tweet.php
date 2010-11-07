@@ -37,7 +37,7 @@ function format_tweet($tweet) {
   $user_replace = '@<a href="/user/\1">\1</a>';
   $tag_pattern = '/#([a-zA-Z0-9_]*)/';
   $tag_replace = '#<a href="/search?data=\1">\1</a>';
-  $url_pattern = '/((http|https)\:\/\/[a-zA-Z0-9_\-\+\.\/\?\&\$\@\:]+)/';
+  $url_pattern = '/((http|https)\:\/\/[a-zA-Z0-9_\-\+\.\/\?\&\$\@\:\=]+)/';
   $url_replace = '<a href="\1">\1</a>';
 
   $tweet = preg_replace($list_pattern, $list_replace, $tweet);

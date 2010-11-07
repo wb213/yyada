@@ -55,7 +55,7 @@ function parse_tweet($tweet) {
   if ($settings->show_avatar) {
     $ret .= "<img src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
   }
-  $ret .= "<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>".$tweet->user->name."(@".$tweet->user->screen_name.")</a>";
+  $ret .= "<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>".$tweet->user->name." @".$tweet->user->screen_name."</a>";
   $ret .= "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>reply</a>";
   if (count(get_mentioned_users($tweet->text)) > 1)
     $ret .= "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>reply all</a>";
