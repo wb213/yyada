@@ -49,29 +49,81 @@ function echo_menu() {
   echo "<div class='menu'><a href='".path_join(BASE_URL, "user/show", $access_token['screen_name'])."'>Profile</a> | <a href='".BASE_URL."'>Home</a> | <a href='".path_join(BASE_URL, "user/mention")."'>Mention</a> | <a href='".path_join(BASE_URL, "direct")."'>Directs</a> | <a href='".path_join(BASE_URL, "favor")."'>Favourite</a> | <a href='".path_join(BASE_URL, "search")."'>Search</a> | <a href='".path_join(BASE_URL, "list")."'>List</a> | <a href='".path_join(BASE_URL, "settings")."'>Settings</a></div>";
 }
 
-function parse_tweet($tweet) {
-  global $settings;
-  $ret = "<p class='tweet'>";
-  if ($settings->show_avatar) {
-    $ret .= "<img src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
+function echo_update($reply_tweet_id = null) {
+  if (empty($reply_tweet_id)) $reply_tweet_id = "";
+  echo "
+<form class='update' method='post' action='/tweet'>
+  <textarea id='status' name='status' rows='3'></textarea> 
+  <input name='in_reply_to_id' value='$reply_tweet_id' type='hidden' />
+  <input type='submit' value='Update' />
+  <span id='remaining'>140</span> 
+  <span id='geo'>
+    <input onclick='goGeo()' type='checkbox' id='geoloc' name='location' />
+    <label for='geoloc' id='lblGeo'></label>
+  </span> 
+  <script type='text/javascript'> 
+started = false;
+chkbox = document.getElementById('geoloc');
+if (navigator.geolocation) {
+  geoStatus('Tweet my location');
+  if ('N'=='Y') {
+    chkbox.checked = true;
+    goGeo();
   }
-  $ret .= "<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>".$tweet->user->name." @".$tweet->user->screen_name."</a>";
-  $ret .= "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>reply</a>";
+}
+function goGeo(node) {
+  if (started) return;
+  started = true;
+  geoStatus('Locating...');
+  navigator.geolocation.getCurrentPosition(geoSuccess, geoStatus);
+} 
+function geoStatus(msg) {
+  document.getElementById('geo').style.display = 'inline';
+  document.getElementById('lblGeo').innerHTML = msg;
+}
+function geoSuccess(position) {
+  geoStatus('Tweet my location');
+  chkbox.value = position.coords.latitude + ',' + position.coords.longitude;
+}
+function updateCount() {
+  document.getElementById('remaining').innerHTML = 140 - document.getElementById('status').value.length;
+  setTimeout(updateCount, 400);
+}
+updateCount();
+  </script> 
+</form>";
+}
+
+function echo_tweet($tweet=null) {
+  global $settings, $content;
+  if (empty($tweet)) $tweet = $content['tweet'];
+
+  echo "<p class='tweet'>";
+  if ($settings->show_avatar) {
+    echo "<img src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
+  }
+  echo "<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>".$tweet->user->name." @".$tweet->user->screen_name."</a>";
+  echo "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>reply</a>";
   if (count(get_mentioned_users($tweet->text)) > 1)
-    $ret .= "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>reply all</a>";
-  $ret .= "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->id_str)."'>direct</a>";
+    echo "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>reply all</a>";
+  echo "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->id_str)."'>direct</a>";
   if ($tweet->favorited)
-    $ret .= "<a class='unfavor' href='".path_join(BASE_URL, "favor/remove", $tweet->id_str)."'>unfavor</a>";
+    echo "<a class='unfavor' href='".path_join(BASE_URL, "favor/remove", $tweet->id_str)."'>unfavor</a>";
   else
-    $ret .= "<a class='favor' href='".path_join(BASE_URL, "direct/new", $tweet->id_str)."'>favor</a>";
-  $ret .= "<a class='retweet' href='".path_join(BASE_URL, "tweet/retweet", $tweet->id_str)."'>retweet</a>";
-  $ret .= "<a class='time' href='".path_join(BASE_URL, "tweet/show", $tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
-  $ret .= "<p>".format_tweet($tweet->text)." ";
-  $ret .= "<span class='via'>via ".$tweet->source."</span> ";
+    echo "<a class='favor' href='".path_join(BASE_URL, "direct/new", $tweet->id_str)."'>favor</a>";
+  echo "<a class='retweet' href='".path_join(BASE_URL, "tweet/retweet", $tweet->id_str)."'>retweet</a>";
+  if (isset($tweet->geo)) {
+    $lat = $tweet->geo->coordinates[0];
+    $long = $tweet->geo->coordinates[1];
+    $point = "$lat,$long";
+    echo "<a class='geo' href='http://maps.google.com/maps/api/staticmap?center=$point&markers=$point&sensor=false&size=400x400&zoom=12'>geo</a>";
+  }
+  echo "<a class='time' href='".path_join(BASE_URL, "tweet/show", $tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
+  echo "<p>".format_tweet($tweet->text)." ";
+  echo "<span class='via'>via ".$tweet->source."</span> ";
   if (isset($tweet->in_reply_to_status_id_str))
-    $ret .= "<a class='reply' href='".path_join(BASE_URL, "tweet/show_reply", $tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
-  $ret .= "</p></p>";
-  return $ret;
+    echo "<a class='reply' href='".path_join(BASE_URL, "tweet/show_reply", $tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
+  echo "</p></p>";
 }
 
 function echo_tweets() {
@@ -83,15 +135,10 @@ function echo_tweets() {
     if (in_array($current_user, get_mentioned_users($tweet->text)))
       echo " class='mentioned'";
     echo ">";
-    echo parse_tweet($tweet);
+    echo_tweet($tweet);
     echo "</li>";
   }
   echo "</ul>";
-}
-
-function echo_tweet() {
-  global $content;
-  echo parse_tweet($content['tweet']);
 }
 
 function echo_users() {

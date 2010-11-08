@@ -13,16 +13,22 @@ $theme = get_theme();
 $access_token = load_access_token();
 $content = array();
 $settings = get_settings();
+$conn = get_twitter_conn();
 
 if (empty($_REQUEST)) {
-  global $theme, $content;
-
-  $conn = get_twitter_conn();
   $tweets = $conn->get('statuses/home_timeline');
   $content = array_merge($content, array('tweets' => $tweets));
 
   include($theme->get_html_path('tweets'));
 } else {
-  include($theme->get_html_path('show_debug'));
+  $post_data = array("status" => $_REQUEST['status']);
+  if (!empty($_REQUEST['in_reply_to_id']))
+    $post_data = array_merge($post_data, array("in_reply_to_status_id" => $_REQUEST['in_reply_to_id']));
+  if (!empty($_REQUEST['location'])) {
+    list($lat, $long) = explode(',', $_REQUEST['location']);
+    $post_data = array_merge($post_data, array("lat" => $lat, "long" => "$long"));
+  }
+  $conn->post('statuses/update', $post_data);
+  header('Location: /');
 }
 
