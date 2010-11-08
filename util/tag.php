@@ -9,7 +9,7 @@ function echo_settings() {
   global $settings;
   $s = $settings;
 
-  echo '<form action="settings" method="post">';
+  echo '<form action="/settings" method="post">';
   echo '<p>Theme:<select name="theme">';
   foreach (Theme::list_all() as $theme_name) {
     echo '<option value="' . $theme_name . '"';

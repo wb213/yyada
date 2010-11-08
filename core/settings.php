@@ -3,7 +3,7 @@
 class Settings {
 
   public $theme = "basic";
-  public $show_avatar = true;
+  public $show_avatar = false;
   public $is_reverse_thread = false;
   public $show_img = false;
   public $rt_format = "RT %u: %t";
