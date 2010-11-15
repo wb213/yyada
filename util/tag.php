@@ -2,7 +2,7 @@
 
 function echo_theme_path() {
   $t = get_theme();
-  echo $t->get_path();
+  echo '/theme/' . $t->name . '.theme';
 }
 
 function echo_settings() {
@@ -46,7 +46,7 @@ function echo_settings() {
 
 function echo_menu() {
   global $access_token;
-  echo "<div class='menu'><a href='".path_join(BASE_URL, "user/show", $access_token['screen_name'])."'>Profile</a> | <a href='".BASE_URL."'>Home</a> | <a href='".path_join(BASE_URL, "user/mention")."'>Mention</a> | <a href='".path_join(BASE_URL, "direct")."'>Directs</a> | <a href='".path_join(BASE_URL, "favor")."'>Favourite</a> | <a href='".path_join(BASE_URL, "search")."'>Search</a> | <a href='".path_join(BASE_URL, "list")."'>List</a> | <a href='".path_join(BASE_URL, "settings")."'>Settings</a></div>";
+  echo "<div class='menu'><a href='".path_join(BASE_URL, "user/show", $access_token['screen_name'])."'>Profile</a> | <a href='".BASE_URL."'>Home</a> | <a href='".path_join(BASE_URL, "user/mention")."'>Mention</a> | <a href='".path_join(BASE_URL, "direct")."'>Directs</a> | <a href='".path_join(BASE_URL, "favor")."'>Favourite</a> | <a href='".path_join(BASE_URL, "search")."'>Search</a> | <a href='".path_join(BASE_URL, "list")."'>List</a> | <a href='".path_join(BASE_URL, "settings")."'>Settings</a> | <a href='".path_join(BASE_URL, "login/clear")."'>Logout</a></div>";
 }
 
 function echo_update($reply_tweet_id = null) {

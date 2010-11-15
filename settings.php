@@ -14,14 +14,14 @@ $access_token = load_access_token();
 $content = array();
 $settings = get_settings();
 
-if (empty($_REQUEST)) {
+if (empty($_POST)) {
   include($theme->get_html_path('settings'));
 } else {
-  if (isset($_REQUEST['theme'])) $settings->theme = $_REQUEST['theme'];
-  $settings->show_avatar = isset($_REQUEST['avatar']);
-  $settings->is_reverse_thread = isset($_REQUEST['reverse']);
-  $settings->show_img = isset($_REQUEST['img']);
-  if (isset($_REQUEST['rt_format'])) $settings->rt_format = $_REQUEST['rt_format'];
+  if (isset($_POST['theme'])) $settings->theme = $_POST['theme'];
+  $settings->show_avatar = isset($_POST['avatar']);
+  $settings->is_reverse_thread = isset($_POST['reverse']);
+  $settings->show_img = isset($_POST['img']);
+  if (isset($_POST['rt_format'])) $settings->rt_format = $_POST['rt_format'];
 
   save_settings();
   header('Location: /');

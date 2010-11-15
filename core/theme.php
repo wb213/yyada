@@ -10,13 +10,13 @@ class Theme {
   public function get_path() {
     chdir(__DIR__);
     chdir('../theme');
-    $path = implode('/', array(getcwd(), $this->name . '.theme'));
+    $path = getcwd() . '/' . $this->name . '.theme';
     chdir(__DIR__);
     return $path;
   }
 
   public function get_html_path($name) {
-    return implode('/', array($this->get_path(), $name . '.html'));
+    return $this->get_path() . '/' . $name . '.html';
   }
 
   public static function list_all() {
