@@ -42,6 +42,10 @@ ul {
 	padding : 0px;
 }
 
+.toolbar, .status {
+	display:block;
+}
+
 .name, .reply, .replyall, .direct, .favor, .retweet, .time {
 	margin : 3px ;
 }

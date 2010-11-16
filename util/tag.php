@@ -107,7 +107,7 @@ function echo_tweet($tweet=null) {
   if (empty($tweet)) $tweet = $content['tweet'];
 
   if ($settings->show_avatar) {
-    echo "<img src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
+    echo "<img class='avatar' src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
   }
   echo "<p class='tweet'>";
   echo "<span class='toolbar'>";
