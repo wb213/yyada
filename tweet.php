@@ -42,7 +42,7 @@ function get_reply_thread($tweet_id) {
 function get_reply_users($tweet_id) {
   global $conn;
   $t = $conn->get('statuses/show/'.$tweet_id);
-  $users = get_mentioned_users('@'.$t->user->screen_name.' '.$tweet->text)
+  $users = get_mentioned_users('@'.$t->user->screen_name.' '.$tweet->text);
   $ret = array();
   foreach ($users as $user) {
     if (!in_array($user, $ret))
