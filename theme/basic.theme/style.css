@@ -1,0 +1,74 @@
+a {
+	color : #1481B1;
+}
+
+table {
+	border-collapse : collapse;
+}
+
+form {
+	margin : .3em;
+}
+
+td {
+	vertical-align : top;padding : 0.3em;
+}
+
+img.avatar {
+	float : left;
+	border : 0;
+	max-height : 25px ;
+	max-width : 25px ;
+}
+
+via {
+	color : #555;
+	font : 70% sans-serif;
+}
+
+body {
+	background : #FFF;
+	color : #333;
+	margin : 0;
+	font : 90% sans-serif;
+}
+
+li {
+	list-style-type : none;
+}
+
+ul {
+	margin : 4px;
+	padding : 0px;
+}
+
+.name, .reply, .replyall, .direct, .favor, .retweet, .time {
+	margin : 3px ;
+}
+
+ul.tweets > li {
+	background : #FFF;
+}
+
+ul.tweets > li.even {
+	background : #EEE;
+}
+
+tr.reply td {
+	background : #FFA;
+}
+
+tr.reply.even td {
+	background :  #DD9;
+}
+
+.menu {
+	color : #333;
+	background : #9AE4E8;
+	padding :  2px;
+}
+
+.menu a {
+	color : #333;
+	text-decoration :  none;
+}
