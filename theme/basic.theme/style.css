@@ -21,7 +21,7 @@ img.avatar {
 	max-width : 25px ;
 }
 
-via {
+.via, span.via > a {
 	color : #555;
 	font : 70% sans-serif;
 }
@@ -43,7 +43,14 @@ ul {
 }
 
 .toolbar, .status {
+	margin:3px;
 	display:block;
+}
+
+.tweet {
+	margin:4px;
+	display:block;
+	overflow:hidden;
 }
 
 .name, .reply, .replyall, .direct, .favor, .retweet, .time {

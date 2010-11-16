@@ -129,7 +129,7 @@ function echo_tweet($tweet=null) {
   }
   echo "<a class='time' href='".path_join(BASE_URL, "tweet/show", $tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
   echo "</span>";
-  echo "<span class='stauts'>".format_tweet($tweet->text)." ";
+  echo "<span class='status'>".format_tweet($tweet->text)." ";
   echo "<span class='via'>via ".$tweet->source."</span> ";
   if (isset($tweet->in_reply_to_status_id_str))
     echo "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
