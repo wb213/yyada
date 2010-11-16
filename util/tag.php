@@ -112,7 +112,7 @@ function echo_tweet($tweet=null) {
   }
   echo "<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>".$tweet->user->name." @".$tweet->user->screen_name."</a>";
   echo "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>reply</a>";
-  if (count(get_mentioned_users($tweet->text)) > 0)
+  if (count(get_mentioned_users('@'.$tweet->user->screen_name.' '.$tweet->text)) > 1)
     echo "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>reply all</a>";
   echo "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->id_str)."'>direct</a>";
   if ($tweet->favorited)
@@ -142,7 +142,7 @@ function echo_tweets() {
   foreach ($content['tweets'] as $tweet) {
     echo "<li class='";
     if ((++$count & 1) == 0) echo ' even';
-    if (in_array($current_user, get_mentioned_users($tweet->text)))
+    if (in_array('@'.$current_user, get_mentioned_users($tweet->text)))
       echo " mentioned";
     echo "'>";
     echo_tweet($tweet);
