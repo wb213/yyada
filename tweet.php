@@ -39,6 +39,19 @@ function get_reply_thread($tweet_id) {
   return $ret;
 }
 
+function get_reply_users($tweet_id) {
+  global $conn;
+  $user_pattern = '/(@[a-zA-Z0-9_]*)/';
+  $t = $conn->get('statuses/show/'.$tweet_id);
+  preg_match_all($user_pattern, '@'.$t->user->screen_name.' '.$t->text, $matches, PREG_SET_ORDER);
+  $ret = array();
+  foreach ($matches as $user) {
+    if (!in_array($user[0], $ret))
+      array_push($ret, $user[0]);
+  }
+  return implode($ret, ' ').' ';
+}
+
 if (!empty($_POST)) {
   update();
 } else {
@@ -46,7 +59,12 @@ if (!empty($_POST)) {
   case 'reply':
     $tweets = get_reply_thread($_GET['args']);
     $content['reply_tweet_id'] = $_GET['args'];
-    $content['reply_tweet_name'] = $tweets[0]->user->screen_name;
+    $content['reply_tweet_name'] = '@'.$tweets[0]->user->screen_name.' ';
+    break;
+  case 'replyall':
+    $tweets = get_reply_thread($_GET['args']);
+    $content['reply_tweet_id'] = $_GET['args'];
+    $content['reply_tweet_name'] = get_reply_users($_GET['args']);
     break;
   default:
     $tweets = $conn->get('statuses/home_timeline');

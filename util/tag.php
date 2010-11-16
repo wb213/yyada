@@ -56,7 +56,7 @@ function echo_update() {
   $reply_tweet_name = "";
   if (isset($content['reply_tweet_id'])) {
     $reply_tweet_id = $content['reply_tweet_id'];
-    $reply_tweet_name = '@'.$content['reply_tweet_name'].' ';
+    $reply_tweet_name = $content['reply_tweet_name'];
   }
 
   echo "
