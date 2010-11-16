@@ -49,11 +49,19 @@ function echo_menu() {
   echo "<div class='menu'><a href='".path_join(BASE_URL, "user/show", $access_token['screen_name'])."'>Profile</a> | <a href='".BASE_URL."'>Home</a> | <a href='".path_join(BASE_URL, "user/mention")."'>Mention</a> | <a href='".path_join(BASE_URL, "direct")."'>Directs</a> | <a href='".path_join(BASE_URL, "favor")."'>Favourite</a> | <a href='".path_join(BASE_URL, "search")."'>Search</a> | <a href='".path_join(BASE_URL, "list")."'>List</a> | <a href='".path_join(BASE_URL, "settings")."'>Settings</a> | <a href='".path_join(BASE_URL, "login/clear")."'>Logout</a></div>";
 }
 
-function echo_update($reply_tweet_id = null) {
-  if (empty($reply_tweet_id)) $reply_tweet_id = "";
+function echo_update() {
+  global $content;
+
+  $reply_tweet_id = "";
+  $reply_tweet_name = "";
+  if (isset($content['reply_tweet_id'])) {
+    $reply_tweet_id = $content['reply_tweet_id'];
+    $reply_tweet_name = '@'.$content['reply_tweet_name'];
+  }
+
   echo "
 <form class='update' method='post' action='/tweet'>
-  <textarea id='status' name='status' rows='3'></textarea> 
+  <textarea id='status' name='status' rows='3'>$reply_tweet_name</textarea>
   <input name='in_reply_to_id' value='$reply_tweet_id' type='hidden' />
   <input type='submit' value='Update' />
   <span id='remaining'>140</span> 

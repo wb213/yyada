@@ -55,14 +55,13 @@ function logout() {
   cookie_clear();
 }
 
-function get_theme() {
-  $s = new Settings(cookie_get('config'));
-  return new Theme($s->theme);
-}
-
 function get_settings() {
   $s = new Settings(cookie_get('config'));
   return $s;
+}
+
+function get_theme() {
+  return new Theme(get_settings()->theme);
 }
 
 function save_settings() {

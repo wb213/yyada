@@ -15,20 +15,45 @@ $content = array();
 $settings = get_settings();
 $conn = get_twitter_conn();
 
-if (empty($_REQUEST)) {
-  $tweets = $conn->get('statuses/home_timeline');
-  $content = array_merge($content, array('tweets' => $tweets));
-
-  include($theme->get_html_path('tweets'));
-} else {
-  $post_data = array("status" => $_REQUEST['status']);
-  if (!empty($_REQUEST['in_reply_to_id']))
-    $post_data = array_merge($post_data, array("in_reply_to_status_id" => $_REQUEST['in_reply_to_id']));
-  if (!empty($_REQUEST['location'])) {
-    list($lat, $long) = explode(',', $_REQUEST['location']);
+function update() {
+  global $conn;
+  $post_data = array("status" => $_POST['status']);
+  if (!empty($_POST['in_reply_to_id']))
+    $post_data = array_merge($post_data, array("in_reply_to_status_id" => $_POST['in_reply_to_id']));
+  if (!empty($_POST['location'])) {
+    list($lat, $long) = explode(',', $_POST['location']);
     $post_data = array_merge($post_data, array("lat" => $lat, "long" => "$long"));
   }
   $conn->post('statuses/update', $post_data);
   header('Location: /');
+}
+
+function get_reply_thread($tweet_id) {
+  global $conn;
+  $ret = array();
+  do {
+    $t = $conn->get('statuses/show/'.$tweet_id);
+    array_push($ret, $t);
+    $tweet_id = $t->in_reply_to_status_id;
+  } while (!empty($tweet_id));
+  return $ret;
+}
+
+if (!empty($_POST)) {
+  update();
+} else {
+  switch ($_GET['action']) {
+  case 'reply':
+    $tweets = get_reply_thread($_GET['args']);
+    $content['reply_tweet_id'] = $_GET['args'];
+    $content['reply_tweet_name'] = $tweets[0]->user->screen_name;
+    break;
+  default:
+    $tweets = $conn->get('statuses/home_timeline');
+    break;
+  }
+  $content = array_merge($content, array('tweets' => $tweets));
+
+  include($theme->get_html_path('tweets'));
 }
 
