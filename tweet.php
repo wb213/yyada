@@ -34,7 +34,7 @@ function get_reply_thread($tweet_id) {
   do {
     $t = $conn->get('statuses/show/'.$tweet_id);
     array_push($ret, $t);
-    $tweet_id = $t->in_reply_to_status_id;
+    $tweet_id = $t->in_reply_to_status_id_str;
   } while (!empty($tweet_id));
   return $ret;
 }
