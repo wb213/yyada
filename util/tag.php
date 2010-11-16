@@ -138,11 +138,13 @@ function echo_tweets() {
   global $content, $access_token;
   echo "<ul class='tweets'>";
   $current_user = strtolower($access_token['screen_name']);
+  $count = 0;
   foreach ($content['tweets'] as $tweet) {
-    echo "<li";
+    echo "<li class='";
+    if ((++$count & 1) == 0) echo ' even';
     if (in_array($current_user, get_mentioned_users($tweet->text)))
-      echo " class='mentioned'";
-    echo ">";
+      echo " mentioned";
+    echo "'>";
     echo_tweet($tweet);
     echo "</li>";
   }

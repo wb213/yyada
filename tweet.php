@@ -41,13 +41,12 @@ function get_reply_thread($tweet_id) {
 
 function get_reply_users($tweet_id) {
   global $conn;
-  $user_pattern = '/(@[a-zA-Z0-9_]*)/';
   $t = $conn->get('statuses/show/'.$tweet_id);
-  preg_match_all($user_pattern, '@'.$t->user->screen_name.' '.$t->text, $matches, PREG_SET_ORDER);
+  $users = get_mentioned_users('@'.$t->user->screen_name.' '.$tweet->text)
   $ret = array();
-  foreach ($matches as $user) {
-    if (!in_array($user[0], $ret))
-      array_push($ret, $user[0]);
+  foreach ($users as $user) {
+    if (!in_array($user, $ret))
+      array_push($ret, '@'.$user);
   }
   return implode($ret, ' ').' ';
 }
