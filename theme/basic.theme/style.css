@@ -9,8 +9,10 @@ form {
 img.avatar {
 	padding-right: 5px;
 	float: left;
-	max-height: 25px ;
-	max-width: 25px ;
+	height: 100%;
+	max-height: 25px;
+	width: 100%;
+	max-width: 25px;
 }
 
 .via, span.via > a {
