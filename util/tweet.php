@@ -1,5 +1,10 @@
 <?php
 
+function array_get($array, $key, $default=null) {
+  if (isset($array[$key])) return $array[$key];
+  return $default;
+}
+
 function pluralise($word, $count, $show) {
   if ($show) $word = "{$count} {$word}";
   return $word . (($count > 1) ? 's' : '');

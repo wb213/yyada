@@ -25,7 +25,6 @@ function update() {
     $post_data = array_merge($post_data, array("lat" => $lat, "long" => "$long"));
   }
   $conn->post('statuses/update', $post_data);
-  header('Location: /');
 }
 
 function get_reply_thread($tweet_id) {
@@ -46,14 +45,16 @@ function get_reply_users($tweet_id) {
   return implode($users, ' ').' ';
 }
 
-if (!empty($_POST)) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   switch ($_GET['action']) {
   case 'delete':
+    $ret = $conn->post('statuses/destroy/'.$_GET['args']);
     break;
   default:
     update();
     break;
   }
+  header('Location: /');
 } else {
   switch ($_GET['action']) {
   case 'reply':
@@ -68,7 +69,6 @@ if (!empty($_POST)) {
     break;
   case 'delete':
     $tweets = get_reply_thread($_GET['args']);
-    $content['information'] = "just test some information";
     break;
   default:
     $tweets = $conn->get('statuses/home_timeline');

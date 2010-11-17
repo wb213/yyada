@@ -52,7 +52,18 @@ function echo_menu() {
 function echo_info() {
   global $content;
 
-  if (isset($content['information'])) echo $content['infomation'];
+  if (isset($content['information'])) {
+    echo $content['information'];
+  }
+}
+
+function echo_remove_tweet() {
+  global $content;
+
+  echo "<p>Are you really sure you want to delete your tweet?<br />There is no way to undo this action.</p>";
+  echo "<form action='/tweet/delete/".$_GET['args']."' method='post'>";
+  echo "<input type='submit' value='Yes please' />";
+  echo "</form>";
 }
 
 function echo_update() {
