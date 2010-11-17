@@ -73,6 +73,8 @@ function echo_update() {
   $reply_tweet_name = "";
   if (isset($content['reply_tweet_id'])) {
     $reply_tweet_id = $content['reply_tweet_id'];
+  }
+  if (isset($content['reply_tweet_name'])) {
     $reply_tweet_name = $content['reply_tweet_name'];
   }
 
@@ -132,11 +134,11 @@ function echo_tweet($tweet=null) {
   }
   echo "<div class='tweet'>";
   echo "<div class='toolbar'>";
-  echo $tweet->user->name." |<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>".$tweet->user->screen_name."</a>";
+  echo $tweet->user->name." |<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>";
   echo "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>@</a>";
   if (count(get_mentioned_users('@'.$tweet->user->screen_name.' '.$tweet->text)) > 1)
     echo "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>@@</a>";
-  echo "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->id_str)."'>DM</a>";
+  echo "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->screen_name)."'>DM</a>";
   if ($tweet->favorited)
     echo "<a class='unfavor' href='".path_join(BASE_URL, "favor/remove", $tweet->id_str)."'>unFAV</a>";
   else
@@ -182,6 +184,17 @@ function echo_users() {
 }
 
 function echo_user() {
+  global $content;
+    
+  if (!isset($content['tweets'])) return;
+  
+  $tweet = $content['tweets'][0];
+  echo "<img src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
+  echo "<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>"."(".$tweet->user->name.")<br/>";
+  echo "Bio: ". $tweet->user->description."<br/>";
+  echo "Link: <a target='_blank' href='".$tweet->user->url."'>".$tweet->user->url."</a><br/>";
+  echo "Location: ". $tweet->user->location."<br/>";
+  echo "Joined: ". $tweet->user->created_at."<br/>";
 }
 
 function echo_lists() {
