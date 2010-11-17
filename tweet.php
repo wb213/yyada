@@ -47,7 +47,13 @@ function get_reply_users($tweet_id) {
 }
 
 if (!empty($_POST)) {
-  update();
+  switch ($_GET['action']) {
+  case 'delete':
+    break;
+  default:
+    update();
+    break;
+  }
 } else {
   switch ($_GET['action']) {
   case 'reply':
@@ -59,6 +65,10 @@ if (!empty($_POST)) {
     $tweets = get_reply_thread($_GET['args']);
     $content['reply_tweet_id'] = $_GET['args'];
     $content['reply_tweet_name'] = get_reply_users($_GET['args']);
+    break;
+  case 'delete':
+    $tweets = get_reply_thread($_GET['args']);
+    $content['information'] = "just test some information";
     break;
   default:
     $tweets = $conn->get('statuses/home_timeline');

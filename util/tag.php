@@ -49,6 +49,12 @@ function echo_menu() {
   echo "<div class='menu'><a href='".path_join(BASE_URL, "user/show", $access_token['screen_name'])."'>Profile</a> | <a href='".BASE_URL."'>Home</a> | <a href='".path_join(BASE_URL, "user/mention")."'>Mention</a> | <a href='".path_join(BASE_URL, "direct")."'>Directs</a> | <a href='".path_join(BASE_URL, "favor")."'>Favourite</a> | <a href='".path_join(BASE_URL, "search")."'>Search</a> | <a href='".path_join(BASE_URL, "list")."'>List</a> | <a href='".path_join(BASE_URL, "settings")."'>Settings</a> | <a href='".path_join(BASE_URL, "login/clear")."'>Logout</a></div>";
 }
 
+function echo_info() {
+  global $content;
+
+  if (isset($content['information'])) echo $content['infomation'];
+}
+
 function echo_update() {
   global $content;
 
@@ -104,7 +110,11 @@ updateCount();
 
 function echo_tweet($tweet=null) {
   global $settings, $content, $access_token;
-  if (empty($tweet)) $tweet = $content['tweet'];
+  if (empty($tweet))
+    if (isset($content['tweet']))
+      $tweet = $content['tweet'];
+    else
+      return;
 
   if ($settings->show_avatar) {
     echo "<img class='avatar' src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
@@ -140,6 +150,8 @@ function echo_tweet($tweet=null) {
 
 function echo_tweets() {
   global $content, $access_token;
+  if (!isset($content['tweets'])) return;
+
   echo "<ul class='tweets'>";
   $current_user = strtolower($access_token['screen_name']);
   $count = 0;
