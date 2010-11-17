@@ -111,7 +111,7 @@ function echo_tweet($tweet=null) {
   }
   echo "<div class='tweet'>";
   echo "<div class='toolbar'>";
-  echo $tweet->user->name."<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>".$tweet->user->screen_name."</a>";
+  echo $tweet->user->name." |<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>".$tweet->user->screen_name."</a>";
   echo "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>@</a>";
   if (count(get_mentioned_users('@'.$tweet->user->screen_name.' '.$tweet->text)) > 1)
     echo "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>@@</a>";
