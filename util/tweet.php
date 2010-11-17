@@ -36,11 +36,11 @@ function format_time($time, $offset) {
 }
 
 function format_tweet($tweet) {
-  $list_pattern = '/@([a-zA-Z0-9_]*)\/([a-zA-Z0-9_]*)/';
+  $list_pattern = '/@([a-zA-Z0-9_]+)\/([a-zA-Z0-9_]+)/';
   $list_replace = '@\1/<a href="/list/\1/\2">\2</a>';
-  $user_pattern = '/@([a-zA-Z0-9_]*)/';
+  $user_pattern = '/@([a-zA-Z0-9_]+)/';
   $user_replace = '@<a href="/user/\1">\1</a>';
-  $tag_pattern = '/#([a-zA-Z0-9_]*)/';
+  $tag_pattern = '/#([a-zA-Z0-9_]+)/';
   $tag_replace = '#<a href="/search?data=\1">\1</a>';
   $url_pattern = '/((http|https)\:\/\/[a-zA-Z0-9_\-\+\.\/\?\&\$\@\:\=]+)/';
   $url_replace = '<a href="\1">\1</a>';
@@ -54,10 +54,9 @@ function format_tweet($tweet) {
 }
 
 function get_mentioned_users($tweet) {
-  preg_match_all('/(?P<name>@[a-zA-Z0-9_]*)/', $tweet, $users);
+  preg_match_all('/(?P<name>@[a-zA-Z0-9_]+)/', $tweet, $users);
   $ret = array();
-  foreach ($users['name'] as $u) {
-    $user = strtolower($u);
+  foreach ($users['name'] as $user) {
     if (!in_array($user, $ret))
       array_push($ret, $user);
   }

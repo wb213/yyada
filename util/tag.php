@@ -169,7 +169,7 @@ function echo_tweets() {
   foreach ($content['tweets'] as $tweet) {
     echo "<li class='";
     if ((++$count & 1) == 0) echo ' even';
-    if (in_array('@'.$current_user, get_mentioned_users($tweet->text)))
+    if (in_array('@'.$current_user, get_mentioned_users('@'.$tweet->user->screen_name.' '.$tweet->text)))
       echo " mentioned";
     echo "'>";
     echo_tweet($tweet);
