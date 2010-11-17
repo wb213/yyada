@@ -103,7 +103,7 @@ updateCount();
 }
 
 function echo_tweet($tweet=null) {
-  global $settings, $content;
+  global $settings, $content, $access_token;
   if (empty($tweet)) $tweet = $content['tweet'];
 
   if ($settings->show_avatar) {
@@ -112,15 +112,17 @@ function echo_tweet($tweet=null) {
   echo "<div class='tweet'>";
   echo "<div class='toolbar'>";
   echo $tweet->user->name." <a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>@".$tweet->user->screen_name."</a>";
-  echo "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>reply</a>";
+  echo "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>@</a>";
   if (count(get_mentioned_users('@'.$tweet->user->screen_name.' '.$tweet->text)) > 1)
-    echo "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>reply all</a>";
-  echo "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->id_str)."'>direct</a>";
+    echo "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>@@</a>";
+  echo "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->id_str)."'>DM</a>";
   if ($tweet->favorited)
-    echo "<a class='unfavor' href='".path_join(BASE_URL, "favor/remove", $tweet->id_str)."'>unfavor</a>";
+    echo "<a class='unfavor' href='".path_join(BASE_URL, "favor/remove", $tweet->id_str)."'>unFAV</a>";
   else
-    echo "<a class='favor' href='".path_join(BASE_URL, "direct/new", $tweet->id_str)."'>favor</a>";
-  echo "<a class='retweet' href='".path_join(BASE_URL, "tweet/retweet", $tweet->id_str)."'>retweet</a>";
+    echo "<a class='favor' href='".path_join(BASE_URL, "direct/new", $tweet->id_str)."'>FAV</a>";
+  echo "<a class='retweet' href='".path_join(BASE_URL, "tweet/retweet", $tweet->id_str)."'>RT</a>";
+  if ($tweet->user->screen_name == $access_token['screen_name'])
+    echo "<a class='del' href='".path_join(BASE_URL, "tweet/delete", $tweet->id_str)."'>DEL</a>";
   if (isset($tweet->geo)) {
     $lat = $tweet->geo->coordinates[0];
     $long = $tweet->geo->coordinates[1];
