@@ -56,11 +56,11 @@ ul {
 }
 
 ul.tweets > li {
-	background: #FFF;
+	background: #EEE;
 }
 
 ul.tweets > li.even {
-	background: #EEE;
+	background: #FFF;
 }
 
 ul.tweets > li.mentioned {
