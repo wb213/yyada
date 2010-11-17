@@ -109,9 +109,9 @@ function echo_tweet($tweet=null) {
   if ($settings->show_avatar) {
     echo "<img class='avatar' src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
   }
-  echo "<p class='tweet'>";
-  echo "<span class='toolbar'>";
-  echo "<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>".$tweet->user->name." @".$tweet->user->screen_name."</a>";
+  echo "<div class='tweet'>";
+  echo "<div class='toolbar'>";
+  echo $tweet->user->name." <a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->id_str)."'>@".$tweet->user->screen_name."</a>";
   echo "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>reply</a>";
   if (count(get_mentioned_users('@'.$tweet->user->screen_name.' '.$tweet->text)) > 1)
     echo "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>reply all</a>";
@@ -128,12 +128,12 @@ function echo_tweet($tweet=null) {
     echo "<a class='geo' href='http://maps.google.com/maps/api/staticmap?center=$point&markers=$point&sensor=false&size=400x400&zoom=12'>geo</a>";
   }
   echo "<a class='time' href='".path_join(BASE_URL, "tweet/show", $tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
-  echo "</span>";
-  echo "<span class='status'>".format_tweet($tweet->text)." ";
-  echo "<span class='via'>via ".$tweet->source."</span> ";
+  echo "</div>";
+  echo "<div class='status'>".format_tweet($tweet->text)." ";
+  echo "<span class='via'>via ".$tweet->source;
   if (isset($tweet->in_reply_to_status_id_str))
-    echo "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
-  echo "</span></p>";
+    echo " <a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
+  echo "</span></div></div>";
 }
 
 function echo_tweets() {

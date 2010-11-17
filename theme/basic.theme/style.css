@@ -1,85 +1,77 @@
 a {
-	color : #1481B1;
-}
-
-table {
-	border-collapse : collapse;
+	color: #1481B1;
 }
 
 form {
-	margin : .3em;
-}
-
-td {
-	vertical-align : top;padding : 0.3em;
+	margin: .3em;
 }
 
 img.avatar {
-	float : left;
-	border : 0;
-	max-height : 25px ;
-	max-width : 25px ;
+	padding-right: 5px;
+	float: left;
+	max-height: 25px ;
+	max-width: 25px ;
 }
 
 .via, span.via > a {
-	color : #555;
-	font : 70% sans-serif;
+	color: #555;
+	font: 70% sans-serif;
 }
 
 body {
-	background : #FFF;
-	color : #333;
-	margin : 0;
-	font : 90% sans-serif;
+	background: #FFF;
+	color: #333;
+	margin: 0;
+	font: 90% sans-serif;
 }
 
 li {
-	list-style-type : none;
+	list-style-type: none;
+	padding: 5px;
 }
 
 ul {
-	margin : 4px;
-	padding : 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
-.toolbar, .status {
-	margin:3px;
-	display:block;
+.new textarea {
+	width: 100%;
+	max-width: 400px;
+}
+
+.status {
+	margin-top: 5px;
 }
 
 .tweet {
-	margin:4px;
-	display:block;
-	overflow:hidden;
+	display: block;
+	overflow: hidden;
 }
 
 .name, .reply, .replyall, .direct, .favor, .retweet, .time {
-	margin : 3px ;
+	margin: 3px;
 }
 
 ul.tweets > li {
-	background : #FFF;
+	background: #FFF;
 }
 
 ul.tweets > li.even {
-	background : #EEE;
+	background: #EEE;
 }
 
-tr.reply td {
-	background : #FFA;
-}
-
-tr.reply.even td {
-	background :  #DD9;
+ul.tweets > li.mentioned {
+	background: #FFA;
 }
 
 .menu {
-	color : #333;
-	background : #9AE4E8;
-	padding :  2px;
+	color: #333;
+	background: #9AE4E8;
+	padding: 2px;
 }
 
 .menu a {
-	color : #333;
-	text-decoration :  none;
+	color: #333;
+	text-decoration: none;
 }
