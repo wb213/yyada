@@ -81,13 +81,15 @@ function echo_update() {
   echo "
 <form class='update' method='post' action='/tweet'>
   <textarea id='status' name='status' rows='3'>$reply_tweet_name</textarea>
-  <input name='in_reply_to_id' value='$reply_tweet_id' type='hidden' />
-  <input type='submit' value='Update' />
-  <span id='remaining'>140</span> 
-  <span id='geo'>
-    <input onclick='goGeo()' type='checkbox' id='geoloc' name='location' />
-    <label for='geoloc' id='lblGeo'></label>
-  </span> 
+  <div>
+    <input name='in_reply_to_id' value='$reply_tweet_id' type='hidden' />
+    <input type='submit' value='Update' />
+    <span id='remaining'>140</span>
+    <span id='geo'>
+      <input onclick='goGeo()' type='checkbox' id='geoloc' name='location' />
+      <label for='geoloc' id='lblGeo'></label>
+    </span>
+  </div>
   <script type='text/javascript'> 
 started = false;
 chkbox = document.getElementById('geoloc');

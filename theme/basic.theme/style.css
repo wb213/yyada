@@ -3,16 +3,14 @@ a {
 }
 
 form {
-	margin: .3em;
+	margin: 5px;
 }
 
 img.avatar {
 	padding-right: 5px;
 	float: left;
-	height: 100%;
-	max-height: 25px;
-	width: 100%;
-	max-width: 25px;
+	height: 25px;
+	width: 25px;
 }
 
 .via, span.via > a {
@@ -38,8 +36,8 @@ ul {
 }
 
 .update textarea {
-	width: 100%;
 	max-width: 400px;
+	width: 99%;
 }
 
 .status {
