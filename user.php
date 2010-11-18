@@ -20,18 +20,18 @@ function get_mentions() {
 
   $tweets = $conn->get('statuses/mentions');
   $content = array_merge($content, array('tweets' => $tweets));
-  
+ 
   include($theme->get_html_path('tweets'));
 }
 
 function get_user() {
   global $theme, $content, $conn;
-  
+ 
   $parm = array("screen_name" => $_GET['args']);
   $tweets = $conn->get('statuses/user_timeline', $parm);
   $content['reply_tweet_name'] = '@'.$_GET['args'].' ';
   $content = array_merge($content, array('tweets' => $tweets));
-  
+ 
   include($theme->get_html_path('user'));
 }
 
@@ -46,5 +46,5 @@ switch ($_GET['action']) {
     get_mentions();
     break;
 }
-  
+ 
 ?>

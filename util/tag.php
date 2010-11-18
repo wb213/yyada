@@ -185,9 +185,9 @@ function echo_users() {
 
 function echo_user() {
   global $content;
-    
+ 
   if (!isset($content['tweets'])) return;
-  
+ 
   $tweet = $content['tweets'][0];
   echo "<img src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
   echo "<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>"."(".$tweet->user->name.")<br/>";
