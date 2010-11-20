@@ -1,0 +1,14 @@
+<?php include('header.html') ?>
+
+<div class='information'><?php information() ?></div>
+<div class='list'>
+  <ul>
+  <?php while (has_list()) : ?>
+    <li <?php list_item_class() ?>>
+      <?php list_item_html() ?>
+    </li>
+  <?php endwhile; ?>
+  </ul>
+</div>
+
+<?php include('footer.html') ?>
