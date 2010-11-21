@@ -187,7 +187,6 @@ function echo_users() {
 
 function echo_user() {
   global $content;
- 
   if (!isset($content['tweets'])) return;
  
   $tweet = $content['tweets'][0];

@@ -4,7 +4,8 @@ require_once('config.php');
 require_once('core/twitteroauth.php');
 require_once('core/settings.php');
 require_once('util/url.php');
-require_once('util/settings.php');
+require_once('util/cookie.php');
+require_once('util/factory.php');
 
 session_start();
 

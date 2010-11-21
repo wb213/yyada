@@ -3,7 +3,8 @@ require_once('config.php');
 require_once('core/twitteroauth.php');
 require_once('core/settings.php');
 require_once('core/theme.php');
-require_once('util/settings.php');
+require_once('util/cookie.php');
+require_once('util/factory.php');
 require_once('util/url.php');
 require_once('util/tweet.php');
 require_once('util/tag.php');
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
   header('Location: /');
 } else {
-  switch ($_GET['action']) {
+  switch (isset$_GET['action'] && $_GET['action']) {
   case 'reply':
     $tweets = get_reply_thread($_GET['args']);
     $content['reply_tweet_id'] = $_GET['args'];
