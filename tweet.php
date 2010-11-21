@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
   header('Location: /');
 } else {
-  switch (isset$_GET['action'] && $_GET['action']) {
+  switch (isset($_GET['action']) && $_GET['action']) {
   case 'reply':
     $tweets = get_reply_thread($_GET['args']);
     $content['reply_tweet_id'] = $_GET['args'];
