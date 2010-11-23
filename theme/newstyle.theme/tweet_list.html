@@ -1,14 +1,10 @@
 <?php include('header.html') ?>
 
-<div class='information'>
-  <?php while (has_info()) : ?>
-  <div class="<?php info_item_name() ?>">
-    <?php info_item_html() ?>
-  </div>
-  <?php endwhile; ?>
+<div class='update'>
+  <?php update_html() ?>
 </div>
 
-<div class='list'>
+<div class='tweets'>
   <ul>
     <?php while (has_list()) : ?>
     <li <?php list_item_class() ?>>
