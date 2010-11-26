@@ -21,7 +21,7 @@ function login_status() {
 	return $_SESSION['status'];
 }
 
-function environment_init() {
+function init_environment() {
 	global $theme, $settings, $access_token;
 
 	session_start();
@@ -50,7 +50,7 @@ function environment_init() {
 		default :
 			settings_purge();
 			$page = 'login';
-			break
+			break;
 	}
 }
 
