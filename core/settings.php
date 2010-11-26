@@ -44,25 +44,12 @@ function purge_settings() {
 	cookie_clear();
 }
 
-function get_settings() {
-	$s = new Settings(cookie_get('config'));
+function init_settings() {
+	global $settings, $theme, $access_token;
+	$settings = new Settings(cookie_get('config'));
+	$theme    = new Theme($settings->theme);
+	$access_token = load_access_token();
 	return $s;
-}
-
-function load_access_token() {
-  $str = cookie_get_secret('access_token', null);
-  $ret = null;
-  if (isset($str)) {
-    list($oauth_token, $oauth_token_secret, $user_id, $screen_name) = explode('|', $str);
-    if (isset($oauth_token)  && isset($oauth_token_secret) && isset($user_id) && isset($screen_name) && check_invite($screen_name)) {
-      $ret = array('oauth_token' => $oauth_token,
-                   'oauth_token_secret' => $oauth_token_secret,
-                   'user_id' => $user_id,
-                   'screen_name' => $screen_name);
-      $_SESSION['status'] = 'verified';
-    }
-  }
-  return $ret;
 }
 
 function check_invite($user) {

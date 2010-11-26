@@ -50,4 +50,20 @@ function cookie_clear() {
   }
 }
 
+function load_access_token() {
+  $str = cookie_get_secret('access_token', null);
+  $ret = null;
+  if (isset($str)) {
+    list($oauth_token, $oauth_token_secret, $user_id, $screen_name) = explode('|', $str);
+    if (isset($oauth_token)  && isset($oauth_token_secret) && isset($user_id) && isset($screen_name) && check_invite($screen_name)) {
+      $ret = array('oauth_token' => $oauth_token,
+                   'oauth_token_secret' => $oauth_token_secret,
+                   'user_id' => $user_id,
+                   'screen_name' => $screen_name);
+      $_SESSION['status'] = 'verified';
+    }
+  }
+  return $ret;
+}
+
 ?>

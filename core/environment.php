@@ -28,10 +28,7 @@ function init_environment() {
 
 	session_start();
 	url_dispatcher();
-
-	$theme = get_theme();
-	$access_token = load_access_token();
-	$settings = get_settings();
+	init_settings();
 
 	$warning = '';
 	switch ( login_status() ) {

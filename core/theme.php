@@ -34,8 +34,4 @@ class Theme {
   }
 }
 
-function get_theme() {
-  return new Theme(get_settings()->theme);
-}
-
 ?>
