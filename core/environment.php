@@ -13,6 +13,7 @@ function url_dispatcher() {
 	$action = isset($uri[1]) ? $uri[1] : '' ;
 	$target = isset($uri[2]) ? $uri[2] : '' ;
 
+	//TODO: can't handle the request correct if install under folder
 	//TODO: request URL validation
 
 }
