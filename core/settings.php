@@ -45,14 +45,6 @@ function purge_settings() {
 	cookie_clear();
 }
 
-function init_settings() {
-	global $settings, $theme, $access_token;
-	$settings = new Settings(cookie_get('config'));
-	$theme    = new Theme($settings->theme);
-	$access_token = load_access_token();
-	return $s;
-}
-
 function check_invite($user) {
   $invite_file = __DIR__ . '/' . '../invite.txt';
   if (ENABLE_INVITE != 'true') return true;
