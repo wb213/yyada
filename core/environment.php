@@ -34,21 +34,21 @@ function init_environment() {
 	$warning = '';
 	switch ( login_status() ) {
 		case 'logoff' :
-			settings_purge();
+			purge_settings();
 			$page = 'logoff';
 			break;
 		case 'login_fail'    :
-			settings_purge();
+			purge_settings();
 			$warning = 'Sign in failed, please try again.';
 			$page = 'info';
 			break;
 		case 'invite_fail':
-			settings_purge();
+			purge_settings();
 			$warning = 'You are not invited by administrator.';
 			$page = 'info';
 			break;
 		default :
-			settings_purge();
+			purge_settings();
 			$page = 'login';
 			break;
 	}
