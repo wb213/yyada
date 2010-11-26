@@ -1,5 +1,7 @@
 <?php
 
+require_once ('tags.php');
+
 class Theme {
   public $name = "basic";
 
@@ -26,12 +28,16 @@ class Theme {
     chdir(__DIR__);
     $ret = array();
     while (false !== ($entry = $d->read())) {
-      if (!preg_match('/.*\.theme$/', $entry)) continue;
-      if (!is_dir('../theme/' . $entry)) continue;
-      array_push($ret, preg_replace('/\.theme$/', '', $entry));
+	if (preg_match('/\.+$/', $entry)) continue;
+    	array_push($ret, preg_replace('/\.theme$/', '', $entry));
     }
     return $ret;
   }
+}
+
+function theme_load($page) {
+	global $theme;
+	include($theme->get_html_path($page));
 }
 
 ?>
