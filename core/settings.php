@@ -1,5 +1,7 @@
 <?php
 
+require_once('cookie.php');
+
 class Settings {
 
   public $theme = "basic";
@@ -31,6 +33,16 @@ class Settings {
     if (isset($show_img)) $this->show_img = ($show_img == '1');
     if (isset($rt_format)) $this->rt_format = $rt_format;
   }
+}
+
+function purge_settings() {
+	session_unset();
+	cookie_clear();
+}
+
+function get_settings() {
+	$s = new Settings(cookie_get('config'));
+	return $s;
 }
 
 ?>
