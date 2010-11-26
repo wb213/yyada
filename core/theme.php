@@ -1,6 +1,6 @@
 <?php
 
-require_once ('tags.php');
+require_once('tags.php');
 
 class Theme {
   public $name = "basic";

@@ -2,7 +2,7 @@
 
 function echo_theme_path() {
   global $theme
-  echo '/theme/' . $theme->name;
+  echo 'theme/' . $theme->name;
 }
 
 function echo_settings() {

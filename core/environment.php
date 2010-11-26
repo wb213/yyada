@@ -9,10 +9,12 @@ function url_dispatcher() {
 	$uri = explode("/" , $_SERVER['REQUEST_URI']);
 	array_shift($uri);
 
-	$page   = isset($uri[0]) ? $uri[0] : 'home' ;
+	$page   = isset($uri[0]) ? $uri[0] : '' ;
 	$action = isset($uri[1]) ? $uri[1] : '' ;
 	$target = isset($uri[2]) ? $uri[2] : '' ;
 
+	if (empty($page)) $page = 'home';
+	
 	//TODO: can't handle the request correct if install under folder
 	//TODO: request URL validation
 
