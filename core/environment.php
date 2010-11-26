@@ -7,10 +7,11 @@ function url_dispatcher() {
 
 	// pharse URI
 	$uri = explode("/" , $_SERVER['REQUEST_URI']);
+	array_shift($uri);
 
-	$page   = isset($uri_a[0]) ? $uri_a[0] : 'home' ;
-	$action = isset($uri_a[1]) ? $uri_a[1] : '' ;
-	$target = isset($uri_a[2]) ? $uri_a[2] : '' ;
+	$page   = isset($uri[0]) ? $uri[0] : 'home' ;
+	$action = isset($uri[1]) ? $uri[1] : '' ;
+	$target = isset($uri[2]) ? $uri[2] : '' ;
 
 	//TODO: request URL validation
 
