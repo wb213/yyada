@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head> 
+  <title>yyada</title> 
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
+  <style type="text/css">
+    img {border-width: 0}
+    * {font-family:'Lucida Grande', sans-serif;}
+  </style> 
+</head>
+<body>
+  <?php echo_menu() ?>
+  <div class='settings'><?php echo_settings() ?></div>
+  <?php echo_menu() ?>
+
+  <p>
+    <pre>
+<?php
+print_r($_COOKIE);
+print_r($_SESSION);
+print_r($content);
+?>
+    </pre>
+  </p>
+
+</body>
+</html>

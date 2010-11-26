@@ -10,7 +10,7 @@ class Theme {
   public function get_path() {
     chdir(__DIR__);
     chdir('../theme');
-    $path = getcwd() . '/' . $this->name . '.theme';
+    $path = getcwd() . '/' . $this->name;
     chdir(__DIR__);
     return $path;
   }
@@ -32,6 +32,10 @@ class Theme {
     }
     return $ret;
   }
+}
+
+function get_theme() {
+  return new Theme(get_settings()->theme);
 }
 
 ?>
