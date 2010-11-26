@@ -39,7 +39,7 @@ function environment_init() {
 			break;
 		case 'login_fail'    :
 			settings_purge();
-			$warning = 'Sign in failed, please try again.';	
+			$warning = 'Sign in failed, please try again.';
 			$page = 'info';
 			break;
 		case 'invite_fail':
