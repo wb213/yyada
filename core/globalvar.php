@@ -7,7 +7,9 @@ global $page, $action, $target, $warning, $theme;
 global $settings;
 
 // oauth
-global $access_token;
+global $access_token, $conn;
 
+// tweet
+global $content;
 
 ?>

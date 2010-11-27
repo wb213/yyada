@@ -1,7 +1,7 @@
 <?php
 
 function echo_theme_path() {
-  global $theme
+  global $theme;
   echo 'theme/' . $theme->name;
 }
 

@@ -3,6 +3,7 @@
 require_once('config.php');
 require_once('core/globalvar.php');
 require_once('core/environment.php');
+require_once('core/tweet.php');
 
 url_dispatcher();
 init_environment();
