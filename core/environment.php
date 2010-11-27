@@ -27,7 +27,7 @@ function login_status() {
 }
 
 function load_controller($page) {
-	$func_name = 'load' . $page;
+	$func_name = 'load_' . $page;
 	$func_name();
 }
 
