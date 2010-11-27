@@ -10,6 +10,7 @@ function url_dispatcher() {
 	// pharse URI
 	$base  = preg_replace('/^\w+:\/+s*/' , '' , BASE_URL) . '/';
 	$url   = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+	$url   = preg_replace('/\?.*$/','',$url);
 	$r_uri = str_ireplace($base , '' , $url);
 	
 	$uri = explode('/' , $r_uri);

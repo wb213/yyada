@@ -31,7 +31,7 @@ function handle_callback() {
 
 function handle_login() {
   $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, NULL, NULL, OAUTH_PROXY);
-  $request_token = $connection->getRequestToken(path_join(BASE_URL, 'login.php?action=callback'));
+  $request_token = $connection->getRequestToken(path_join(BASE_URL, 'login/callback'));
 
   $_SESSION['oauth_token'] = $token = $request_token['oauth_token'];
   $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
@@ -50,7 +50,7 @@ function handle_login() {
 }
 
 function load_login() {
-	global $display, $page;
+	global $display, $page, $action;
 
 	$display = false;
 	
