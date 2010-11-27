@@ -50,13 +50,16 @@ function handle_login() {
 }
 
 function load_login() {
-	global $display;
+	global $display, $page;
 
 	$display = false;
 	
-	if (empty($action)) $action = 'login';
+	if (empty($action)) $action = 'show';
 
 	switch ($action) {
+		case 'show':
+		  load_theme($page);
+		  break;
 		case 'callback':
 		  handle_callback();
 		  header('Location: /');
