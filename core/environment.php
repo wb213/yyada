@@ -2,16 +2,17 @@
 
 require_once('core/settings.php');
 require_once('core/tweets.php');
+require_once('control/include.php');
 
 function url_dispatcher() {
 	global $page, $action, $target;
 
 	// pharse URI
-	$base  = preg_replace("/^\w+:\/+s*/" , "" , BASE_URL) . "/";
+	$base  = preg_replace('/^\w+:\/+s*/' , '' , BASE_URL) . '/';
 	$url   = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-	$r_uri = str_ireplace($base , "" , $url);
+	$r_uri = str_ireplace($base , '' , $url);
 	
-	$uri = explode("/" , $r_uri);
+	$uri = explode('/' , $r_uri);
 	
 	$page   = isset($uri[0]) ? $uri[0] : '' ;
 	$action = isset($uri[1]) ? $uri[1] : '' ;
@@ -23,6 +24,11 @@ function url_dispatcher() {
 function login_status() {
 	if (empty($_SESSION['status'])) $_SESSION['status'] = '';
 	return $_SESSION['status'];
+}
+
+function load_controller($page) {
+	$func_name = 'load' . $page;
+	$func_name();
 }
 
 function init_environment() {

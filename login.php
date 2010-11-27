@@ -1,16 +1,17 @@
 <?php
 
-require_once('config.php');
+require_once('core/globalvar.php');
 require_once('core/twitteroauth.php');
 require_once('core/url.php');
 require_once('core/cookie.php');
-require_once('core/settings.php');
+
+session_start();
 
 function handle_callback() {
   if (empty($_SESSION['oauth_token']) ||
       empty($_REQUEST['oauth_token']) ||
       $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
-    purge_settings();
+    handle_clear();
     return;
   }
 
@@ -22,7 +23,7 @@ function handle_callback() {
   unset($_SESSION['oauth_token_secret']);
 
   if (200 != $connection->http_code) {
-    purge_settings();
+    handle_clear();
     $_SESSION['status'] = 'login_fail';
     return;
   }
@@ -43,32 +44,29 @@ function handle_login() {
     break;
   default:
     $_SESSION['status'] = 'login_fail';
-    purge_settings();
+    handle_clear();
     header('Location: /');
     break;
   }
 }
 
-function load_login() {
-	global $display;
+function handle_clear() {
+	//TODO: dummy function
+}
 
-	$display = false;
-	
-	if (empty($action)) $action = 'login';
-
-	switch ($action) {
-		case 'callback':
-		  handle_callback();
-		  header('Location: /');
-		  break;
-		case 'clear':
-		  purge_settings();
-		  header('Location: /');
-		  break;
-		default:
-		  handle_login();
-		  break;
-	}
+if (!isset($_REQUEST['action'])) $_REQUEST['action'] = 'login';
+switch ($_REQUEST['action']) {
+case 'callback':
+  handle_callback();
+  header('Location: /');
+  break;
+case 'clear':
+  logout();
+  header('Location: /');
+  break;
+default:
+  handle_login();
+  break;
 }
 
 ?>

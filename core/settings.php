@@ -1,7 +1,6 @@
 <?php
 
 require_once('cookie.php');
-require_once('theme.php');
 
 class Settings {
 

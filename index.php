@@ -25,7 +25,7 @@ switch ( login_status() ) {
 		$page = 'info';
 		break;
 	case 'verified':
-		if (empty($page)) $page = 'home';
+		if (empty($page)) $page = 'timeline';
 		break;
 	default :
 		purge_settings();
@@ -33,6 +33,7 @@ switch ( login_status() ) {
 		break;
 }
 
-load_theme($page);
+load_controller($page);
+if ($display) load_theme($page);
 
 ?>
