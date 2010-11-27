@@ -7,7 +7,7 @@ require_once('core/tweet.php');
 
 url_dispatcher();
 init_environment();
-init_tweets();
+init_tweet();
 
 $warning = '';
 switch ( login_status() ) {

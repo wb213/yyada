@@ -1,7 +1,7 @@
 <?php
 
-require_once('settings.php');
-require_once('tweet.php');
+require_once('core/settings.php');
+require_once('core/tweet.php');
 
 function url_dispatcher() {
 	global $page, $action, $target;

@@ -66,4 +66,9 @@ function load_access_token() {
   return $ret;
 }
 
+function save_access_token($access_token) {
+  $str = join('|', array($access_token['oauth_token'], $access_token['oauth_token_secret'], $access_token['user_id'], $access_token['screen_name']));
+  cookie_set_secret('access_token', $str);
+}
+
 ?>
