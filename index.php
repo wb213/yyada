@@ -3,11 +3,10 @@
 require_once('config.php');
 require_once('core/globalvar.php');
 require_once('core/environment.php');
-require_once('core/tweet.php');
+require_once('core/theme.php');
 
 url_dispatcher();
 init_environment();
-init_tweet();
 
 $warning = '';
 switch ( login_status() ) {
@@ -25,13 +24,15 @@ switch ( login_status() ) {
 		$warning = 'You are not invited by administrator.';
 		$page = 'info';
 		break;
+	case 'verified':
+		if (empty($page)) $page = 'home';
+		break;
 	default :
 		purge_settings();
 		$page = 'login';
 		break;
 }
-	
-require_once('core/theme.php');
-theme_load($page);
+
+load_theme($page);
 
 ?>

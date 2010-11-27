@@ -104,8 +104,4 @@ function get_mentioned_users($tweet) {
   return $ret;
 }
 
-function init_tweet() {
-	global $conn, $content;
-	$content = array();
-	$conn = get_twitter_conn();
-}
+?>

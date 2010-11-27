@@ -35,7 +35,7 @@ class Theme {
   }
 }
 
-function theme_load($page) {
+function load_theme($page) {
 	global $theme;
 	include($theme->get_html_path($page));
 }

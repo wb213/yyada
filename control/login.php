@@ -50,6 +50,10 @@ function handle_login() {
   }
 }
 
+function handle_clear() {
+	//TODO: dummy function
+}
+
 if (!isset($_REQUEST['action'])) $_REQUEST['action'] = 'login';
 switch ($_REQUEST['action']) {
 case 'callback':

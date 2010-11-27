@@ -1,7 +1,7 @@
 <?php
 
 require_once('core/settings.php');
-require_once('core/tweet.php');
+require_once('core/tweets.php');
 
 function url_dispatcher() {
 	global $page, $action, $target;
@@ -17,8 +17,6 @@ function url_dispatcher() {
 	$action = isset($uri[1]) ? $uri[1] : '' ;
 	$target = isset($uri[2]) ? $uri[2] : '' ;
 
-	if (empty($page)) $page = 'home';
-	
 	//TODO: request URL validation
 }
 
@@ -28,13 +26,15 @@ function login_status() {
 }
 
 function init_environment() {
-	global $theme, $settings, $access_token;
+	global $theme, $settings, $access_token, $conn, $content;
 
 	session_start();
 
 	$settings = new Settings(cookie_get('config'));
 	$theme    = new Theme($settings->theme);
 	$access_token = load_access_token();
+	$content = array();
+	$conn = get_twitter_conn();
 }
 
 ?>
