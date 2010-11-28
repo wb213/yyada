@@ -1,6 +1,6 @@
 <?php
 
-require_once('core/settings.php');
+require_once('core/settings-control.php');
 require_once('core/theme.php');
 
 function load_settings() {

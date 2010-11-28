@@ -3,7 +3,7 @@
 require_once('config.php');
 require_once('core/twitteroauth.php');
 require_once('core/cookie.php');
-require_once('core/settings.php');
+require_once('core/settings-control.php');
 require_once('util/url.php');
 
 function handle_callback() {
