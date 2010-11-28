@@ -34,6 +34,22 @@ function get_reply_users($tweet_id) {
   return implode($users, ' ').' ';
 }
 
+function get_mentions() {
+  global $content, $conn;
+
+  $tweets = $conn->get('statuses/mentions');
+  $content = array_merge($content, array('tweets' => $tweets));
+}
+
+function get_user() {
+  global $content, $conn, $target;
+ 
+  $parm = array("screen_name" => $target);
+  $tweets = $conn->get('statuses/user_timeline', $parm);
+  $content['reply_tweet_name'] = '@' . $target . ' ';
+  $content = array_merge($content, array('tweets' => $tweets));
+}
+
 function get_twitter_conn() {
   global $access_token;
   if (isset($access_token)) {
