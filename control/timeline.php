@@ -9,13 +9,6 @@ require_once('util/url.php');
 require_once('util/tweet.php');
 require_once('util/tag.php');
 
-session_start();
-$theme = get_theme();
-$access_token = load_access_token();
-$content = array();
-$settings = get_settings();
-$conn = get_twitter_conn();
-
 function update() {
   global $conn;
   $post_data = array("status" => $_POST['status']);
@@ -46,37 +39,40 @@ function get_reply_users($tweet_id) {
   return implode($users, ' ').' ';
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  switch ($_GET['action']) {
-  case 'delete':
-    $ret = $conn->post('statuses/destroy/'.$_GET['args']);
-    break;
-  default:
-    update();
-    break;
-  }
-  header('Location: /');
-} else {
-  switch (isset($_GET['action']) && $_GET['action']) {
-  case 'reply':
-    $tweets = get_reply_thread($_GET['args']);
-    $content['reply_tweet_id'] = $_GET['args'];
-    $content['reply_tweet_name'] = '@'.$tweets[0]->user->screen_name.' ';
-    break;
-  case 'replyall':
-    $tweets = get_reply_thread($_GET['args']);
-    $content['reply_tweet_id'] = $_GET['args'];
-    $content['reply_tweet_name'] = get_reply_users($_GET['args']);
-    break;
-  case 'delete':
-    $tweets = get_reply_thread($_GET['args']);
-    break;
-  default:
-    $tweets = $conn->get('statuses/home_timeline');
-    break;
-  }
-  $content = array_merge($content, array('tweets' => $tweets));
+function load_timeline() {
+	global $access_token, $content, $conn, $action, $target;
 
-  include($theme->get_html_path('tweets'));
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	  switch ($action) {
+		  case 'delete':
+		    $ret = $conn->post('statuses/destroy/' . $target);
+		    break;
+		  default:
+		    update();
+		    break;
+	  }
+	  header('Location: /');
+	} else {
+    	switch ($action) {
+		  case 'reply':
+		    $tweets = get_reply_thread($target);
+		    $content['reply_tweet_id'] = $target;
+		    $content['reply_tweet_name'] = '@'.$tweets[0]->user->screen_name.' ';
+		    break;
+		  case 'replyall':
+		    $tweets = get_reply_thread($target);
+		    $content['reply_tweet_id'] = $target;
+		    $content['reply_tweet_name'] = get_reply_users($target);
+		    break;
+		  case 'delete':
+		    $tweets = get_reply_thread($target);
+		    break;
+		  default:
+		    $tweets = $conn->get('statuses/home_timeline');
+		    break;
+		}
+		
+	  	$content = array_merge($content, array('tweets' => $tweets));
 }
 
+?>
