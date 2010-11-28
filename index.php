@@ -1,38 +1,33 @@
 <?php
 
 require_once('config.php');
-require_once('core/globalvar.php');
 require_once('core/environment.php');
 require_once('core/theme.php');
 
-url_dispatcher();
 init_environment();
 
-$warning = '';
-switch ( login_status() ) {
-	case 'logoff' :
-		purge_settings();
-		$page = 'logoff';
-		break;
-	case 'login_fail'    :
-		purge_settings();
-		$warning = 'Sign in failed, please try again.';
-		$page = 'info';
-		break;
-	case 'invite_fail':
-		purge_settings();
-		$warning = 'You are not invited by administrator.';
-		$page = 'info';
-		break;
-	case 'verified':
-		if (empty($page)) $page = 'tweet';
-		break;
-	default :
-		purge_settings();
-		$page = 'login';
-		break;
+switch ($_SESSION['status']) {
+  case 'verified':
+    dispatch_url();
+    break;
+  case 'login_fail':
+    purge_settings();
+    $content['info'] = '<div class="warning">Sign in failed, please try again.</div>';
+    $content['info'] .= login_html($echo=false);
+    $theme->include_html('info');
+    break;
+  case 'invite_fail':
+    purge_settings();
+    $content['info'] = '<div class="warning">You are not invited by administrator.</div>';
+    $content['info'] .= login_html($echo=false);
+    $theme->include_html('info');
+    break;
+  case 'logoff':
+  default:
+    purge_settings();
+    $content['info'] = login_html($echo=false);
+    $theme->include_html('info');
+    break;
 }
-
-load_controller($page);
 
 ?>

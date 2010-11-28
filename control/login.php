@@ -3,14 +3,34 @@
 require_once('config.php');
 require_once('core/twitteroauth.php');
 require_once('core/cookie.php');
-require_once('core/settings-control.php');
+require_once('core/settings.php');
 require_once('util/url.php');
 
-function handle_callback() {
+function login() {
+  $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, NULL, NULL, OAUTH_PROXY);
+  $request_token = $connection->getRequestToken(join_path(BASE_URL, 'login/callback'));
+
+  $_SESSION['oauth_token'] = $token = $request_token['oauth_token'];
+  $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
+
+  switch ($connection->http_code) {
+  case 200:
+    $url = $connection->getAuthorizeURL($token);
+    header('Location: ' . $url);
+    break;
+  default:
+    Settings::purge();
+    $_SESSION['status'] = 'login_fail';
+    header('Location: /');
+    break;
+  }
+}
+
+function callback() {
   if (empty($_SESSION['oauth_token']) ||
       empty($_REQUEST['oauth_token']) ||
       $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
-    purge_settings();
+    Settings::purge();
     return;
   }
 
@@ -22,54 +42,22 @@ function handle_callback() {
   unset($_SESSION['oauth_token_secret']);
 
   if (200 != $connection->http_code) {
-    purge_settings();
+    Settings::purge();
     $_SESSION['status'] = 'login_fail';
     return;
   }
   save_access_token($access_token);
+  header('Location: /');
 }
 
-function handle_login() {
-  $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, NULL, NULL, OAUTH_PROXY);
-  $request_token = $connection->getRequestToken(path_join(BASE_URL, 'login/callback'));
-
-  $_SESSION['oauth_token'] = $token = $request_token['oauth_token'];
-  $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
-
-  switch ($connection->http_code) {
-  case 200:
-    $url = $connection->getAuthorizeURL($token);
-    header('Location: ' . $url); 
-    break;
-  default:
-    $_SESSION['status'] = 'login_fail';
-    purge_settings();
-    header('Location: /');
-    break;
-  }
+function clear() {
+  Settings::purge();
+  $_SESSION['status'] = 'logoff';
+  header('Location: /');
 }
 
-function load_login() {
-	global $page, $action;
-
-	if (empty($action)) $action = 'show';
-
-	switch ($action) {
-		case 'show':
-		  load_theme($page);
-		  break;
-		case 'callback':
-		  handle_callback();
-		  header('Location: /');
-		  break;
-		case 'clear':
-		  purge_settings();
-		  header('Location: /');
-		  break;
-		default:
-		  handle_login();
-		  break;
-	}
+function default() {
+  return login();
 }
 
 ?>
