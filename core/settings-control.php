@@ -35,6 +35,11 @@ class Settings {
   }
 }
 
+function save_settings() {
+  global $settings;
+  cookie_set('config', $settings->str());
+}
+
 function purge_settings() {
 	session_unset();
 	if (isset($_COOKIE[session_name()])) {
