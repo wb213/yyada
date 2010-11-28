@@ -58,10 +58,11 @@ function format_tweet($tweet) {
 }
 
 function get_mentioned_users($tweet) {
+	global $access_token;
   preg_match_all('/(?P<name>@[a-zA-Z0-9_]+)/', $tweet, $users);
   $ret = array();
   foreach ($users['name'] as $user) {
-    if (!in_array($user, $ret) and $user != ('@' . $_SESSION['user']))
+    if (!in_array($user, $ret) and $user != ('@' . $access_token['screen_name']))
       array_push($ret, $user);
   }
   return $ret;
