@@ -1,6 +1,6 @@
 <?php
 
-require_once('core/settings.php');
+require_once('core/setting-control.php');
 require_once('core/APIcall.php');
 require_once('control/include.php');
 
