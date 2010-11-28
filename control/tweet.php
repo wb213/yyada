@@ -1,11 +1,9 @@
 <?php
 
-require_once('core/tweets.php');
+require_once('core/APIcall.php');
 
-function load_timeline() {
-	global $access_token, $content, $conn, $action, $target, $display;
-
-	$display = true;
+function load_tweet() {
+	global $access_token, $content, $page, $conn, $action, $target;
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	  switch ($action) {
@@ -13,7 +11,7 @@ function load_timeline() {
 		    $ret = $conn->post('statuses/destroy/' . $target);
 		    break;
 		  default:
-		    update();
+		    update_status();
 		    break;
 	  }
 	  header('Location: /');
@@ -36,9 +34,10 @@ function load_timeline() {
 		    $tweets = $conn->get('statuses/home_timeline');
 		    break;
 		}
-		
+
 	  	$content = array_merge($content, array('tweets' => $tweets));
 	}
+	load_theme($page);
 }
 
 ?>

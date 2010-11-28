@@ -1,7 +1,7 @@
 <?php
 
 // environment
-global $page, $action, $target, $warning, $theme, $display;
+global $page, $action, $target, $warning, $theme;
 
 // settings
 global $settings;

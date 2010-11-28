@@ -25,7 +25,7 @@ switch ( login_status() ) {
 		$page = 'info';
 		break;
 	case 'verified':
-		if (empty($page)) $page = 'timeline';
+		if (empty($page)) $page = 'tweet';
 		break;
 	default :
 		purge_settings();
@@ -34,6 +34,5 @@ switch ( login_status() ) {
 }
 
 load_controller($page);
-if ($display) load_theme($page);
 
 ?>

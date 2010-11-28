@@ -1,6 +1,6 @@
 <?php
 
-require_once('cookie.php');
+require_once('core/cookie.php');
 
 class Settings {
 

@@ -2,9 +2,9 @@
 
 require_once('config.php');
 require_once('core/twitteroauth.php');
-require_once('core/url.php');
 require_once('core/cookie.php');
 require_once('core/settings.php');
+require_once('util/url.php');
 
 function handle_callback() {
   if (empty($_SESSION['oauth_token']) ||
@@ -50,10 +50,8 @@ function handle_login() {
 }
 
 function load_login() {
-	global $display, $page, $action;
+	global $page, $action;
 
-	$display = false;
-	
 	if (empty($action)) $action = 'show';
 
 	switch ($action) {

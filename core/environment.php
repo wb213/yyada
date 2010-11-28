@@ -1,7 +1,7 @@
 <?php
 
 require_once('core/settings.php');
-require_once('core/tweets.php');
+require_once('core/APIcall.php');
 require_once('control/include.php');
 
 function url_dispatcher() {
@@ -10,7 +10,11 @@ function url_dispatcher() {
 	// pharse URI
 	$base  = preg_replace('/^\w+:\/+s*/' , '' , BASE_URL) . '/';
 	$url   = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+
+	// remove the query string
 	$url   = preg_replace('/\?.*$/','',$url);
+	
+	// get the relative URI based on the BASE URL
 	$r_uri = str_ireplace($base , '' , $url);
 	
 	$uri = explode('/' , $r_uri);
