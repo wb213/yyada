@@ -3,11 +3,11 @@
 <head> 
   <title>yyada</title> 
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
-  <link type="text/css" rel="stylesheet" href="<?php echo_theme_path() ?>/style.css">
+  <link type="text/css" rel="stylesheet" href="/<?php echo_theme_path() ?>/style.css">
 </head> 
 <body> 
   <?php echo_menu() ?>
-  <?php switch (array_get($_GET, 'action')) {
+  <?php switch (echo_global_var('action')) {
     case 'delete':
       echo "<div class='delete'>";
       echo_remove_tweet();

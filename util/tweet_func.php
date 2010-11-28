@@ -5,6 +5,10 @@ function array_get($array, $key, $default=null) {
   return $default;
 }
 
+function echo_global_var($varname) {
+  return $GLOBALS[$varname];
+}
+
 function pluralise($word, $count, $show) {
   if ($show) $word = "{$count} {$word}";
   return $word . (($count > 1) ? 's' : '');
