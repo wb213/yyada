@@ -25,7 +25,8 @@ function load_tweet() {
 		  case 'replyall':
 		    $tweets = get_reply_thread($target);
 		    $content['reply_tweet_id'] = $target;
-		    $content['reply_tweet_name'] = get_reply_users($target);
+		    $users = str_ireplace('@'.$access_token['screen_name'] , '' , get_reply_users($target));
+		    $content['reply_tweet_name'] = $users;
 		    break;
 		  case 'show':
 		    $tweets = get_single_tweet($target);

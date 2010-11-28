@@ -62,7 +62,7 @@ function get_mentioned_users($tweet) {
   preg_match_all('/(?P<name>@[a-zA-Z0-9_]+)/', $tweet, $users);
   $ret = array();
   foreach ($users['name'] as $user) {
-    if (!in_array($user, $ret) and $user != ('@' . $access_token['screen_name']))
+    if (!in_array($user, $ret))
       array_push($ret, $user);
   }
   return $ret;
