@@ -27,6 +27,9 @@ function load_tweet() {
 		    $content['reply_tweet_id'] = $target;
 		    $content['reply_tweet_name'] = get_reply_users($target);
 		    break;
+		  case 'show'
+		    $tweets = get_single_tweet($target);
+		    break;
 		  case 'delete':
 		    $tweets = get_reply_thread($target);
 		    break;

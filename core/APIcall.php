@@ -16,6 +16,12 @@ function update_status() {
   $conn->post('statuses/update', $post_data);
 }
 
+function get_single_tweet($tweet_id) {
+	global $conn;
+    $tweet = $conn->get('statuses/show/'.$tweet_id);
+    return $tweet;
+}
+
 function get_reply_thread($tweet_id) {
   global $conn;
   $ret = array();
