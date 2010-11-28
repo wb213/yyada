@@ -18,8 +18,10 @@ function update_status() {
 
 function get_single_tweet($tweet_id) {
 	global $conn;
-    $tweet = $conn->get('statuses/show/'.$tweet_id);
-    return $tweet;
+	$ret = array();
+    $t = $conn->get('statuses/show/'.$tweet_id);
+    array_push($ret,$t);
+    return $ret;
 }
 
 function get_reply_thread($tweet_id) {
