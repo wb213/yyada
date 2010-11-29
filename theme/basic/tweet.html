@@ -13,6 +13,11 @@
       echo_remove_tweet();
       echo "</div>";
       break;
+    case 'retweet':
+      echo "<div class='reweet'>";
+      echo_retweet_tweet(echo_global_var('target'));
+      echo "</div>";
+      break;
     default:
       echo "<div class='update'>";
       echo_update();

@@ -3,20 +3,23 @@
 require_once('core/APIcall.php');
 
 function load_tweet() {
-	global $access_token, $content, $page, $conn, $action, $target;
+  global $access_token, $content, $page, $conn, $action, $target;
 
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	  switch ($action) {
-		  case 'delete':
-		    delete_status($target);
-		    break;
-		  default:
-		    update_status();
-		    break;
-	  }
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    switch ($action) {
+      case 'delete':
+        delete_status($target);
+        break;
+      case 'retweet':
+        retweet_status($target);
+        break;
+      default:
+        update_status();
+        break;
+    }
 	  header('Location: /');
 	} else {
-    	switch ($action) {
+    switch ($action) {
 		  case 'reply':
 		    $tweets = get_reply_thread($target);
 		    $content['reply_tweet_id'] = $target;
@@ -29,6 +32,11 @@ function load_tweet() {
 		    break;
 		  case 'show':
 		    $tweets = get_single_tweet($target);
+		    break;
+      case 'retweet':
+        $tweets = get_single_tweet($target);
+        $content['retweet_user'] = '@'.$tweets[0]->user->screen_name;
+        $content['retweet_text'] = $tweets->text;
 		    break;
 		  case 'delete':
 		    $tweets = get_reply_thread($target);

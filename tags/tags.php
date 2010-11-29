@@ -66,6 +66,20 @@ function echo_remove_tweet() {
   echo "</form>";
 }
 
+function echo_retweet_tweet() {
+  global $content, $target;
+  echo "<p>Twitter's new style retweet:</p>";
+  echo "<form action='/tweet/retweet/" . $target . "' method='post'>";
+  echo "<input type='submit' value='Twitter Retweet' />";
+  echo "</form>";
+	echo "<hr /><p>Old style editable retweet:</p>";
+  $retweet = $settings->rt_format;
+  $retweet = str_ireplace("%u", $content['retweet_user'], $reweet);
+  $retweet = str_ireplace("%t", $content['retweet_text'], $reweet);
+  $content['reply_tweet_name'] = $retweet;
+  echo_update();
+}
+
 function echo_update() {
   global $content;
 
