@@ -10,6 +10,8 @@ class Settings {
   public $show_img = false;
   public $rt_format = "RT %u: %t";
 
+  private static $cookie_key = "config";
+
   public function __construct($s = null) {
     if (isset($s) && $s != "") {
       $this->load($s);
@@ -25,7 +27,9 @@ class Settings {
                    $this->rt_format);
   }
 
-  public function load($s) {
+  public function load($s = null) {
+    if (!isset($s)) $s = cookie_get($this->cookie_key);
+
     list($theme, $show_avatar, $is_reverse_thread, $show_img, $rt_format) = explode('|', $s);
     if (isset($theme)) $this->theme = $theme;
     if (isset($show_avatar)) $this->show_avatar = ($show_avatar == '1');
@@ -33,20 +37,15 @@ class Settings {
     if (isset($show_img)) $this->show_img = ($show_img == '1');
     if (isset($rt_format)) $this->rt_format = $rt_format;
   }
-}
 
-function save_settings() {
-  global $settings;
-  cookie_set('config', $settings->str());
-}
+  public function save() {
+    cookie_set($this->cookie_key, $this->str());
+  }
 
-function purge_settings() {
-	session_unset();
-	if (isset($_COOKIE[session_name()])) {
-    	setcookie(session_name(), '', time()-3600, '/');
-	}
-	session_destroy();
-	cookie_clear();
+  public static function purge() {
+    session_unset();
+    cookie_clear();
+  }
 }
 
 function check_invite($user) {

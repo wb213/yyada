@@ -1,7 +1,5 @@
 <?php
 
-require_once('tags/tags.php');
-
 class Theme {
   public $name = "basic";
 
@@ -33,11 +31,10 @@ class Theme {
     }
     return $ret;
   }
-}
 
-function load_theme($page) {
-	global $theme;
-	include($theme->get_html_path($page));
+  public function include_html($page) {
+    include($this->get_html_path($page));
+  }
 }
 
 ?>
