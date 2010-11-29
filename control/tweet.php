@@ -37,6 +37,7 @@ function load_tweet() {
         $tweets = get_single_tweet($target);
         $content['retweet_user'] = '@'.$tweets[0]->user->screen_name;
         $content['retweet_text'] = $tweets[0]->text;
+        unset($tweets[0]);
 		    break;
 		  case 'delete':
 		    $tweets = get_reply_thread($target);
@@ -46,9 +47,9 @@ function load_tweet() {
 		    break;
 		}
 
-	  	$content = array_merge($content, array('tweets' => $tweets));
+  	$content = array_merge($content, array('tweets' => $tweets));
+    load_theme($page);
 	}
-	load_theme($page);
 }
 
 ?>
