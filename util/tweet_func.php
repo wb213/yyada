@@ -71,7 +71,7 @@ function is_reply_all($tweet) {
   global $access_token;
   $users = get_mentioned_all($tweet);
   $num = count($users);
-  if in_array('@'.$access_token['screen_name'], $users) $num--;
+  if in_array('@'.$access_token['screen_name'], $users) $num-- ;
   return $num > 1;
 }
 
@@ -87,6 +87,7 @@ function get_mentioned_users($tweet) {
   $key = array_search('@'.$access_token['screen_name'], $users);
   if ($key) unset($users[$key]);
   return $users > 1;
+}
 
 ?>
 
