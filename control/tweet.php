@@ -36,7 +36,7 @@ function load_tweet() {
       case 'retweet':
         $tweets = get_single_tweet($target);
         $content['retweet_user'] = '@'.$tweets[0]->user->screen_name;
-        $content['retweet_text'] = $tweets->text;
+        $content['retweet_text'] = $tweets[0]->text;
 		    break;
 		  case 'delete':
 		    $tweets = get_reply_thread($target);
