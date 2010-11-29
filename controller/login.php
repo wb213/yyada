@@ -6,9 +6,8 @@ require_once('core/cookie.php');
 require_once('core/settings.php');
 require_once('util/url.php');
 
-function login() {
+function oauth() {
   $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, NULL, NULL, OAUTH_PROXY);
-error_log(join_path(BASE_URL, 'login/callback'));
   $request_token = $connection->getRequestToken(join_path(BASE_URL, 'login/callback'));
 
   $_SESSION['oauth_token'] = $token = $request_token['oauth_token'];
@@ -30,8 +29,11 @@ error_log(join_path(BASE_URL, 'login/callback'));
 function callback() {
   if (empty($_SESSION['oauth_token']) ||
       empty($_REQUEST['oauth_token']) ||
-      $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
+      $_SESSION['oauth_token'] != $_REQUEST['oauth_token']) {
+error_log('fail');
     Settings::purge();
+    $_SESSION['status'] = 'login_fail';
+    header('Location: /');
     return;
   }
 
@@ -45,8 +47,10 @@ function callback() {
   if (200 != $connection->http_code) {
     Settings::purge();
     $_SESSION['status'] = 'login_fail';
+    header('Location: /');
     return;
   }
+  $_SESSION['status'] = 'verified';
   save_access_token($access_token);
   header('Location: /');
 }
@@ -58,7 +62,8 @@ function clear() {
 }
 
 function def() {
-  return login();
+  global $theme, $content;
+  $theme->include_html('info');
 }
 
 ?>

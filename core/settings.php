@@ -44,7 +44,6 @@ class Settings {
 
   public static function purge() {
     session_unset();
-    session_destroy();
     cookie_clear();
   }
 }

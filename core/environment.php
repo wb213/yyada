@@ -2,55 +2,62 @@
 
 require_once('core/settings.php');
 require_once('core/APIcall.php');
-require_once('control/include.php');
 
 // environment
-global $controller, $action, $args, $content;
+global $content;
 
 // settings
 global $settings, $theme, $access_token, $conn;
 
-function url_dispatcher() {
-	// pharse URI
-	$base = preg_replace('/^\w+:\/+s*/' , '' , BASE_URL) . '/';
-	$url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+function dispatch_url() {
+  global $access_token;
 
-	// remove the query string
-	$url = preg_replace('/\?.*$/','',$url);
-	
-	// get the relative URI based on the BASE URL
-	$r_uri = str_ireplace($base , '' , $url);
-	
-	$uri = explode('/' , $r_uri);
-	
-	$controller = isset($uri[0]) ? ($uri[0].'.php') : '' ;
-	$action = isset($uri[1]) ? $uri[1] : '' ;
-	$args = isset($uri[2]) ? $uri[2] : '' ;
+  // pharse URI
+  $base = preg_replace('/^\w+:\/+s*/' , '' , BASE_URL) . '/';
+  $url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
-	if ($controller == '') {
-		$controller = 'status.php';
-		$action = 'home';
-	} else if ($action == '') {
-		$action = 'def';
-		$args = $access_token['screen_name'];
-	} else if ($args == '') {
-		$args = $access_token['screen_name'];
-	}
+  // remove the query string
+  $url = preg_replace('/\?.*$/','',$url);
 
-	include 'controller/' . $controller;
-	$action($args);
+  // get the relative URI based on the BASE URL
+  $r_uri = str_ireplace($base , '' , $url);
+
+  $uri = explode('/' , $r_uri);
+
+  if (!isset($uri[0]) || empty($uri[0])) {
+    if (isset($_SESSION['status']) && $_SESSION['status'] == 'verified')
+      $controller = 'status.php';
+    else
+      $controller = 'login.php';
+    $action = 'def';
+    $args = $access_token['screen_name'];
+  } else if (!isset($uri[1]) || empty($uri[1])) {
+    $controller = $uri[0] . ".php";
+    $action = 'def';
+    $args = $access_token['screen_name'];
+  } else if (!isset($uri[2])|| empty($uri[2])) {
+    $controller = $uri[0] . ".php";
+    $action = $uri[1];
+    $args = $access_token['screen_name'];
+  } else {
+    $controller = $uri[0] . ".php";
+    $action = $uri[1];
+    $args = $uri[2];
+  }
+  include 'controller/' . $controller;
+  $action($args);
 }
 
 function init_environment() {
-	global $theme, $settings, $access_token, $conn, $content;
+  global $theme, $settings, $access_token, $conn, $content;
 
-	session_start();
+  session_start();
 
-	$settings = new Settings(cookie_get('config'));
-	$theme = new Theme($settings->theme);
-	$access_token = load_access_token();
-	$content = array();
-	$conn = get_twitter_conn();
+  $settings = new Settings(cookie_get('config'));
+  $theme = new Theme($settings->theme);
+  $access_token = load_access_token();
+  $content = array();
+  $conn = get_twitter_conn();
 }
 
 ?>
