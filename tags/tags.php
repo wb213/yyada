@@ -218,4 +218,86 @@ function echo_lists() {
 function echo_list() {
 }
 
+
+function echo_direct_menu() {
+  echo "
+<div class='direct_menu'>
+  <a href='".path_join(BASE_URL, "direct/create")."'>Create</a> | 
+  <a href='".path_join(BASE_URL, "direct/inbox")."'>Inbox</a> | 
+  <a href='".path_join(BASE_URL, "direct/sent")."'>Sent</a>
+</div>";
+}
+
+function echo_create_direct($target) {
+  global $content,$target;
+
+  if (empty($target)) {
+    $post_action = '/direct/create';
+  } else {
+    $post_action = '/direct/create/'.$target;
+  }
+
+  echo "<form class='create-direct' method='post' action='$post_action'>";
+  if (empty($target)) {
+    echo "To: <input type='text' name='to'> <br />";
+  } else {
+    echo "Sending direct message to <b>$target</b>";
+  }
+
+  echo "
+  Direct Message: <br />
+  <textarea id='direct' name='direct' rows='3'></textarea>
+  <div>
+    <input type='submit' value='Send Direct' />
+    <span id='remaining'>140</span>
+  </div>
+</form>
+<script type='text/javascript'> 
+  function updateCount() {
+    document.getElementById('remaining').innerHTML = 140 - document.getElementById('direct').value.length;
+    setTimeout(updateCount, 400);
+  }
+  updateCount();
+</script>";
+}
+
+function echo_direct($direct=null) {
+  global $settings, $content, $access_token;
+  if (empty($direct))
+    if (isset($content['direct']))
+      $direct = $content['direct'];
+    else
+      return;
+
+  if ($settings->show_avatar) {
+    echo "<img class='avatar' src='".$direct->sender->profile_image_url."' alt='".$direct->sender->name."' />";
+  }
+  echo "<div class='direct-message'>";
+  echo "<div class='direct-toolbar'>";
+  echo $direct->sender->name." |<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->screen_name)."'>".$direct->sender_screen_name."</a>";
+  echo "<a class='direct-reply' href='".path_join(BASE_URL, "direct/create", $direct->sender_screen_name)."'>DM</a>";
+  echo "<a class='direct-delete' href='".path_join(BASE_URL, "direct/delete", $direct->id)."'>DEL</a>";
+  echo " | <span class='direct-time'>".format_time(strtotime($direct->created_at), 0)."</span>";
+  echo "</div>";
+  echo "<div class='direct-text'>".format_tweet($direct->text)."</div>";
+  echo "</div>";
+}
+
+function echo_direct_box() {
+  global $content, $access_token;
+  if (!isset($content['directs'])) return;
+
+  echo "<ul class='directs'>";
+  $current_user = strtolower($access_token['screen_name']);
+  $count = 0;
+  foreach ($content['directs'] as $direct) {
+    echo "<li class='";
+    if ((++$count & 1) == 0) echo ' even';
+    echo "'>";
+    echo_direct($direct);
+    echo "</li>";
+  }
+  echo "</ul>";
+}
+
 ?>
