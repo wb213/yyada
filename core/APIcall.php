@@ -58,11 +58,15 @@ function get_direct($box) {
 }
 
 function new_direct($target) {
-  global $conn, $access_token;
-  $post_data = array(
-                'text' => $_POST['direct'],
-                'screen_name' => $access_token['screen_name'],
-                'user_id' => $target);
+  global $conn, $target;
+
+  if (empty($target)) {
+    if (isset($_POST['to']))
+      $target = $_POST['to'];
+    else
+      return;
+  
+  $post_data = array('text' => $_POST['direct'], 'screen_name' => $target);
   $conn->post('direct_messages/new', $post_data);
 }
 
