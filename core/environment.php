@@ -1,6 +1,6 @@
 <?php
 
-require_once('core/settings-control.php');
+require_once('core/settings.php');
 require_once('core/APIcall.php');
 require_once('control/include.php');
 
@@ -31,7 +31,7 @@ function url_dispatcher() {
 		$controller = 'status.php';
 		$action = 'home';
 	} else if ($action == '') {
-		$action = 'show';
+		$action = 'def';
 		$args = $access_token['screen_name'];
 	} else if ($args == '') {
 		$args = $access_token['screen_name'];

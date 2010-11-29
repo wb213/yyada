@@ -8,6 +8,7 @@ require_once('util/url.php');
 
 function login() {
   $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, NULL, NULL, OAUTH_PROXY);
+error_log(join_path(BASE_URL, 'login/callback'));
   $request_token = $connection->getRequestToken(join_path(BASE_URL, 'login/callback'));
 
   $_SESSION['oauth_token'] = $token = $request_token['oauth_token'];
@@ -56,7 +57,7 @@ function clear() {
   header('Location: /');
 }
 
-function default() {
+function def() {
   return login();
 }
 
