@@ -86,7 +86,7 @@ function get_mentioned_users($tweet) {
   $users = get_mentioned_all($tweet);
   $key = array_search('@'.$access_token['screen_name'], $users);
   if ($key) unset($users[$key]);
-  return $users > 1;
+  return $users;
 }
 
 ?>
