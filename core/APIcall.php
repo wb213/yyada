@@ -60,7 +60,7 @@ function get_direct($box) {
 function new_direct($target) {
   global $conn;
   $post_data = array(
-                'text' => $_POST['direct_text'],
+                'text' => $_POST['direct'],
                 'screen_name' => $access_token['screen_name'],
                 'user_id' => $target);
   $conn->post('direct_messages/new', $post_data);

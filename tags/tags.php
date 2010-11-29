@@ -274,7 +274,7 @@ function echo_direct($direct=null) {
   }
   echo "<div class='direct-message'>";
   echo "<div class='direct-toolbar'>";
-  echo $direct->sender->name." |<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->screen_name)."'>".$direct->sender_screen_name."</a>";
+  echo $direct->sender->name." |<a class='name' href='".path_join(BASE_URL, "user/show", $direct->sender_screen_name)."'>".$direct->sender_screen_name."</a>";
   echo "<a class='direct-reply' href='".path_join(BASE_URL, "direct/create", $direct->sender_screen_name)."'>DM</a>";
   echo "<a class='direct-delete' href='".path_join(BASE_URL, "direct/delete", $direct->id)."'>DEL</a>";
   echo " | <span class='direct-time'>".format_time(strtotime($direct->created_at), 0)."</span>";
