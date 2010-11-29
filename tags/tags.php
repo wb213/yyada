@@ -154,7 +154,7 @@ function echo_tweet($tweet=null) {
   echo "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>@</a>";
   if (is_reply_all('@'.$tweet->user->screen_name.' '.$tweet->text))
     echo "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>@@</a>";
-  echo "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->screen_name)."'>DM</a>";
+  echo "<a class='direct' href='".path_join(BASE_URL, "direct/create", $tweet->user->screen_name)."'>DM</a>";
   if ($tweet->favorited)
     echo "<a class='unfavor' href='".path_join(BASE_URL, "favor/remove", $tweet->id_str)."'>unFAV</a>";
   else
