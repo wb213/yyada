@@ -263,19 +263,39 @@ function echo_create_direct($target) {
 
 function echo_direct($direct=null) {
   global $settings, $content, $access_token;
-  if (empty($direct))
+
+  if (empty($direct)) {
     if (isset($content['direct']))
       $direct = $content['direct'];
     else
       return;
+  }
+
+  if (isset($content['box']))
+    $box = $content['box'];
+  else
+    return;
+
+  switch ($box) {
+    case 'inbox':
+      $name = $direct->sender->name;
+      $screen_name = $direct->sender_screen_name;
+      $img_url = $direct->sender->profile_image_url;
+      break;
+    case 'sent':
+      $name = $direct->recipient->name;
+      $screen_name = $direct->recipient_screen_name;
+      $img_url = $direct->recipient->profile_image_url;
+      break;
+  }
 
   if ($settings->show_avatar) {
-    echo "<img class='avatar' src='".$direct->sender->profile_image_url."' alt='".$direct->sender->name."' />";
+        echo "<img class='avatar' src='".$img_url."' alt='".$name."' />";
   }
   echo "<div class='direct-message'>";
   echo "<div class='direct-toolbar'>";
-  echo $direct->sender->name." |<a class='name' href='".path_join(BASE_URL, "user/show", $direct->sender_screen_name)."'>".$direct->sender_screen_name."</a>";
-  echo "<a class='direct-reply' href='".path_join(BASE_URL, "direct/create", $direct->sender_screen_name)."'>DM</a>";
+  echo $name." |<a class='name' href='".path_join(BASE_URL, "user/show", $screen_name)."'>".$screen_name."</a>";
+  echo "<a class='direct-reply' href='".path_join(BASE_URL, "direct/create", $screen_name)."'>DM</a>";
   echo "<a class='direct-delete' href='".path_join(BASE_URL, "direct/delete", $direct->id)."'>DEL</a>";
   echo " | <span class='direct-time'>".format_time(strtotime($direct->created_at), 0)."</span>";
   echo "</div>";
@@ -288,7 +308,6 @@ function echo_direct_box() {
   if (!isset($content['directs'])) return;
 
   echo "<ul class='directs'>";
-  $current_user = strtolower($access_token['screen_name']);
   $count = 0;
   foreach ($content['directs'] as $direct) {
     echo "<li class='";

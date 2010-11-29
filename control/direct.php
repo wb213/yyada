@@ -7,19 +7,21 @@ function load_direct() {
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST' and $action = 'create') {
     new_direct($target);
-    $box = 'sent';
+    header('Location: /direct/sent');
+    return;
 	} else {
     switch ($action) {
       case 'create':
         //TODO check if the target user following current user;
       case 'delete':
         remove_direct($target);
-        $box = 'inbox';
+        header('Location: /direct/inbox');
+        return;
         break;
       default:
         $box = $action;
         $directs = get_direct($box);
- 	      $content = array_merge($content, array('directs' => $directs));
+ 	      $content = array_merge($content, array('directs' => $directs, 'box' => $box));
         break;
     }
   }
