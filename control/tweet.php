@@ -39,6 +39,14 @@ function load_tweet() {
         $content['retweet_text'] = $tweets[0]->text;
         unset($tweets[0]);
 		    break;
+      case 'fav';
+        add_fav_tweet($target);
+        header('Location" /');
+        return;
+      case 'unfav';
+        remove_fav_tweet($target);
+        header('Location" /');
+        return;
 		  case 'delete':
 		    $tweets = get_reply_thread($target);
 		    break;

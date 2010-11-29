@@ -26,6 +26,16 @@ function retweet_status($target) {
   $ret = $conn->post('statuses/retweet/' . $target);
 }
 
+function add_fav_tweet($target) {
+  global $conn;
+  $ret = $conn->post('favorites/create/' . $target);
+}
+
+function remove_fav_tweet($target) {
+  global $conn;
+  $ret = $conn->post('favorites/destroy/' . $target);
+}
+
 function get_timeline() {
   global $conn;
   return $conn->get('statuses/home_timeline');
