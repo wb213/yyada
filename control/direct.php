@@ -17,10 +17,13 @@ function load_direct() {
         remove_direct($target);
         $box = 'in';
         break;
+      default:
+        $box = 'in';
+        break;
     }
   }
 
-  $tweet = get_direct($box);
+  $tweets = get_direct($box);
  	$content = array_merge($content, array('tweets' => $tweets));
   load_theme($page);
 }
