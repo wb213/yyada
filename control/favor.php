@@ -8,10 +8,12 @@ function load_favor() {
   switch ($action) {
       case 'add';
         add_fav_tweet($target);
-        header('Location" /');
+        header('Location: /');
+        break;
       case 'remove';
         remove_fav_tweet($target);
-        header('Location" /');
+        header('Location: /');
+        break;
 		  default:
 		    $tweets = get_fav();
       	$content = array_merge($content, array('tweets' => $tweets));
