@@ -41,6 +41,36 @@ function remove_fav_tweet($target) {
   $conn->post('favorites/destroy/' . $target);
 }
 
+function get_direct($box) {
+  global $conn;
+  switch ($box) {
+    case 'in':
+      $ret = $conn->get('direct_messages');
+      break;
+    case 'sent':
+      $ret = $conn->get('direct_messages/sent');
+      break;
+    default:
+      $ret = $conn->get('direct_messages');
+      break;
+  }
+  return $ret;
+}
+
+function new_direct($target) {
+  global $conn;
+  $post_data = array(
+                'text' => $_POST['direct_text'],
+                'screen_name' => $access_token['screen_name'],
+                'user_id' => $target);
+  $conn->post('direct_messages/new', $post_data);
+}
+
+function remove_direct($target) {
+  global $conn;
+  $conn->post('direct_messages/destroy/' . $target);
+}
+
 function get_timeline() {
   global $conn;
   return $conn->get('statuses/home_timeline');
