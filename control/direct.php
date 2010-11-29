@@ -19,6 +19,7 @@ function load_direct() {
         return;
         break;
       default:
+        if (empty($action)) $action = 'inbox';
         $box = $action;
         $directs = get_direct($box);
  	      $content = array_merge($content, array('directs' => $directs, 'box' => $box));
