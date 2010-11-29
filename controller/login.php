@@ -15,6 +15,7 @@ function oauth() {
 
   switch ($connection->http_code) {
   case 200:
+    $_SESSION['status'] = 'logining';  
     $url = $connection->getAuthorizeURL($token);
     header('Location: ' . $url);
     break;

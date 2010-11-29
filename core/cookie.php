@@ -53,7 +53,7 @@ function cookie_clear() {
 function load_access_token() {
   $str = cookie_get_secret('access_token', null);
   $ret = null;
-  $_SESSION['status'] = 'logoff';
+  if (isset($_SESSION['status']) && $_SESSION['status'] != 'logining') $_SESSION['status'] = 'logoff';
   if (isset($str)) {
     list($oauth_token, $oauth_token_secret, $user_id, $screen_name) = explode('|', $str);
     if (isset($oauth_token)  && isset($oauth_token_secret) && isset($user_id) && isset($screen_name) && check_invite($screen_name)) {
