@@ -18,22 +18,27 @@ function update_status() {
 
 function delete_status($target) {
   global $conn;
-  $ret = $conn->post('statuses/destroy/' . $target);
+  $conn->post('statuses/destroy/' . $target);
 }
 
 function retweet_status($target) {
   global $conn;
-  $ret = $conn->post('statuses/retweet/' . $target);
+  $conn->post('statuses/retweet/' . $target);
+}
+
+function get_fav() {
+  global $conn;
+  return $conn->get('favorites');
 }
 
 function add_fav_tweet($target) {
   global $conn;
-  $ret = $conn->post('favorites/create/' . $target);
+  $conn->post('favorites/create/' . $target);
 }
 
 function remove_fav_tweet($target) {
   global $conn;
-  $ret = $conn->post('favorites/destroy/' . $target);
+  $conn->post('favorites/destroy/' . $target);
 }
 
 function get_timeline() {

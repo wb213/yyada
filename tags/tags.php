@@ -156,9 +156,9 @@ function echo_tweet($tweet=null) {
     echo "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>@@</a>";
   echo "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->screen_name)."'>DM</a>";
   if ($tweet->favorited)
-    echo "<a class='unfavor' href='".path_join(BASE_URL, "unfav", $tweet->id_str)."'>unFAV</a>";
+    echo "<a class='unfavor' href='".path_join(BASE_URL, "favor/remove", $tweet->id_str)."'>unFAV</a>";
   else
-    echo "<a class='favor' href='".path_join(BASE_URL, "fav", $tweet->id_str)."'>FAV</a>";
+    echo "<a class='favor' href='".path_join(BASE_URL, "favor/add", $tweet->id_str)."'>FAV</a>";
   echo "<a class='retweet' href='".path_join(BASE_URL, "tweet/retweet", $tweet->id_str)."'>RT</a>";
   if ($tweet->user->screen_name == $access_token['screen_name'])
     echo "<a class='del' href='".path_join(BASE_URL, "tweet/delete", $tweet->id_str)."'>DEL</a>";
