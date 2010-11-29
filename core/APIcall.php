@@ -58,7 +58,7 @@ function get_direct($box) {
 }
 
 function new_direct($target) {
-  global $conn;
+  global $conn, $access_token;
   $post_data = array(
                 'text' => $_POST['direct'],
                 'screen_name' => $access_token['screen_name'],
