@@ -57,8 +57,7 @@ function format_tweet($tweet) {
   return $tweet;
 }
 
-function get_mentioned_users($tweet) {
-	global $access_token;
+function get_mentioned_all($tweet) {
   preg_match_all('/(?P<name>@[a-zA-Z0-9_]+)/', $tweet, $users);
   $ret = array();
   foreach ($users['name'] as $user) {
@@ -68,4 +67,27 @@ function get_mentioned_users($tweet) {
   return $ret;
 }
 
+function is_reply_all($tweet) {
+  global $access_token;
+  $users = get_mentioned_all($tweet);
+  $num = count($users);
+  if in_array('@'.$access_token['screen_name'], $users) $num--;
+  return $num > 1;
+}
+
+function is_mentioned($tweet) {
+  global $access_token;
+  $users = get_mentioned_all($tweet);
+  return in_array('@'.$access_token['screen_name'], $users);
+}
+
+function get_mentioned_users($tweet) {
+  global $access_token;
+  $users = get_mentioned_all($tweet);
+  $key = array_search('@'.$access_token['screen_name'], $users);
+  if ($key) unset($users[$key]);
+  return $users > 1;
+
 ?>
+
+

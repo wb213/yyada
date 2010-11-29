@@ -8,7 +8,7 @@ function load_tweet() {
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	  switch ($action) {
 		  case 'delete':
-		    $ret = $conn->post('statuses/destroy/' . $target);
+		    delete_status();
 		    break;
 		  default:
 		    update_status();
@@ -25,8 +25,7 @@ function load_tweet() {
 		  case 'replyall':
 		    $tweets = get_reply_thread($target);
 		    $content['reply_tweet_id'] = $target;
-		    $users = str_ireplace('@'.$access_token['screen_name'] , '' , get_reply_users($target));
-		    $content['reply_tweet_name'] = $users;
+		    $content['reply_tweet_name'] = get_reply_users($target);
 		    break;
 		  case 'show':
 		    $tweets = get_single_tweet($target);
@@ -35,7 +34,7 @@ function load_tweet() {
 		    $tweets = get_reply_thread($target);
 		    break;
 		  default:
-		    $tweets = $conn->get('statuses/home_timeline');
+		    $tweets = get_timeline();
 		    break;
 		}
 

@@ -138,7 +138,7 @@ function echo_tweet($tweet=null) {
   echo "<div class='toolbar'>";
   echo $tweet->user->name." |<a class='name' href='".path_join(BASE_URL, "user/show", $tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>";
   echo "<a class='reply' href='".path_join(BASE_URL, "tweet/reply", $tweet->id_str)."'>@</a>";
-  if (count(get_mentioned_users('@'.$tweet->user->screen_name.' '.$tweet->text)) > 1)
+  if (is_reply_all('@'.$tweet->user->screen_name.' '.$tweet->text))
     echo "<a class='replyall' href='".path_join(BASE_URL, "tweet/replyall", $tweet->id_str)."'>@@</a>";
   echo "<a class='direct' href='".path_join(BASE_URL, "direct/new", $tweet->user->screen_name)."'>DM</a>";
   if ($tweet->favorited)
@@ -173,7 +173,7 @@ function echo_tweets() {
   foreach ($content['tweets'] as $tweet) {
     echo "<li class='";
     if ((++$count & 1) == 0) echo ' even';
-    if (in_array('@'.$current_user, get_mentioned_users('@'.$tweet->user->screen_name.' '.$tweet->text)))
+    if (is_mentioned('@'.$tweet->user->screen_name.' '.$tweet->text))
       echo " mentioned";
     echo "'>";
     echo_tweet($tweet);

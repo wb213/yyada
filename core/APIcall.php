@@ -16,6 +16,16 @@ function update_status() {
   $conn->post('statuses/update', $post_data);
 }
 
+function delete_status() {
+  global $conn;
+  $ret = $conn->post('statuses/destroy/' . $target);
+}
+
+function get_timeline() {
+  global $conn;
+  return $conn->get('statuses/home_timeline');
+}
+
 function get_single_tweet($tweet_id) {
 	global $conn;
 	$ret = array();

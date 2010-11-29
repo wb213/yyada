@@ -13,15 +13,5 @@
     <h2>Welcome to yyada, Yet Yyada Another DAbr.</h2>
     <?php if (isset($warning)) echo "<p>" . $warning . "</p>"; ?>
     <a href="/login/oauth"><img src="<?php echo_theme_path() ?>/twitter_button.gif" alt="Sign in with Twitter/OAuth" width="165" height="28" /></a>
-
-    <p>
-      <pre>
-        <?php
-print_r($_SESSION);
-print_r($_COOKIE);
-        ?>
-      </pre>
-    </p>
-
 </body>
 </html>
