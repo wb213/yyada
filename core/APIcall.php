@@ -44,7 +44,7 @@ function remove_fav_tweet($target) {
 function get_direct($box) {
   global $conn;
   switch ($box) {
-    case 'in':
+    case 'inbox':
       $ret = $conn->get('direct_messages');
       break;
     case 'sent':
