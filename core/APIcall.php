@@ -16,7 +16,7 @@ function update_status() {
   $conn->post('statuses/update', $post_data);
 }
 
-function delete_status() {
+function delete_status($target) {
   global $conn;
   $ret = $conn->post('statuses/destroy/' . $target);
 }

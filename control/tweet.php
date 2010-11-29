@@ -8,7 +8,7 @@ function load_tweet() {
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	  switch ($action) {
 		  case 'delete':
-		    delete_status();
+		    delete_status($target);
 		    break;
 		  default:
 		    update_status();
