@@ -13,6 +13,7 @@ function load_direct() {
     switch ($action) {
       case 'create':
         //TODO check if the target user following current user;
+        break;
       case 'delete':
         remove_direct($target);
         header('Location: /direct/inbox');
