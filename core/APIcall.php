@@ -60,7 +60,7 @@ function get_direct($box) {
 function new_direct($target) {
   global $conn, $target;
 
-  if (empty($target)) {
+  if (empty($target)) 
     if (isset($_POST['to']))
       $target = $_POST['to'];
     else
