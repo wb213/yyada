@@ -241,7 +241,7 @@ function echo_create_direct($target) {
   if (empty($target)) {
     echo "To: <input type='text' name='to'> <br />";
   } else {
-    echo "Sending direct message to <b>$target</b>";
+    echo "Sending direct message to <b>$target</b><br />";
   }
 
   echo "
