@@ -1,5 +1,7 @@
 <?php
 
+require_once('util/url.php');
+
 function theme_name($echo = true) {
   global $theme;
   $ret = $theme->name;

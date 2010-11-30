@@ -6,9 +6,9 @@
 
 <div class='tweets'>
   <ul>
-    <?php while (has_list()) : ?>
-    <li <?php list_item_class() ?>>
-      <?php list_item_html() ?>
+    <?php while (has_tweet_list()) : ?>
+    <li <?php list_tweet_item_class() ?>>
+      <?php list_tweet_item_html() ?>
     </li>
     <?php endwhile; ?>
   </ul>
