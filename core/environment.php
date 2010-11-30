@@ -24,26 +24,20 @@ function dispatch_url() {
 
   $uri = explode('/' , $r_uri);
 
-  if (!isset($uri[0]) || empty($uri[0])) {
-    if (isset($_SESSION['status']) && $_SESSION['status'] == 'verified')
-      $controller = 'status.php';
-    else
-      $controller = 'login.php';
-    $action = 'def';
-    $args = $access_token['screen_name'];
-  } else if (!isset($uri[1]) || empty($uri[1])) {
+  if (isset($_SESSION['status']) && $_SESSION['status'] == 'verified')
+    $controller = 'status.php';
+  else
+    $controller = 'login.php';
+  $action = 'default_behavior';
+  $args = $access_token['screen_name'];
+
+  if (isset($uri[0]) && !empty($uri[0]))
     $controller = $uri[0] . ".php";
-    $action = 'def';
-    $args = $access_token['screen_name'];
-  } else if (!isset($uri[2])|| empty($uri[2])) {
-    $controller = $uri[0] . ".php";
+  if (isset($uri[1]) && !empty($uri[1]))
     $action = $uri[1];
-    $args = $access_token['screen_name'];
-  } else {
-    $controller = $uri[0] . ".php";
-    $action = $uri[1];
+  if (isset($uri[2]) && !empty($uri[2]))
     $args = $uri[2];
-  }
+
   include 'controller/' . $controller;
   $action($args);
 }

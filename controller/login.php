@@ -61,8 +61,28 @@ function clear() {
   header('Location: /');
 }
 
-function def() {
+function default_behavior() {
   global $theme, $content;
+
+  switch ($_SESSION['status']) {
+    case 'login_fail':
+      Settings::purge();
+      $_SESSION['status'] = 'logoff';
+      $content['info'] = '<div class="warning">Sign in failed, please try again.</div>';
+      $content['info'] .= login_html($echo=false);
+      break;
+    case 'invite_fail':
+      Settings::purge();
+      $_SESSION['status'] = 'logoff';
+      $content['info'] = '<div class="warning">You are not invited by administrator.</div>';
+      $content['info'] .= login_html($echo=false);
+      break;
+    case 'logoff':
+      Settings::purge();
+      $content['info'] = login_html($echo=false);
+      break;
+  }
+
   $theme->include_html('info');
 }
 
