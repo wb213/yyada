@@ -25,11 +25,11 @@ function dispatch_url() {
   $uri = explode('/' , $r_uri);
 
   if (isset($_SESSION['status']) && $_SESSION['status'] == 'verified')
-    $controller = 'status.php';
+    $controller = 'tweet.php';
   else
     $controller = 'login.php';
   $action = 'default_behavior';
-  $args = $access_token['screen_name'];
+  $args = '';
 
   if (isset($uri[0]) && !empty($uri[0]))
     $controller = $uri[0] . ".php";
