@@ -96,7 +96,7 @@ function list_tweet_item_html() {
   echo "<div class='toolbar'>";
   echo $tweet->user->name." |<a class='name' href='".join_path(BASE_URL, "user/show", $tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>";
   echo "<a class='reply' href='".join_path(BASE_URL, "tweet/reply", $tweet->id_str)."'>@</a>";
-  if (count(get_mentioned_users('@'.$tweet->user->screen_name.' '.$tweet->text)) > 1)
+  if (is_reply_all('@'.$tweet->user->screen_name.' '.$tweet->text))
     echo "<a class='replyall' href='".join_path(BASE_URL, "tweet/replyall", $tweet->id_str)."'>@@</a>";
   echo "<a class='direct' href='".join_path(BASE_URL, "direct/new", $tweet->user->screen_name)."'>DM</a>";
   if ($tweet->favorited)
