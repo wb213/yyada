@@ -76,7 +76,7 @@ function replyall($tweet) {
 
   $content['tweets'] = get_reply_thread($tweet);
   $content['reply_tweet_id'] = $tweet;
-  $content['reply_tweet_name'] = get_reply_users($tweet);
+  $content['reply_tweet_name'] = get_reply_users($content['tweets'][0]);
   $theme->include_html('tweet_list');
 }
 
