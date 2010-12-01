@@ -97,7 +97,7 @@ function list_tweet_item_html() {
   if ($tweet->favorited)
     echo "<a class='unfavor' href='".join_path(BASE_URL, "favor/remove", $tweet->id_str)."'>unFAV</a>";
   else
-    echo "<a class='favor' href='".join_path(BASE_URL, "direct/new", $tweet->id_str)."'>FAV</a>";
+    echo "<a class='favor' href='".join_path(BASE_URL, "favor/add", $tweet->id_str)."'>FAV</a>";
   echo "<a class='retweet' href='".join_path(BASE_URL, "tweet/retweet", $tweet->id_str)."'>RT</a>";
   if ($tweet->user->screen_name == $access_token['screen_name'])
     echo "<a class='del' href='".join_path(BASE_URL, "tweet/delete", $tweet->id_str)."'>DEL</a>";
