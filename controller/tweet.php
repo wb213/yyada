@@ -43,6 +43,7 @@ function retweet($tweet) {
     $content['retweet_user'] = '@'.$tweets[0]->user->screen_name;
     $content['retweet_text'] = $tweets[0]->text;
     $theme->include_html('retweet');
+  }
 }
 
 function reply($tweet) {
