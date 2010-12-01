@@ -5,11 +5,13 @@ require_once('core/APIcall.php');
 function create($user) {
   global $content;
 
-  $content['create-direct']=true;
+
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     new_direct($user);
     header('Location: /direct/sent');
-  }
+  } else {
+    $content['create-direct'] = true;
+    $theme->include_html('direct_list');
 }
 
 function delete() {
@@ -17,13 +19,24 @@ function delete() {
   header('Location: /direct/inbox');
 }
 
-function default_behavior($box) {
+function inbox() {
   global $content, $theme;
 
-  if (empty($box)) $box = 'inbox';
-  $directs = get_direct($box);
-  $content = array_merge($content, array('directs' => $directs, 'box' => $box));
+  $directs = get_direct('inbox');
+  $content = array_merge($content, array('directs' => $directs, 'box' => 'inbox'));
   $theme->include_html('direct_list');
+}
+
+function sent() {
+  global $content, $theme;
+
+  $directs = get_direct('sent');
+  $content = array_merge($content, array('directs' => $directs, 'box' => 'sent'));
+  $theme->include_html('direct_list');
+}
+
+function default_behavior($box) {
+  inbox();
 }
 
 ?>
