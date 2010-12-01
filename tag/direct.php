@@ -73,7 +73,8 @@ function list_direct_item_class() {
 function list_direct_item_html() {
   global $settings, $content, $access_token;
 
-  $tweet = $content['directs'][$content['iter']];
+  $direct = $content['directs'][$content['iter']];
+
   if (isset($content['box']))
     $box = $content['box'];
   else
