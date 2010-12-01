@@ -17,7 +17,7 @@ function is_create_direct() {
     return false;
 }
 
-function create_direct_html($user) {
+function create_direct_html() {
   global $content;
 
   $user = $content['create-to'];
