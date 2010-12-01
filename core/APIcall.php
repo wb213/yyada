@@ -115,7 +115,7 @@ function get_user($user) {
   global $conn;
  
   $parm = array("screen_name" => $user);
-  $tweets = $conn->get('statuses/user_timeline', $parm);
+  return $conn->get('statuses/user_timeline', $parm);
 }
 
 function get_twitter_conn() {
