@@ -18,6 +18,7 @@ function update() {
 }
 
 function delete($tweet) {
+  global $content, $theme;
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     delete_status($tweet);
     header('Location: /');
