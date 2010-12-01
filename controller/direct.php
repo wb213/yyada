@@ -12,6 +12,7 @@ function create($user) {
   } else {
     $content['create-direct'] = true;
     $theme->include_html('direct_list');
+  }
 }
 
 function delete() {
