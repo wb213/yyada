@@ -77,7 +77,7 @@ function replyall($tweet) {
 function default_behavior() {
   global $access_token, $content, $conn, $theme;
 
-  $tweets = $conn->get('statuses/home_timeline');
+  $tweets = get_timeline();
   $content = array_merge($content, array('tweets' => $tweets));
   $theme->include_html('tweet_list');
 }

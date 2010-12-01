@@ -21,9 +21,9 @@ function delete_status($tweet_id) {
   $conn->post('statuses/destroy/' . $tweet_id);
 }
 
-function retweet_status($target) {
+function retweet_status($tweet_id) {
   global $conn;
-  $conn->post('statuses/retweet/' . $target);
+  $conn->post('statuses/retweet/' . $tweet_id);
 }
 
 function get_fav() {
@@ -31,14 +31,14 @@ function get_fav() {
   return $conn->get('favorites');
 }
 
-function add_fav_tweet($target) {
+function add_fav_tweet($tweet_id) {
   global $conn;
-  $conn->post('favorites/create/' . $target);
+  $conn->post('favorites/create/' . $tweet_id);
 }
 
 function remove_fav_tweet($target) {
   global $conn;
-  $conn->post('favorites/destroy/' . $target);
+  $conn->post('favorites/destroy/' . $tweet_id);
 }
 
 function get_direct($box) {
@@ -82,10 +82,7 @@ function get_timeline() {
 
 function get_single_tweet($tweet_id) {
 	global $conn;
-	$ret = array();
-    $t = $conn->get('statuses/show/'.$tweet_id);
-    array_push($ret,$t);
-    return $ret;
+  return $conn->get('statuses/show/'.$tweet_id);
 }
 
 function get_reply_thread($tweet_id) {
