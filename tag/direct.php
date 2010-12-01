@@ -3,9 +3,9 @@
 function direct_menu_html() {
   echo "
 <div class='direct_menu'>
-  <a href='" . path_join(BASE_URL, "direct/create") . "'>Create</a> | 
-  <a href='" . path_join(BASE_URL, "direct/inbox") . "'>Inbox</a> | 
-  <a href='" . path_join(BASE_URL, "direct/sent") . "'>Sent</a>
+  <a href='" . join_path(BASE_URL, "direct/create") . "'>Create</a> | 
+  <a href='" . join_path(BASE_URL, "direct/inbox") . "'>Inbox</a> | 
+  <a href='" . join_path(BASE_URL, "direct/sent") . "'>Sent</a>
 </div>";
 }
 
@@ -97,9 +97,9 @@ function list_direct_item_html() {
   }
   echo "<div class='direct-message'>";
   echo "<div class='direct-toolbar'>";
-  echo $name." |<a class='name' href='".path_join(BASE_URL, "user/show", $screen_name)."'>".$screen_name."</a>";
-  echo "<a class='direct-reply' href='".path_join(BASE_URL, "direct/create", $screen_name)."'>DM</a>";
-  echo "<a class='direct-delete' href='".path_join(BASE_URL, "direct/delete", $direct->id)."'>DEL</a>";
+  echo $name." |<a class='name' href='".join_path(BASE_URL, "user/show", $screen_name)."'>".$screen_name."</a>";
+  echo "<a class='direct-reply' href='".join_path(BASE_URL, "direct/create", $screen_name)."'>DM</a>";
+  echo "<a class='direct-delete' href='".join_path(BASE_URL, "direct/delete", $direct->id)."'>DEL</a>";
   echo " | <span class='direct-time'>".format_time(strtotime($direct->created_at), 0)."</span>";
   echo "</div>";
   echo "<div class='direct-text'>".format_tweet($direct->text)."</div>";
