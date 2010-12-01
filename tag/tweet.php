@@ -75,8 +75,11 @@ function list_tweet_item_class() {
   $classes = array();
   $current_user = $access_token['screen_name'];
   $tweet = $content['tweets'][$content['iter']];
-  if (($content['iter'] % 2) == 0) array_push($classes, 'even');
-  if (is_mentioned($tweet->text)) array_push($classes, 'mentioned');
+  if (($content['iter'] % 2) == 0)
+    array_push($classes, 'even');
+  if (!isset($content['mentioned']) || $content['mentioned'])
+    if (is_mentioned($tweet->text))
+      array_push($classes, 'mentioned');
   if (count($classes) == 0) return '';
   echo "class='" . implode(' ', $classes) . "'";
 }
