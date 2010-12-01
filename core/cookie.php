@@ -63,7 +63,6 @@ function load_access_token() {
                    'user_id' => $user_id,
                    'screen_name' => $screen_name);
       $_SESSION['status'] = 'verified';
-      $_SESSION['user'] = $screen_name;
     }
   }
   return $ret;

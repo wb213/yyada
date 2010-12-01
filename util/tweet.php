@@ -57,38 +57,33 @@ function format_tweet($tweet) {
   return $tweet;
 }
 
-function get_mentioned_all($tweet) {
+function get_mentioned_users($tweet) {
   preg_match_all('/(?P<name>@[a-zA-Z0-9_]+)/', $tweet, $users);
   $ret = array();
   foreach ($users['name'] as $user) {
-    if (!in_array($user, $ret))
+    if (!in_array($user, $ret) and $user != ('@' . $_SESSION['user']))
       array_push($ret, $user);
   }
   return $ret;
 }
 
-function is_reply_all($tweet) {
-  global $access_token;
-  $users = get_mentioned_all($tweet);
-  $num = count($users);
-  if (in_array('@'.$access_token['screen_name'], $users)) $num-- ;
-  return $num > 1;
+function get_reply_users($tweet_id) {
+  global $conn, $access_token;
+  $t = $conn->get('statuses/show/'.$tweet_id);
+  $users = get_mentioned_users('@'.$t->user->screen_name.' '.$t->text);
+  $self = array_search(
+  return implode($users, ' ').' ';
 }
 
-function is_mentioned($tweet) {
-  global $access_token;
-  $users = get_mentioned_all($tweet);
-  return in_array('@'.$access_token['screen_name'], $users);
-}
-
-function get_mentioned_users($tweet) {
-  global $access_token;
-  $users = get_mentioned_all($tweet);
-  $key = array_search('@'.$access_token['screen_name'], $users);
-  if ($key) unset($users[$key]);
-  return $users;
+function get_reply_thread($tweet_id) {
+  global $conn;
+  $ret = array();
+  do {
+    $t = $conn->get('statuses/show/'.$tweet_id);
+    array_push($ret, $t);
+    $tweet_id = $t->in_reply_to_status_id_str;
+  } while (!empty($tweet_id));
+  return $ret;
 }
 
 ?>
-
-

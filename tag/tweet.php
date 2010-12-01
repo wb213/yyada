@@ -13,7 +13,7 @@ function update_html() {
   }
 
   echo "
-<form class='update' method='post' action='/tweet'>
+<form class='update' method='post' action='/tweet/update'>
   <textarea id='status' name='status' rows='3'>$reply_tweet_name</textarea>
   <div>
     <input name='in_reply_to_id' value='$reply_tweet_id' type='hidden' />
@@ -73,10 +73,10 @@ function list_tweet_item_class() {
   $classes = array();
   $current_user = $access_token['screen_name'];
   $tweet = $content['tweets'][$content['iter']];
-  if (($content['iter'] & 2) == 0) array_push($classes, 'even');
-  if (in_array('@'.$current_user, get_mentioned_users($tweet->text))) array_push($classes, 'mentioned');
+  if (($content['iter'] % 2) == 0) array_push($classes, 'even');
+  if (is_mentioned($tweet->text)) array_push($classes, 'mentioned');
   if (count($classes) == 0) return '';
-  return 'class='.implode(' ', $classes);
+  echo "class='" . implode(' ', $classes) . "'";
 }
 
 function list_tweet_item_html() {
@@ -97,7 +97,7 @@ function list_tweet_item_html() {
   if ($tweet->favorited)
     echo "<a class='unfavor' href='".join_path(BASE_URL, "favor/remove", $tweet->id_str)."'>unFAV</a>";
   else
-    echo "<a class='favor' href='".join_path(BASE_URL, "direct/new", $tweet->id_str)."'>FAV</a>";
+    echo "<a class='favor' href='".join_path(BASE_URL, "favor/add", $tweet->id_str)."'>FAV</a>";
   echo "<a class='retweet' href='".join_path(BASE_URL, "tweet/retweet", $tweet->id_str)."'>RT</a>";
   if ($tweet->user->screen_name == $access_token['screen_name'])
     echo "<a class='del' href='".join_path(BASE_URL, "tweet/delete", $tweet->id_str)."'>DEL</a>";
@@ -114,6 +114,41 @@ function list_tweet_item_html() {
   if (isset($tweet->in_reply_to_status_id_str))
     echo " <a class='reply' href='".join_path(BASE_URL, "tweet/reply", $tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
   echo "</span></div></div>";
+}
+
+function is_delete_tweet() {
+  global $content;
+
+  if (isset($content['delete']) && ! empty($content['delete']))
+    return true;
+  else
+    return false;
+}
+
+function delete_html() {
+  global $content;
+
+  echo "<form action='/tweet/delete/" . $content['delete'] . "' method='post'>";
+  echo "<input type='submit' value='Yes please' />";
+  echo "</form>";
+}
+
+function new_retweet_html() {
+  global $content;
+
+  echo "<form action='/tweet/retweet/" . $content['retweet_id'] . "' method='post'>";
+  echo "<input type='submit' value='Twitter Retweet' />";
+  echo "</form>";
+}
+
+function old_retweet_html() {
+  global $content, $settings;
+
+  $retweet = $settings->rt_format;
+  $retweet = str_ireplace("%u", $content['retweet_user'], $retweet);
+  $retweet = str_ireplace("%t", $content['retweet_text'], $retweet);
+  $content['reply_tweet_name'] = $retweet;
+  update_html();
 }
 
 ?>

@@ -1,8 +1,18 @@
 <?php include('header.html') ?>
 
-<div class='update'>
-  <?php update_html() ?>
-</div>
+<?php if(is_delete_tweet()) : ?>
+  <div class='delete'>
+    <p>
+      Are you really sure you want to delete your tweet?<br />
+      There is no way to undo this action.
+    </p>
+    <?php delete_html() ?>
+  </div>
+<?php else : ?>
+  <div class='update'>
+    <?php update_html() ?>
+  </div>
+<?php endif ?>
 
 <div class='tweets'>
   <ul>

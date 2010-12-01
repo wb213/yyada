@@ -16,12 +16,73 @@ function update_status() {
   $conn->post('statuses/update', $post_data);
 }
 
+function delete_status($tweet_id) {
+  global $conn;
+  $conn->post('statuses/destroy/' . $tweet_id);
+}
+
+function retweet_status($tweet_id) {
+  global $conn;
+  $conn->post('statuses/retweet/' . $tweet_id);
+}
+
+function get_fav() {
+  global $conn;
+  return $conn->get('favorites');
+}
+
+function add_fav_tweet($tweet_id) {
+  global $conn;
+  $conn->post('favorites/create/' . $tweet_id);
+}
+
+function remove_fav_tweet($tweet_id) {
+  global $conn;
+  $conn->post('favorites/destroy/' . $tweet_id);
+}
+
+function get_direct($box) {
+  global $conn;
+  switch ($box) {
+    case 'inbox':
+      $ret = $conn->get('direct_messages');
+      break;
+    case 'sent':
+      $ret = $conn->get('direct_messages/sent');
+      break;
+    default:
+      $ret = $conn->get('direct_messages');
+      break;
+  }
+  return $ret;
+}
+
+function new_direct($user) {
+  global $conn;
+
+  if (empty($user)) 
+    if (isset($_POST['to']))
+      $user = $_POST['to'];
+    else
+      return;
+  
+  $post_data = array('text' => $_POST['direct'], 'screen_name' => $user);
+  $conn->post('direct_messages/new', $post_data);
+}
+
+function remove_direct($direct) {
+  global $conn;
+  $conn->post('direct_messages/destroy/' . $direct);
+}
+
+function get_timeline() {
+  global $conn;
+  return $conn->get('statuses/home_timeline');
+}
+
 function get_single_tweet($tweet_id) {
 	global $conn;
-	$ret = array();
-    $t = $conn->get('statuses/show/'.$tweet_id);
-    array_push($ret,$t);
-    return $ret;
+  return $conn->get('statuses/show/'.$tweet_id);
 }
 
 function get_reply_thread($tweet_id) {
@@ -43,19 +104,15 @@ function get_reply_users($tweet_id) {
 }
 
 function get_mentions() {
-  global $content, $conn;
-
-  $tweets = $conn->get('statuses/mentions');
-  $content = array_merge($content, array('tweets' => $tweets));
+  global $conn;
+  return $conn->get('statuses/mentions');
 }
 
-function get_user() {
-  global $content, $conn, $target;
+function get_user($user) {
+  global $conn;
  
-  $parm = array("screen_name" => $target);
-  $tweets = $conn->get('statuses/user_timeline', $parm);
-  $content['reply_tweet_name'] = '@' . $target . ' ';
-  $content = array_merge($content, array('tweets' => $tweets));
+  $parm = array("screen_name" => $user);
+  return $conn->get('statuses/user_timeline', $parm);
 }
 
 function get_twitter_conn() {

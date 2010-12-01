@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+<head> 
+  <title>yyada</title> 
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
+  <link type="text/css" rel="stylesheet" href="/<?php echo_theme_path() ?>/style.css">
+</head> 
+<body> 
+  <?php echo_menu() ?>
+  <?php echo_direct_menu() ?>
+  <?php switch (echo_global_var('action')) {
+    case 'create':
+      echo_create_direct(echo_global_var('target'));
+      break;
+    default:
+      echo_direct_box();
+      break;
+  } ?>
+  <?php echo_menu() ?>
+</body> 
+</html> 

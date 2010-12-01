@@ -1,23 +1,18 @@
 <?php
 
-require_once('core/APIcall.php');
+function show($user) {
+  global $content, $conn, $theme;
 
-function load_user() {
-	global $action,$page;
-	
-	switch ($action) {
-		case 'mention':
-    		get_mentions();
-    		$page = 'tweet';
-		    break;
-		case 'show':
-		    get_user();
-		    break;
-		default:
-			get_mentions();
-			$page = 'tweet';
-		    break;
-	}
-	load_theme($page);
+  $tweets = $conn->get('statuses/user_timeline', array("screen_name" => $user));
+  $content['reply_tweet_name'] = '@' . $user . ' ';
+  $content['tweets'] = $tweets;
+  $theme->include_html('user');
+}
+
+function default_behavior() {
+  global $access_token;
+
+  show($access_token['screen_name']);
 } 
+
 ?>
