@@ -50,15 +50,16 @@ function mention() {
 }
 
 function retweet($tweet) {
-  global $content, $theme;
+  global $conn, $content, $theme;
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->post('statuses/retweet/' . $tweet);
     header('Location: /');
   } else {
-    $content['retweet_id'] = $conn->get('statuses/show/' . $tweet);  
-    $content['retweet_user'] = '@'.$tweets[0]->user->screen_name;
-    $content['retweet_text'] = $tweets[0]->text;
+    $tweet_obj = $conn->get('statuses/show/' . $tweet);
+    $content['retweet_id'] = $tweet;
+    $content['retweet_user'] = '@'.$tweet_obj->user->screen_name;
+    $content['retweet_text'] = $tweet_obj->text;
     $theme->include_html('retweet');
   }
 }
