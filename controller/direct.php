@@ -16,8 +16,8 @@ function create($user) {
   }
 }
 
-function delete() {
-  remove_direct($target);
+function delete($direct) {
+  remove_direct($direct);
   header('Location: /direct/inbox');
 }
 

@@ -57,22 +57,22 @@ function get_direct($box) {
   return $ret;
 }
 
-function new_direct($target) {
-  global $conn, $target;
+function new_direct($user) {
+  global $conn;
 
-  if (empty($target)) 
+  if (empty($user)) 
     if (isset($_POST['to']))
-      $target = $_POST['to'];
+      $user = $_POST['to'];
     else
       return;
   
-  $post_data = array('text' => $_POST['direct'], 'screen_name' => $target);
+  $post_data = array('text' => $_POST['direct'], 'screen_name' => $user);
   $conn->post('direct_messages/new', $post_data);
 }
 
-function remove_direct($target) {
+function remove_direct($direct) {
   global $conn;
-  $conn->post('direct_messages/destroy/' . $target);
+  $conn->post('direct_messages/destroy/' . $direct);
 }
 
 function get_timeline() {
