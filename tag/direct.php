@@ -20,6 +20,8 @@ function is_create_direct() {
 function create_direct_html($user) {
   global $content;
 
+  $user = $content['create-to'];
+
   if (empty($user)) {
     $post_action = '/direct/create';
   } else {

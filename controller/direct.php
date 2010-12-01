@@ -11,6 +11,7 @@ function create($user) {
     header('Location: /direct/sent');
   } else {
     $content['create-direct'] = true;
+    $content['create-to'] = $user;
     $theme->include_html('direct_list');
   }
 }
