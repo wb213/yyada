@@ -53,15 +53,15 @@ ul {
 	margin: 3px;
 }
 
-ul.tweets > li {
+ul > li {
 	background: #EEE;
 }
 
-ul.tweets > li.even {
+ul > li.even {
 	background: #FFF;
 }
 
-ul.tweets > li.mentioned {
+ul > li.mentioned {
 	background: #FFA;
 }
 

@@ -76,7 +76,7 @@ function list_tweet_item_class() {
   if (($content['iter'] % 2) == 0) array_push($classes, 'even');
   if (in_array('@'.$current_user, get_mentioned_users($tweet->text))) array_push($classes, 'mentioned');
   if (count($classes) == 0) return '';
-  return 'class='.implode(' ', $classes);
+  echo "class='" . implode(' ', $classes) . "'";
 }
 
 function list_tweet_item_html() {
