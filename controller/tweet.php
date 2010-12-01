@@ -32,7 +32,7 @@ function delete($tweet) {
 }
 
 function retweet($tweet) {
-  global $content;
+  global $content, $theme;
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     retweet_status($tweet);
