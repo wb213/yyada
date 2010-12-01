@@ -107,10 +107,8 @@ function get_reply_users($tweet_id) {
 }
 
 function get_mentions() {
-  global $content, $conn;
-
-  $tweets = $conn->get('statuses/mentions');
-  $content = array_merge($content, array('tweets' => $tweets));
+  global $conn;
+  return $conn->get('statuses/mentions');
 }
 
 function get_user() {
