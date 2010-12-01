@@ -86,7 +86,7 @@ function is_reply_all($tweet) {
 function get_reply_users($tweet_obj) {
   global $access_token;
 
-  $tweet_user = '@'.$tweet_object->screen_name;
+  $tweet_user = '@'.$tweet_obj->user->screen_name;
   $tweet = $tweet_obj->text;
   $users = get_mentioned_users($tweet_user.' '.$tweet);
   $self = array_search('@'.$access_token['screen_name'], $users);

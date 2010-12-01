@@ -68,7 +68,7 @@ function reply($tweet) {
 
   $content['tweets'] = get_reply_thread($tweet);
   $content['reply_tweet_id'] = $tweet;
-  $content['reply_tweet_name'] = '@'.$tweets[0]->user->screen_name.' ';
+  $content['reply_tweet_name'] = '@'.$content['tweets'][0]->user->screen_name.' ';
   $theme->include_html('tweet_list');
 }
 
@@ -84,8 +84,7 @@ function replyall($tweet) {
 function default_behavior() {
   global $access_token, $content, $conn, $theme;
 
-  $tweets = $conn->get('statuses/home_timeline');
-  $content = array_merge($content, array('tweets' => $tweets));
+  $content['tweets'] = $conn->get('statuses/home_timeline');
   $theme->include_html('tweet_list');
 }
 
