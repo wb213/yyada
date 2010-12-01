@@ -3,9 +3,12 @@
 function create($user) {
   global $content, $theme;
 
-
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    new_direct($user);
+    if (empty($user) && isset($_POST['to']))
+      $user = $_POST['to'];
+
+    $post_data = array('text' => $_POST['direct'], 'screen_name' => $user);
+    $conn->post('direct_messages/new', $post_data);
     header('Location: /direct/sent');
   } else {
     $content['create-direct'] = true;
@@ -15,14 +18,14 @@ function create($user) {
 }
 
 function delete($direct) {
-  remove_direct($direct);
+  $conn->post('direct_messages/destroy/' . $direct);
   header('Location: /direct/inbox');
 }
 
 function inbox() {
   global $content, $theme;
 
-  $directs = get_direct('inbox');
+  $directs = $conn->get('direct_messages');
   $content = array_merge($content, array('directs' => $directs, 'box' => 'inbox'));
   $theme->include_html('direct_list');
 }
@@ -30,7 +33,7 @@ function inbox() {
 function sent() {
   global $content, $theme;
 
-  $directs = get_direct('sent');
+  $directs = $conn->get('direct_messages/sent');
   $content = array_merge($content, array('directs' => $directs, 'box' => 'sent'));
   $theme->include_html('direct_list');
 }
