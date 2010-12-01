@@ -3,7 +3,7 @@
 require_once('core/APIcall.php');
 
 function create($user) {
-  global $content;
+  global $content, $theme;
 
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
