@@ -1,7 +1,5 @@
 <?php
 
-require_once('core/APIcall.php');
-
 function create($user) {
   global $content, $theme;
 

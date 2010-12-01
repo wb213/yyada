@@ -2,7 +2,7 @@
 
 require_once('config.php');
 require_once('core/twitteroauth.php');
-require_once('util/tweet_func.php');
+require_once('util/tweet.php');
 
 function update_status() {
   global $conn;
@@ -96,7 +96,7 @@ function get_reply_thread($tweet_id) {
   return $ret;
 }
 
-function get_reply_users($tweet_id) {
+function get_reply_users_1($tweet_id) {
   global $conn;
   $t = $conn->get('statuses/show/'.$tweet_id);
   $users = get_mentioned_users('@'.$t->user->screen_name.' '.$t->text);

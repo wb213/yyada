@@ -42,7 +42,7 @@ function remove($tweet) {
 }
 
 function mention() {
-  global $content, $theme;
+  global $content, $theme, $conn;
   
   $content['tweets'] = $conn->get('statuses/mentions');
   $theme->include_html('tweet_list');
@@ -83,7 +83,7 @@ function replyall($tweet) {
 function default_behavior() {
   global $access_token, $content, $conn, $theme;
 
-  $tweets = get_timeline();
+  $tweets = $conn->get('statuses/home_timeline');
   $content = array_merge($content, array('tweets' => $tweets));
   $theme->include_html('tweet_list');
 }

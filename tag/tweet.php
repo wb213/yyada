@@ -1,5 +1,7 @@
 <?php
 
+require_once('util/tweet.php');
+
 function update_html() {
   global $content;
 

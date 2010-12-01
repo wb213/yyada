@@ -1,7 +1,5 @@
 <?php
 
-require_once('core/APIcall.php');
-
 function add($tweet_id) {
   add_fav_tweet($tweet_id);
   header('Location: /');

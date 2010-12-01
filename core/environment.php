@@ -1,7 +1,7 @@
 <?php
 
+require_once('core/twitteroauth.php');
 require_once('core/settings.php');
-require_once('core/APIcall.php');
 
 // environment
 global $content;
@@ -51,7 +51,10 @@ function init_environment() {
   $theme = new Theme($settings->theme);
   $access_token = load_access_token();
   $content = array();
-  $conn = get_twitter_conn();
+  if (isset($access_token))
+    return $conn = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+  else
+    $conn = null;
 }
 
 ?>
