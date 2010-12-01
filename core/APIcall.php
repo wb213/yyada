@@ -36,7 +36,7 @@ function add_fav_tweet($tweet_id) {
   $conn->post('favorites/create/' . $tweet_id);
 }
 
-function remove_fav_tweet($target) {
+function remove_fav_tweet($tweet_id) {
   global $conn;
   $conn->post('favorites/destroy/' . $tweet_id);
 }
