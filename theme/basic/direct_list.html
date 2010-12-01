@@ -1,0 +1,19 @@
+<?php include('header.html') ?>
+
+<?php direct_menu_html() ?>
+
+<?php if(is_create_direct()) : ?>
+  <?php create_direct_html() ?>
+<?php else : ?>
+  <div class='tweets'>
+    <ul>
+      <?php while (has_direct_list()) : ?>
+      <li <?php list_direct_item_class() ?>>
+        <?php list_direct_item_html() ?>
+      </li>
+      <?php endwhile; ?>
+    </ul>
+  </div>
+<?php endif ?>
+
+<?php include('footer.html') ?>

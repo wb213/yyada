@@ -2,32 +2,28 @@
 
 require_once('core/APIcall.php');
 
-function load_direct() {
-  global $access_token, $content, $page, $conn, $action, $target;
+function create($user) {
+  global $content;
 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST' and $action = 'create') {
-    new_direct($target);
+  $content['create-direct']=true;
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    new_direct($user);
     header('Location: /direct/sent');
-    return;
-	} else {
-    switch ($action) {
-      case 'create':
-        //TODO check if the target user following current user;
-        break;
-      case 'delete':
-        remove_direct($target);
-        header('Location: /direct/inbox');
-        return;
-        break;
-      default:
-        if (empty($action)) $action = 'inbox';
-        $box = $action;
-        $directs = get_direct($box);
- 	      $content = array_merge($content, array('directs' => $directs, 'box' => $box));
-        break;
-    }
   }
-  load_theme($page);
+}
+
+function delete() {
+  remove_direct($target);
+  header('Location: /direct/inbox');
+}
+
+function default_behavior($box) {
+  global $content, $theme;
+
+  if (empty($box)) $box = 'inbox';
+  $directs = get_direct($box);
+  $content = array_merge($content, array('directs' => $directs, 'box' => $box));
+  $theme->include_html('direct_list');
 }
 
 ?>
