@@ -1,7 +1,7 @@
 <?php
 
 function create($user) {
-  global $content, $theme;
+  global $conn, $content, $theme;
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($user) && isset($_POST['to']))
@@ -18,12 +18,14 @@ function create($user) {
 }
 
 function delete($direct) {
+  global $conn;
+
   $conn->post('direct_messages/destroy/' . $direct);
   header('Location: /direct/inbox');
 }
 
 function inbox() {
-  global $content, $theme;
+  global $conn, $content, $theme;
 
   $directs = $conn->get('direct_messages');
   $content = array_merge($content, array('directs' => $directs, 'box' => 'inbox'));
@@ -31,7 +33,7 @@ function inbox() {
 }
 
 function sent() {
-  global $content, $theme;
+  global $conn, $content, $theme;
 
   $directs = $conn->get('direct_messages/sent');
   $content = array_merge($content, array('directs' => $directs, 'box' => 'sent'));
