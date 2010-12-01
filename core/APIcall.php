@@ -111,13 +111,11 @@ function get_mentions() {
   return $conn->get('statuses/mentions');
 }
 
-function get_user() {
-  global $content, $conn, $target;
+function get_user($user) {
+  global $conn;
  
-  $parm = array("screen_name" => $target);
+  $parm = array("screen_name" => $user);
   $tweets = $conn->get('statuses/user_timeline', $parm);
-  $content['reply_tweet_name'] = '@' . $target . ' ';
-  $content = array_merge($content, array('tweets' => $tweets));
 }
 
 function get_twitter_conn() {
