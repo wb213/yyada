@@ -116,4 +116,22 @@ function list_tweet_item_html() {
   echo "</span></div></div>";
 }
 
+function is_delete_tweet() {
+  global $content;
+
+  if (isset($content['delete']) && ! empty($content['delete']))
+    return true;
+  else
+    return false;
+}
+
+function delete_html() {
+  global $content;
+
+  echo "<p>Are you really sure you want to delete your tweet?<br />There is no way to undo this action.</p>";
+  echo "<form action='/tweet/delete/" . $content['delete'] . "' method='post'>";
+  echo "<input type='submit' value='Yes please' />";
+  echo "</form>";
+}
+
 ?>

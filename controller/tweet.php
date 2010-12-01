@@ -17,6 +17,18 @@ function update() {
   header('Location: /');
 }
 
+function delete($tweet) {
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    delete_status($tweet);
+    header('Location: /');
+  } else {
+    $tweets = get_single_tweet($tweet);
+    $content = array_merge($content, array('tweets' => $tweets));
+    $content['delete'] = $tweet;
+    $theme->include_html('tweet_list');
+  }
+}
+
 function reply($tweet) {
   global $access_token, $content, $conn, $theme;
 

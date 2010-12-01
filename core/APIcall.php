@@ -16,9 +16,9 @@ function update_status() {
   $conn->post('statuses/update', $post_data);
 }
 
-function delete_status($target) {
+function delete_status($tweet_id) {
   global $conn;
-  $conn->post('statuses/destroy/' . $target);
+  $conn->post('statuses/destroy/' . $tweet_id);
 }
 
 function retweet_status($target) {

@@ -1,8 +1,14 @@
 <?php include('header.html') ?>
 
-<div class='update'>
-  <?php update_html() ?>
-</div>
+<?php if(is_delete_tweet()) : ?>
+  <div class='delete'>
+    <?php delete_html() ?>
+  </div>
+<?php else : ?>
+  <div class='update'>
+    <?php update_html() ?>
+  </div>
+<?php endif ?>
 
 <div class='tweets'>
   <ul>
