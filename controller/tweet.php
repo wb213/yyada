@@ -12,6 +12,11 @@ function show($user = '') {
   $theme->include_html('tweet_list');
 }
 
+function update() {
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') update_status();
+  header('Location: /');
+}
+
 function reply($tweet) {
   global $access_token, $content, $conn, $theme;
 
