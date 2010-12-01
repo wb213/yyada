@@ -16,6 +16,7 @@ function reply($tweet) {
   global $access_token, $content, $conn, $theme;
 
   $tweets = get_reply_thread($tweet);
+  $content = array_merge($content, array('tweets' => $tweets));
   $content['reply_tweet_id'] = $tweet;
   $content['reply_tweet_name'] = '@'.$tweets[0]->user->screen_name.' ';
   $theme->include_html('tweet_list');
@@ -24,9 +25,10 @@ function reply($tweet) {
 function replyall($tweet) {
   global $access_token, $content, $conn, $theme;
 
-  $tweets = get_reply_thread($target);
-  $content['reply_tweet_id'] = $target;
-  $content['reply_tweet_name'] = get_reply_users($target);
+  $tweets = get_reply_thread($tweet);
+  $content = array_merge($content, array('tweets' => $tweets));
+  $content['reply_tweet_id'] = $tweet;
+  $content['reply_tweet_name'] = get_reply_users($tweet);
   $theme->include_html('tweet_list');
 }
 
