@@ -19,6 +19,7 @@ function update() {
 
 function delete($tweet) {
   global $content, $theme;
+
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     delete_status($tweet);
     header('Location: /');
@@ -28,6 +29,20 @@ function delete($tweet) {
     $content['delete'] = $tweet;
     $theme->include_html('tweet_list');
   }
+}
+
+function retweet($tweet) {
+  global $content;
+
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    retweet_status($tweet);
+    header('Location: /');
+  } else {
+    $tweets = get_single_tweet($tweet);
+    $content['retweet_id'] = $tweet;  
+    $content['retweet_user'] = '@'.$tweets[0]->user->screen_name;
+    $content['retweet_text'] = $tweets[0]->text;
+    $theme->include_html('retweet');
 }
 
 function reply($tweet) {

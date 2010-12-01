@@ -128,10 +128,27 @@ function is_delete_tweet() {
 function delete_html() {
   global $content;
 
-  echo "<p>Are you really sure you want to delete your tweet?<br />There is no way to undo this action.</p>";
   echo "<form action='/tweet/delete/" . $content['delete'] . "' method='post'>";
   echo "<input type='submit' value='Yes please' />";
   echo "</form>";
+}
+
+function new_retweet_html() {
+  global $content;
+
+  echo "<form action='/tweet/retweet/" . $content['retweet_id'] . "' method='post'>";
+  echo "<input type='submit' value='Twitter Retweet' />";
+  echo "</form>";
+}
+
+function old_retweet_html() {
+  global $content, $settings;
+
+  $retweet = $settings->rt_format;
+  $retweet = str_ireplace("%u", $content['retweet_user'], $retweet);
+  $retweet = str_ireplace("%t", $content['retweet_text'], $retweet);
+  $content['reply_tweet_name'] = $retweet;
+  update_html();
 }
 
 ?>
