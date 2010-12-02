@@ -105,7 +105,7 @@ function list_tweet_item_html() {
     echo "<a class='favor' href='".join_path(BASE_URL, "favor/add", $tweet->id_str)."'>FAV</a>";
   echo "<a class='retweet' href='".join_path(BASE_URL, "tweet/retweet", $tweet->id_str)."'>RT</a>";
   if ($tweet->user->screen_name == $access_token['screen_name'])
-    echo "<a class='del' href='".join_path(BASE_URL, "tweet/delete", $tweet->id_str)."'>DEL</a>";
+    echo "<a class='del' href='".join_path(BASE_URL, "tweet/remove", $tweet->id_str)."'>DEL</a>";
   if (isset($tweet->geo)) {
     $lat = $tweet->geo->coordinates[0];
     $long = $tweet->geo->coordinates[1];
@@ -133,7 +133,7 @@ function is_delete_tweet() {
 function delete_html() {
   global $content;
 
-  echo "<form action='/tweet/delete/" . $content['delete'] . "' method='post'>";
+  echo "<form action='/tweet/remove/" . $content['delete'] . "' method='post'>";
   echo "<input type='submit' value='Yes please' />";
   echo "</form>";
 }
