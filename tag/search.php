@@ -27,14 +27,14 @@ function has_search_result_list() {
     $content['iter'] = 0;
   else
     $content['iter']++;
-  return $content['iter'] < count($content['saved_searches']);
+  return $content['iter'] < count($content['search_results']);
 }
 
 function list_search_result_class() {
   global $content, $access_token;
 
   $classes = array();
-  $results = $content['saved_searches'][$content['iter']];
+  $results = $content['search_results'][$content['iter']];
   if (($content['iter'] % 2) == 0)
     array_push($classes, 'even');
   if (!isset($content['mentioned']) || $content['mentioned'])
@@ -47,7 +47,7 @@ function list_search_result_class() {
 function list_search_result_html() {
   global $settings, $content, $access_token;
 
-  $results = $content['saved_searches'][$content['iter']];
+  $results = $content['search_results'][$content['iter']];
 
   if ($settings->show_avatar) {
     echo "<img class='avatar' src='".$results->profile_image_url."' alt='".$results->from_user."' />";
