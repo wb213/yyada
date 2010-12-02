@@ -37,6 +37,7 @@ function remove($tweet) {
     header('Location: /');
   } else {
     $content['tweets'] = array($conn->get('statuses/show/' . $tweet));
+    $content['delete'] = $content['tweets'][0]->id_str;
     $theme->include_html('tweet_list');
   }
 }
