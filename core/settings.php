@@ -10,7 +10,7 @@ class Settings {
   public $show_img = false;
   public $rt_format = "RT %u: %t";
 
-  private static $cookie_key = "config";
+  private $cookie_key = "config";
 
   public function __construct($s = null) {
     if (isset($s) && $s != "") {

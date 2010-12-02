@@ -14,7 +14,7 @@ function default_behavior() {
     $settings->show_img = isset($_POST['img']);
     if (isset($_POST['rt_format'])) $settings->rt_format = $_POST['rt_format'];
 
-    save_settings();
+    $settings->save();
     header('Location: /');
   } else {
     $content['info'] = settings_html();
