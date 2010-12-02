@@ -30,13 +30,14 @@ function update() {
 }
 
 function remove($tweet) {
-  global $content, $theme;
+  global $content, $theme, $conn;
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ret = $conn->post('statuses/destroy/' . $tweet);
     header('Location: /');
   } else {
     $content['tweets'] = array($conn->get('statuses/show/' . $tweet));
+    $content['delete'] = $content['tweets'][0]->id_str;
     $theme->include_html('tweet_list');
   }
 }
