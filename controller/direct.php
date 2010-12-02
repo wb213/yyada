@@ -17,7 +17,7 @@ function create($user) {
   }
 }
 
-function delete($direct) {
+function remove($direct) {
   global $conn;
 
   $conn->post('direct_messages/destroy/' . $direct);

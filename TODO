@@ -1,0 +1,18 @@
+// * = Status
+// ! = Priority
+// S = Subject
+// N = Notes
+
+1) [*]Completed [!]High [S]mirgate APIall function to controller
+
+2) [*]In progress [!]High [S]rename delete() function to remove() function to aovid conflict with PHP existing delete() function and add comment for it
+
+3) [*]Future [!]Normal [S]add API call error handler
+
+4) [*]Future [!]Low [S]do not output the DIV tag for tags function
+
+5) [*]Future [!]Normal [S]enhancement for list function
+
+6) [*]Future [!]Low [S]direct page CSS is incorrect [N]因为class名称不一样
+
+7) [*]Future [!]Low [S]redesign for direct page [N]另外我对目前direct的布局还有看法，没必要去学dabr的create单独一个页面，直接放到inbox和sent的顶部来发送就行
