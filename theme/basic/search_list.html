@@ -12,9 +12,9 @@
 
 <div class='tweets'>
   <ul>
-    <?php while (has_tweet_list()) : ?>
-    <li <?php list_tweet_item_class() ?>>
-      <?php list_tweet_item_html() ?>
+    <?php while (has_search_result_list()) : ?>
+    <li <?php list_search_result_class() ?>>
+      <?php list_search_result_html() ?>
     </li>
     <?php endwhile; ?>
   </ul>

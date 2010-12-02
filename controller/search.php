@@ -3,11 +3,12 @@
 function query() {
   global $conn, $content, $theme;
 
-  if (! isset[$_GET['q'] || empty([$_GET['q'])) return;
+  if (! isset($_GET['q']) || empty($_GET['q'])) return;
 
- 	$content['saved_searches'] = '';
-  $tweets = $conn->http('https://search.twitter.com/search.json?q='.$_GET['q'], 'GET', NULL);
- 	$content = array_merge($content, array('tweets' => $tweets));
+ 	$content['saved_searches'] = array();
+  $ret = $conn->http('https://search.twitter.com/search.json?q='.urlencode($_GET['q']), 'GET', NULL);
+  $results = json_decode($ret)->results;
+ 	$content = array_merge($content, array('search_results' => $results));
   $theme->include_html('search_list');
 }
 
@@ -24,7 +25,7 @@ function default_behavior() {
 
   $saved_searches = $conn->get('saved_searches');
  	$content = array_merge($content, array('saved_searches' => $saved_searches));
- 	$content['tweets'] = '';
+ 	$content['tweets'] = array();
   $theme->include_html('search_list');
 }
 
