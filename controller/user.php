@@ -25,7 +25,7 @@ function friends($user) {
   if (empty($user)) $user = $access_token['screen_name'];
 
   $user_list = $conn->get('statuses/friends', array("screen_name" => $user));
-  $content['user_list'] = $friend_list;
+  $content['user_list'] = $user_list;
   $theme->include_html('user_list');
 }
 
