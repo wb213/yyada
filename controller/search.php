@@ -12,12 +12,20 @@ function query() {
   $theme->include_html('search_list');
 }
 
-function add($saved_search) {
+function add($query_string) {
   global $conn;
 
+  $post_data = array('query' => urlencode($query_string));
+  $conn->post('saved_searches/create', $post_data);
+  header('Location: /search');
 }
-function remove($saved_search) {
+
+function remove($saved_search_id) {
   global $conn;
+
+  $post_data = array('id' => $saved_search_id);
+  $conn->post('saved_searches/destroy', $post_data);
+  header('Location: /search');
 }
 
 function default_behavior() {
