@@ -57,7 +57,7 @@ function format_tweet($tweet) {
 }
 
 function hashtag_encode($match) {
-  return "<a href='/search/query/?q=" . urlencode($match[1]) . ">". $match[1] . "</a>"
+  return "<a href='/search/query/?q=" . urlencode($match[1]) . "'>". $match[1] . "</a>";
 }
 
 function get_mentioned_users($tweet) {
