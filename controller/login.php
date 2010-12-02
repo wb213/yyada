@@ -30,7 +30,6 @@ function callback() {
   if (empty($_SESSION['oauth_token']) ||
       empty($_REQUEST['oauth_token']) ||
       $_SESSION['oauth_token'] != $_REQUEST['oauth_token']) {
-error_log('fail');
     Settings::purge();
     $_SESSION['status'] = 'login_fail';
     header('Location: /');
