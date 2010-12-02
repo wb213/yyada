@@ -1,6 +1,6 @@
 <?php
 
-function echo_settings() {
+function settings_html() {
   global $settings;
   $s = $settings;
 
