@@ -30,7 +30,7 @@ function update() {
 }
 
 function remove($tweet) {
-  global $content, $theme;
+  global $content, $theme, $conn;
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ret = $conn->post('statuses/destroy/' . $tweet);
