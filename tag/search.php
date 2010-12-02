@@ -17,7 +17,7 @@ function list_saved_search_html() {
 
   $saved = $content['saved_searches'][$content['iter']];
 
-  echo "<a class='search' href='".join_path(BASE_URL, "tweet/query", $saved->query)."'>". $saved->name ."</a>";
+  echo "<a class='search' href='".join_path(BASE_URL, "search/query", "?q=".urlencode($saved->query))."'>". $saved->name ."</a>";
 }
 
 ?>
