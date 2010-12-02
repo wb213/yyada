@@ -9,7 +9,7 @@ function user_info_html() {
     echo "<img src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
   else
     echo "<a href='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."'>Avatar</a>";
-  echo "<a class='name' href='".join_path(BASE_URL, "user/show", $tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>"."(".$tweet->user->name.")<br/>";
+  echo "<a class='name' href='".make_path("user/show/".$tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>"."(".$tweet->user->name.")<br/>";
   echo "Bio: ". $tweet->user->description."<br/>";
   echo "Link: <a target='_blank' href='".$tweet->user->url."'>".$tweet->user->url."</a><br/>";
   echo "Location: ". $tweet->user->location."<br/>";
@@ -45,7 +45,7 @@ function list_user_html() {
         echo "<img class='avatar' src='".$img_url."' alt='".$name."' />";
   }
 
-  echo $name." |<a class='name' href='".join_path(BASE_URL, "user/show", $screen_name)."'>".$screen_name."</a>";
+  echo $name." |<a class='name' href='".make_path("user/show/".$screen_name)."'>".$screen_name."</a>";
   echo "<br />";
   echo "Bio: " . $desc;
   echo "<br />";

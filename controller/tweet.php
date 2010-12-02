@@ -26,7 +26,7 @@ function update() {
     }
     $conn->post('statuses/update', $post_data);
   }
-  header('Location: /');
+  make_header_location('/');
 }
 
 function remove($tweet) {
@@ -55,7 +55,7 @@ function retweet($tweet) {
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->post('statuses/retweet/' . $tweet);
-    header('Location: /');
+    make_header_location('/');
   } else {
     $tweet_obj = $conn->get('statuses/show/' . $tweet);
     $content['retweet_id'] = $tweet;

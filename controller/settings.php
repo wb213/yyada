@@ -15,7 +15,7 @@ function default_behavior() {
     if (isset($_POST['rt_format'])) $settings->rt_format = $_POST['rt_format'];
 
     $settings->save();
-    header('Location: /');
+    make_header_location('/');
   } else {
     $content['info'] = settings_html($echo=false);
     $theme->include_html('info');

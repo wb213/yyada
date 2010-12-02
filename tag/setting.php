@@ -4,7 +4,7 @@ function settings_html($echo = true) {
   global $settings;
   $s = $settings;
 
-  $ret = '<form action="/settings" method="post">';
+  $ret = '<form action="'.make_path('settings').'" method="post">';
   $ret .= '<p>Theme:<select name="theme">';
   foreach (Theme::list_all() as $theme_name) {
     $ret .= '<option value="' . $theme_name . '"';

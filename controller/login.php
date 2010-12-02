@@ -21,7 +21,7 @@ function oauth() {
   default:
     Settings::purge();
     $_SESSION['status'] = 'login_fail';
-    header('Location: /');
+    make_header_location('/');
     break;
   }
 }
@@ -32,7 +32,7 @@ function callback() {
       $_SESSION['oauth_token'] != $_REQUEST['oauth_token']) {
     Settings::purge();
     $_SESSION['status'] = 'login_fail';
-    header('Location: /');
+    make_header_location('/');
     return;
   }
 
@@ -46,18 +46,18 @@ function callback() {
   if (200 != $connection->http_code) {
     Settings::purge();
     $_SESSION['status'] = 'login_fail';
-    header('Location: /');
+    make_header_location('/');
     return;
   }
   $_SESSION['status'] = 'verified';
   save_access_token($access_token);
-  header('Location: /');
+  make_header_location('/');
 }
 
 function clear() {
   Settings::purge();
   $_SESSION['status'] = 'logoff';
-  header('Location: /');
+  make_header_location('/');
 }
 
 function default_behavior() {

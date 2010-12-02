@@ -15,7 +15,7 @@ function update_html() {
   }
 
   echo "
-<form class='update' method='post' action='/tweet/update'>
+<form class='update' method='post' action='".make_path('tweet/update').">
   <textarea id='status' name='status' rows='3'>$reply_tweet_name</textarea>
   <div>
     <input name='in_reply_to_id' value='$reply_tweet_id' type='hidden' />
@@ -94,30 +94,30 @@ function list_tweet_item_html() {
   }
   echo "<div class='tweet'>";
   echo "<div class='toolbar'>";
-  echo $tweet->user->name." |<a class='name' href='".join_path(BASE_URL, "user/show", $tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>";
-  echo "<a class='reply' href='".join_path(BASE_URL, "tweet/reply", $tweet->id_str)."'>@</a>";
+  echo $tweet->user->name." |<a class='name' href='".make_path("user/show/".$tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>";
+  echo "<a class='reply' href='".make_path("tweet/reply/".$tweet->id_str)."'>@</a>";
   if (is_reply_all('@'.$tweet->user->screen_name.' '.$tweet->text))
-    echo "<a class='replyall' href='".join_path(BASE_URL, "tweet/replyall", $tweet->id_str)."'>@@</a>";
-  echo "<a class='direct' href='".join_path(BASE_URL, "direct/new", $tweet->user->screen_name)."'>DM</a>";
+    echo "<a class='replyall' href='".make_path("tweet/replyall/".$tweet->id_str)."'>@@</a>";
+  echo "<a class='direct' href='".make_path("direct/create/".$tweet->user->screen_name)."'>DM</a>";
   if ($tweet->favorited)
-    echo "<a class='unfavor' href='".join_path(BASE_URL, "favor/remove", $tweet->id_str)."'>unFAV</a>";
+    echo "<a class='unfavor' href='".make_path("favor/remove/".$tweet->id_str)."'>unFAV</a>";
   else
-    echo "<a class='favor' href='".join_path(BASE_URL, "favor/add", $tweet->id_str)."'>FAV</a>";
-  echo "<a class='retweet' href='".join_path(BASE_URL, "tweet/retweet", $tweet->id_str)."'>RT</a>";
+    echo "<a class='favor' href='".make_path("favor/add/".$tweet->id_str)."'>FAV</a>";
+  echo "<a class='retweet' href='".make_path("tweet/retweet/".$tweet->id_str)."'>RT</a>";
   if ($tweet->user->screen_name == $access_token['screen_name'])
-    echo "<a class='del' href='".join_path(BASE_URL, "tweet/remove", $tweet->id_str)."'>DEL</a>";
+    echo "<a class='del' href='".make_path("tweet/remove/".$tweet->id_str)."'>DEL</a>";
   if (isset($tweet->geo)) {
     $lat = $tweet->geo->coordinates[0];
     $long = $tweet->geo->coordinates[1];
     $point = "$lat,$long";
     echo "<a class='geo' href='http://maps.google.com/maps/api/staticmap?center=$point&markers=$point&sensor=false&size=400x400&zoom=12'>geo</a>";
   }
-  echo "<a class='time' href='".join_path(BASE_URL, "tweet/show", $tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
+  echo "<a class='time' href='".make_path("tweet/show/".$tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
   echo "</div>";
   echo "<div class='status'>".format_tweet($tweet->text)." ";
   echo "<span class='via'>via ".$tweet->source;
   if (isset($tweet->in_reply_to_status_id_str))
-    echo " <a class='reply' href='".join_path(BASE_URL, "tweet/reply", $tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
+    echo " <a class='reply' href='".make_path("tweet/reply/".$tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
   echo "</span></div></div>";
 }
 
@@ -133,7 +133,7 @@ function is_delete_tweet() {
 function delete_html() {
   global $content;
 
-  echo "<form action='/tweet/remove/" . $content['delete'] . "' method='post'>";
+  echo "<form action='".make_path('tweet/remove/'.$content['delete'])."' method='post'>";
   echo "<input type='submit' value='Yes please' />";
   echo "</form>";
 }
@@ -141,7 +141,7 @@ function delete_html() {
 function new_retweet_html() {
   global $content;
 
-  echo "<form action='/tweet/retweet/" . $content['retweet_id'] . "' method='post'>";
+  echo "<form action='".make_path("tweet/retweet/".$content['retweet_id'])."' method='post'>";
   echo "<input type='submit' value='Twitter Retweet' />";
   echo "</form>";
 }

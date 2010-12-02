@@ -14,14 +14,19 @@ function join_path() {
   return $ret;
 }
 
-function get_base_path($url) {
+function make_url($path) {
+  return join_path(BASE_URL, $path);
+}
+
+function make_path($path) {
+  $url = make_url($path)
   $ret = preg_replace('/[^:\/]+:\/\/[^:\/]+/', '', $url);
   if (empty($ret)) $ret = '/';
   return $ret;
 }
 
-function make_url($path) {
-  return join_path(BASE_URL, $path);
+function make_header_location($path) {
+  header('Location: '.make_path($path));
 }
 
 ?>

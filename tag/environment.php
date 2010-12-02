@@ -7,6 +7,10 @@ function base_url() {
   echo BASE_URL;
 }
 
+function base_path() {
+  echo make_path('/');
+}
+
 function theme_name($echo = true) {
   global $theme;
   $ret = $theme->name;
@@ -18,17 +22,17 @@ function menu() {
   global $access_token;
   echo "
 <div class='menu'>
-  <a href='".join_path(BASE_URL, "user/show", $access_token['screen_name'])."'>Profile</a> 
+  <a href='".make_path("user/show/".$access_token['screen_name'])."'>Profile</a> 
 | <a href='".BASE_URL."'>Home</a> 
-| <a href='".join_path(BASE_URL, "tweet/mention")."'>Mention</a> 
-| <a href='".join_path(BASE_URL, "direct")."'>Directs</a> 
-| <a href='".join_path(BASE_URL, "favor")."'>Favourite</a> 
-| <a href='".join_path(BASE_URL, "search")."'>Search</a> 
-| <a href='".join_path(BASE_URL, "user/followers")."'>Followers</a> 
-| <a href='".join_path(BASE_URL, "user/friends")."'>Friends</a> 
-| <a href='".join_path(BASE_URL, "list")."'>List</a> 
-| <a href='".join_path(BASE_URL, "settings")."'>Settings</a> 
-| <a href='".join_path(BASE_URL, "login/clear")."'>Logout</a>
+| <a href='".make_path("tweet/mention")."'>Mention</a> 
+| <a href='".make_path("direct")."'>Directs</a> 
+| <a href='".make_path("favor")."'>Favourite</a> 
+| <a href='".make_path("search")."'>Search</a> 
+| <a href='".make_path("user/followers")."'>Followers</a> 
+| <a href='".make_path("user/friends")."'>Friends</a> 
+| <a href='".make_path("list")."'>List</a> 
+| <a href='".make_path("settings")."'>Settings</a> 
+| <a href='".make_path("login/clear")."'>Logout</a>
 </div>
 ";
 }
