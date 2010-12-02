@@ -25,7 +25,7 @@ function default_behavior() {
 
   $saved_searches = $conn->get('saved_searches');
  	$content = array_merge($content, array('saved_searches' => $saved_searches));
- 	$content['tweets'] = array();
+ 	$content['search_results'] = array();
   $theme->include_html('search_list');
 }
 
