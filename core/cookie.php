@@ -1,5 +1,8 @@
 <?php
 
+require_once('util/url.php');
+require_once('config.php');
+
 function cookie_get($key, $default = NULL) {
   if (array_key_exists($key, $_COOKIE)) {
     return $_COOKIE[$key];
@@ -9,7 +12,7 @@ function cookie_get($key, $default = NULL) {
 
 function cookie_set($key, $value) {
   $duration = time() + (3600 * 24 * 30); // one month
-  setcookie($key, $value, $duration, '/');
+  setcookie($key, $value, $duration, get_base_url(BASE_URL));
 }
 
 function cookie_set_secret($key, $value) {
