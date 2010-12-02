@@ -17,7 +17,7 @@ function default_behavior() {
     $settings->save();
     header('Location: /');
   } else {
-    $content['info'] = settings_html();
+    $content['info'] = settings_html($echo=false);
     $theme->include_html('info');
   }
 }
