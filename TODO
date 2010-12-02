@@ -19,8 +19,10 @@
 
 08) [*]Future      [!]Normal   [S]Complete the user info display
 
-09) [*]Future      [!]Normal   [S]Complete the search page
+09) [*]In Progress [!]Normal   [S]Complete the search page
 
 09) [*]Completed   [!]Normal   [S]Complete the followers page
 
 10) [*]Completed   [!]Normal   [S]Complete the friends page
+
+11) [*]Future      [!]High     [S]The hashtag URL need to perform urlencode() [N]the tashtag will start with '#' which its use for anchor control and will drop the string between '?' and '#', a quick & dirty way is to change tashtag URL start with '%23' (but if the hashtag itself contain ? or #, this way will fail)
