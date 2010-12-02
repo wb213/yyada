@@ -1,6 +1,11 @@
 <?php
 
 require_once('util/url.php');
+require_once('config.php');
+
+function base_url() {
+  echo BASE_URL;
+}
 
 function theme_name($echo = true) {
   global $theme;

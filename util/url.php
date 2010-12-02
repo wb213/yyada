@@ -1,5 +1,7 @@
 <?php
 
+require_once('config.php');
+
 function join_path() {
   $ret = '';
   foreach (func_get_args() as $arg) {
@@ -16,6 +18,10 @@ function get_base_path($url) {
   $ret = preg_replace('/[^:\/]+:\/\/[^:\/]+/', '', $url);
   if (empty($ret)) $ret = '/';
   return $ret;
+}
+
+function make_url($path) {
+  return join_path(BASE_URL, $path);
 }
 
 ?>
