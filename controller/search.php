@@ -15,7 +15,7 @@ function query() {
 function add($query_string) {
   global $conn;
 
-  $post_data = array('query' => urlencode($query_string));
+  $post_data = array('query' => urldecode($query_string));
   $conn->post('saved_searches/create', $post_data);
   header('Location: /search');
 }
@@ -23,8 +23,7 @@ function add($query_string) {
 function remove($saved_search_id) {
   global $conn;
 
-  $post_data = array('id' => $saved_search_id);
-  $conn->post('saved_searches/destroy', $post_data);
+  $conn->post('saved_searches/destroy/'.$saved_search_id);
   header('Location: /search');
 }
 
