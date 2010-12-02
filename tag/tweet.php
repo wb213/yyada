@@ -98,7 +98,7 @@ function list_tweet_item_html() {
   echo "<a class='reply' href='".join_path(BASE_URL, "tweet/reply", $tweet->id_str)."'>@</a>";
   if (is_reply_all('@'.$tweet->user->screen_name.' '.$tweet->text))
     echo "<a class='replyall' href='".join_path(BASE_URL, "tweet/replyall", $tweet->id_str)."'>@@</a>";
-  echo "<a class='direct' href='".join_path(BASE_URL, "direct/new", $tweet->user->screen_name)."'>DM</a>";
+  echo "<a class='direct' href='".join_path(BASE_URL, "direct/create", $tweet->user->screen_name)."'>DM</a>";
   if ($tweet->favorited)
     echo "<a class='unfavor' href='".join_path(BASE_URL, "favor/remove", $tweet->id_str)."'>unFAV</a>";
   else

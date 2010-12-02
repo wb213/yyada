@@ -44,17 +44,20 @@ function format_tweet($tweet) {
   $list_replace = '@\1/<a href="/list/\1/\2">\2</a>';
   $user_pattern = '/@([a-zA-Z0-9_]+)/';
   $user_replace = '@<a href="/user/show/\1">\1</a>';
-  $tag_pattern = '/(#[a-zA-Z0-9_]+)/';
-  $tag_replace = '<a href="/search/query/?q=\1">\1</a>';
   $url_pattern = '/((http|https)\:\/\/[a-zA-Z0-9_\-\+\.\/\?\&\$\@\:\=]+)/';
   $url_replace = '<a href="\1">\1</a>';
+  $tag_pattern = '/(#[a-zA-Z0-9_]+)/';
 
   $tweet = preg_replace($list_pattern, $list_replace, $tweet);
   $tweet = preg_replace($user_pattern, $user_replace, $tweet);
-  $tweet = preg_replace($tag_pattern, $tag_replace, $tweet);
   $tweet = preg_replace($url_pattern, $url_replace, $tweet);
+  $tweet = preg_replace_callback($tag_pattern, 'hashtag_encode', $tweet);
 
   return $tweet;
+}
+
+function hashtag_encode($match) {
+  return "<a href='/search/query/?q=" . urlencode($match[1]) . ">". $match[1] . "</a>"
 }
 
 function get_mentioned_users($tweet) {
