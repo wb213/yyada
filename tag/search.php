@@ -11,9 +11,8 @@ function search_box_html() {
 HTML;
 
   if (isset($_GET['q']) && ! empty($_GET['q'])) {
-    echo "<br />";
     echo "<a href='".join_path(BASE_URL, "search/add", $_GET['q'])."'> <b>Save this search</b> </a>";
-    echo "<hr />":
+    echo "<hr />";
   }
 }
 
