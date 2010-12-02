@@ -48,6 +48,7 @@ function list_user_html() {
   echo $name." |<a class='name' href='".join_path(BASE_URL, "user/show", $screen_name)."'>".$screen_name."</a>";
   echo "<br />";
   echo "Bio: " . $desc;
+  echo "<br />";
   echo "Info: " . $tweets . ", " . $friends . ", " . $followers . ", " . $favs . ", " . $lists;
 }
 ?>
