@@ -3,17 +3,24 @@
 // S = Subject
 // N = Notes
 
-1) [*]Completed   [!]High     [S]mirgate APIall function to controller
+01) [*]Completed   [!]High     [S]mirgate APIall function to controller
 
-2) [*]Completed   [!]High     [S]rename delete() function to remove() function to aovid conflict with PHP existing delete() function and add comment for it
+02) [*]Completed   [!]High     [S]rename delete() function to remove() function to aovid conflict with PHP existing delete() function and add comment for it
 
-3) [*]Future      [!]Normal   [S]add API call error handler
+03) [*]Future      [!]Normal   [S]add API call error handler
 
-4) [*]Future      [!]Low      [S]do not output the DIV tag for tags function
+04) [*]Future      [!]Low      [S]do not output the DIV tag for tags function
 
-5) [*]Future      [!]Normal   [S]enhancement for list function
+05) [*]Future      [!]Normal   [S]enhancement for list function
 
-6) [*]Future      [!]Low      [S]direct page CSS is incorrect [N]因为class名称不一样
+06) [*]Future      [!]Low      [S]direct page CSS is incorrect [N]因为class名称不一样
 
-7) [*]Future      [!]Low      [S]redesign for direct page [N]另外我对目前direct的布局还有看法，没必要去学dabr的create单独一个页面，直接放到inbox和sent的顶部来发送就行
+07) [*]Future      [!]Low      [S]redesign for direct page [N]另外我对目前direct的布局还有看法，没必要去学dabr的create单独一个页面，直接放到inbox和sent的顶部来发送就行
 
+08) [*]Future      [!]Normal   [S]Complete the user info display
+
+09) [*]Future      [!]Normal   [S]Complete the search page
+
+09) [*]In Progress [!]Normal   [S]Complete the followers page
+
+10) [*]Future      [!]Normal   [S]Complete the friends page

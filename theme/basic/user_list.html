@@ -2,9 +2,9 @@
 
 <div class='users'>
   <ul>
-    <?php while (has_list()) : ?>
-    <li <?php list_item_class() ?>>
-      <?php list_item_html() ?>
+    <?php while (has_user_list()) : ?>
+    <li>
+      <?php list_user_html() ?>
     </li>
     <?php endwhile; ?>
   </ul>
