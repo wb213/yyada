@@ -7,7 +7,7 @@
 <div class='saved_searches'>
   <ul>
     <?php while (has_saved_search_list()) : ?>
-    <li>
+    <li <?php list_saved_search_class() ?>>
       <?php list_saved_search_html() ?>
     </li>
     <?php endwhile; ?>

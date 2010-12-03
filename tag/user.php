@@ -43,6 +43,17 @@ function has_user_list() {
   return $content['iter'] < count($content['user_list']);
 }
 
+function list_user_class() {
+  global $content;
+
+  $classes = array();
+  $results = $content['user_list'][$content['iter']];
+  if (($content['iter'] % 2) == 0)
+    array_push($classes, 'even');
+  if (count($classes) == 0) return '';
+  echo "class='" . implode(' ', $classes) . "'";
+}
+
 function list_user_html() {
   global $settings, $content, $access_token;
 
@@ -56,7 +67,7 @@ function list_user_html() {
   $friends = $users->friends_count . " friends";
   $followers = $users->followers_count . " followers";
   $favs = $users->favourites_count . " favs";
-  $lists = $users->listed_count . " lists";
+  $lists = $users->listed_count . " listed";
 
   if ($settings->show_avatar) {
         echo "<img class='avatar' src='".$img_url."' alt='".$name."' />";

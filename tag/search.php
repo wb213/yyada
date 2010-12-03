@@ -26,6 +26,17 @@ function has_saved_search_list() {
   return $content['iter'] < count($content['saved_searches']);
 }
 
+function list_saved_search_class() {
+  global $content;
+
+  $classes = array();
+  $results = $content['saved_searches'][$content['iter']];
+  if (($content['iter'] % 2) == 0)
+    array_push($classes, 'even');
+  if (count($classes) == 0) return '';
+  echo "class='" . implode(' ', $classes) . "'";
+}
+
 function list_saved_search_html() {
   global $settings, $content, $access_token;
 

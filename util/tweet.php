@@ -15,7 +15,6 @@ function pluralise($word, $count, $show) {
 }
 
 function local_date($format, $timestamp, $offset) {
-  $offset = $offset * 3600;
   return gmdate($format, $timestamp + $offset);
 }
 

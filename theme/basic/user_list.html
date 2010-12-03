@@ -3,7 +3,7 @@
 <div class='users'>
   <ul>
     <?php while (has_user_list()) : ?>
-    <li>
+    <li <?php list_user_class() ?>>
       <?php list_user_html() ?>
     </li>
     <?php endwhile; ?>
