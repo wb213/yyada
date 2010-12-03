@@ -6,8 +6,8 @@ function query() {
   if (! isset($_GET['q']) || empty($_GET['q'])) return;
   $qry = 'q='.urlencode($_GET['q']);
 
-  if (! isset($_GET['page']) || empty($_GET['page']))
-    $qry. = '&page='.$_GET['page'];
+  if (isset($_GET['page']) && ! empty($_GET['page']))
+    $qry .= '&page='.$_GET['page'];
 
   $content['saved_searches'] = array();
   $ret = $conn->http('https://search.twitter.com/search.json?'.$qry, 'GET', NULL);
