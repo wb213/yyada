@@ -6,14 +6,14 @@ function add($tweet_id) {
   global $conn;
 
   $conn->post('favorites/create/' . $tweet_id);
-  make_header_location('/');
+  header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
 function remove($tweet_id) {
   global $conn;
 
   $conn->post('favorites/destroy/' . $tweet_id);
-  make_header_location('/');
+  header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
 function default_behavior() {
