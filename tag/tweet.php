@@ -159,11 +159,18 @@ function old_retweet_html() {
 function tweet_page_menu() {
   global $content;
 
-  $first_tweet_id = $content['tweets'][0]->id_str;
-  $last_tweet_id = $content['tweets'][count($content['tweets']) - 1]->id_str;
-  echo '<a href="'.$_SERVER['REQUEST_URI'].'?since_id='.$first_tweet_id.'">PageUp</a>';
-  echo '|';
-  echo '<a href="'.$_SERVER['REQUEST_URI'].'?max_id='.$last_tweet_id.'">PageDown</a>';
+  if (isset($_GET['page']))
+    $page = (int)$_GET['page'];
+  if (!isset($page))
+    $page = 1;
+  if ($page > 1) {
+    if ($page == 2)
+      echo '<a href="'.get_current_path().'">PageUp</a>';
+    else
+      echo '<a href="'.get_current_path().'?page='.(string)($page-1).'">PageUp</a>';
+    echo '|';
+  }
+  echo '<a href="'.get_current_path().'?page='.(string)($page+1).'">PageDown</a>';
 }
 
 ?>
