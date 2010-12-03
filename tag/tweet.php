@@ -165,12 +165,12 @@ function tweet_page_menu() {
     $page = 1;
   if ($page > 1) {
     if ($page == 2)
-      echo '<a href="'.get_current_path().'?q='.$_GET['q'].'">PageUp</a>';
+      echo '<a href="'.get_current_path().'">PageUp</a>';
     else
-      echo '<a href="'.get_current_path().'?q='.$_GET['q'].'&page='.(string)($page-1).'">PageUp</a>';
+      echo '<a href="'.get_current_path().'?page='.(string)($page-1).'">PageUp</a>';
     echo '|';
   }
-  echo '<a href="'.get_current_path().'?q='.$_GET['q'].'&page='.(string)($page+1).'">PageDown</a>';
+  echo '<a href="'.get_current_path().'?page='.(string)($page+1).'">PageDown</a>';
 }
 
 ?>
