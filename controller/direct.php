@@ -11,7 +11,7 @@ function create($user) {
 
     $post_data = array('text' => $_POST['direct'], 'screen_name' => $user);
     $conn->post('direct_messages/new', $post_data);
-    make_header_location('/direct/sent');
+    header(Location: $_SERVER['HTTP_REFERER']);
   } else {
     $content['create-direct'] = true;
     $content['create-to'] = $user;
@@ -23,7 +23,7 @@ function remove($direct) {
   global $conn;
 
   $conn->post('direct_messages/destroy/' . $direct);
-  make_header_location('/direct/inbox');
+  header(Location: $_SERVER['HTTP_REFERER']);
 }
 
 function inbox() {

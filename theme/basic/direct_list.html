@@ -2,9 +2,9 @@
 
 <?php direct_menu_html() ?>
 
-<?php if(is_create_direct()) : ?>
-  <?php create_direct_html() ?>
-<?php else : ?>
+<?php create_direct_html() ?>
+
+<?php if(! is_create_direct()) : ?>
   <div class='tweets'>
     <ul>
       <?php while (has_direct_list()) : ?>

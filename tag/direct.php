@@ -3,7 +3,6 @@
 function direct_menu_html() {
   echo "
 <div class='direct_menu'>
-  <a href='" . make_path("direct/create") . "'>Create</a> | 
   <a href='" . make_path("direct/inbox") . "'>Inbox</a> | 
   <a href='" . make_path("direct/sent") . "'>Sent</a>
 </div>";
@@ -20,7 +19,10 @@ function is_create_direct() {
 function create_direct_html() {
   global $content;
 
-  $user = $content['create-to'];
+  if (isset($content['create-to']) && ! empty($content['create-to']))
+    $user = $content['create-to'];
+  else
+    $user = '';
 
   if (empty($user)) {
     $post_action = make_path('/direct/create');
