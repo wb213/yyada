@@ -2,6 +2,20 @@
 
 require_once('util/tweet.php');
 
+function search_box_html() {
+  echo <<<HTML
+<form action='/search/query' method='get'>
+  <input name='q' type='text' value=''/>
+  <input type='submit' value='Search' />
+</form>
+HTML;
+
+  if (isset($_GET['q']) && ! empty($_GET['q'])) {
+    echo "<a href='".join_path(BASE_URL, "search/add", urlencode($_GET['q']))."'> <b>Save this search</b> </a>";
+    echo "<hr />";
+  }
+}
+
 function has_saved_search_list() {
   global $content;
 
@@ -18,6 +32,7 @@ function list_saved_search_html() {
   $saved = $content['saved_searches'][$content['iter']];
 
   echo "<a class='search' href='".make_path("search/query?q=".urlencode($saved->query))."'>". $saved->name ."</a>";
+  echo "  <a class='search' href='".make_path("search/remove/".$saved->id_str)."'>". "DEL</a>";
 }
 
 function has_search_result_list() {
