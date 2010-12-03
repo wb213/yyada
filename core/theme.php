@@ -10,7 +10,7 @@ class Theme {
   public function get_path() {
     chdir(__DIR__);
     chdir('../theme');
-    $path = getcwd() . '/' . $this->name . '.theme';
+    $path = getcwd() . '/' . $this->name;
     chdir(__DIR__);
     return $path;
   }
@@ -26,11 +26,14 @@ class Theme {
     chdir(__DIR__);
     $ret = array();
     while (false !== ($entry = $d->read())) {
-      if (!preg_match('/.*\.theme$/', $entry)) continue;
-      if (!is_dir('../theme/' . $entry)) continue;
-      array_push($ret, preg_replace('/\.theme$/', '', $entry));
+	if (preg_match('/\.+$/', $entry)) continue;
+    	array_push($ret, preg_replace('/\.theme$/', '', $entry));
     }
     return $ret;
+  }
+
+  public function include_html($page) {
+    include($this->get_html_path($page));
   }
 }
 
