@@ -4,7 +4,7 @@ function show($user) {
   global $content, $conn, $theme;
 
   $request = $_GET;
-  $request["screen_name"] = $user;
+  $request['screen_name'] = $user;
   $tweets = $conn->get('statuses/user_timeline', $request);
   $content['reply_tweet_name'] = '@' . $user . ' ';
   $content['tweets'] = $tweets;
@@ -16,8 +16,13 @@ function followers($user) {
 
   if (empty($user)) $user = $access_token['screen_name'];
 
-  $user_list = $conn->get('statuses/followers', array("screen_name" => $user));
+  $request = $_GET;
+  $request['screen_name'] = $user;
+  if (!isset($request['cursor'])) $request['cursor']= -1 ;
+  $user_list = $conn->get('statuses/followers', $request);
   $content['user_list'] = $user_list;
+  $content['next_cursor'] = $user_list->next_cursor;
+  $content['previous_cursor'] = $user_list->previous_cursor;
   $theme->include_html('user_list');
 }
 
@@ -26,8 +31,13 @@ function friends($user) {
 
   if (empty($user)) $user = $access_token['screen_name'];
 
-  $user_list = $conn->get('statuses/friends', array("screen_name" => $user));
+  $request = $_GET;
+  $request['screen_name'] = $user;
+  if (!isset($request['cursor'])) $request['cursor']= -1 ;
+  $user_list = $conn->get('statuses/friends', $request);
   $content['user_list'] = $user_list;
+  $content['next_cursor'] = $user_list->next_cursor;
+  $content['previous_cursor'] = $user_list->previous_cursor;
   $theme->include_html('user_list');
 }
 
