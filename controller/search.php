@@ -4,9 +4,13 @@ function query() {
   global $conn, $content, $theme;
 
   if (! isset($_GET['q']) || empty($_GET['q'])) return;
+  $qry = 'q='.urlencode($_GET['q']);
+
+  if (! isset($_GET['page']) || empty($_GET['page']))
+    $qry. = '&page='.$_GET['page'];
 
   $content['saved_searches'] = array();
-  $ret = $conn->http('https://search.twitter.com/search.json?q='.urlencode($_GET['q']), 'GET', NULL);
+  $ret = $conn->http('https://search.twitter.com/search.json?'.$qry, 'GET', NULL);
   $results = json_decode($ret)->results;
   $content = array_merge($content, array('search_results' => $results));
   $theme->include_html('search_list');
