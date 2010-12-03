@@ -156,4 +156,14 @@ function old_retweet_html() {
   update_html();
 }
 
+function tweet_page_menu() {
+  global $content;
+
+  $first_tweet_id = $content['tweets'][0]->id_str;
+  $last_tweet_id = $content['tweets'][count($content['tweets']) - 1]->id_str;
+  echo '<a href="'.$_SERVER['REQUEST_URI'].'?since_id='.$first_tweet_id.'">PageUp</a>';
+  echo '|';
+  echo '<a href="'.$_SERVER['REQUEST_URI'].'?max_id='.$last_tweet_id.'">PageDown</a>';
+}
+
 ?>
