@@ -33,6 +33,7 @@ function menu() {
 | <a href='".make_path("list")."'>List</a> 
 | <a href='".make_path("settings")."'>Settings</a> 
 | <a href='".make_path("login/clear")."'>Logout</a>
+| <a href='http://code.google.com/p/yyada/issues/list' style='color:red; font-weight:bold;' >BUG REPORT</a>
 </div>
 ";
 }

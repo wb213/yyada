@@ -23,7 +23,7 @@ function remove($direct) {
   global $conn;
 
   $conn->post('direct_messages/destroy/' . $direct);
-  make_header_location('/direct/inbox');
+  header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
 function inbox() {
