@@ -20,7 +20,7 @@ function followers($user) {
   $request['screen_name'] = $user;
   if (!isset($request['cursor'])) $request['cursor']= -1 ;
   $user_list = $conn->get('statuses/followers', $request);
-  $content['user_list'] = $user_list;
+  $content['user_list'] = $user_list->users;
   $content['next_cursor'] = $user_list->next_cursor;
   $content['previous_cursor'] = $user_list->previous_cursor;
   $theme->include_html('user_list');
@@ -35,7 +35,7 @@ function friends($user) {
   $request['screen_name'] = $user;
   if (!isset($request['cursor'])) $request['cursor']= -1 ;
   $user_list = $conn->get('statuses/friends', $request);
-  $content['user_list'] = $user_list;
+  $content['user_list'] = $user_list->users;
   $content['next_cursor'] = $user_list->next_cursor;
   $content['previous_cursor'] = $user_list->previous_cursor;
   $theme->include_html('user_list');

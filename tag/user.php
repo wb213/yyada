@@ -80,14 +80,14 @@ function list_user_html() {
   echo "Info: " . $tweets . ", " . $friends . ", " . $followers . ", " . $favs . ", " . $lists;
 }
 
-function tweet_page_menu() {
+function list_user_page_menu() {
   global $content;
  
   if ($content['previous_cursor'] != 0) {
-    echo '<a href="'.get_current_path().'?cursor='.(string){$content['previous_cursor']}.'">PageUp</a>';
+    echo '<a href="'.get_current_path().'?cursor='.(string)$content['previous_cursor'].'">PageUp</a>';
     echo '|';
   }
-  echo '<a href="'.get_current_path().'?cursor='.(string){$content['next_cursor']}.'">PageDown</a>';
+  echo '<a href="'.get_current_path().'?cursor='.(string)$content['next_cursor'].'">PageDown</a>';
 }
 
 ?>
