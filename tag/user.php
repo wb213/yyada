@@ -3,7 +3,7 @@
 function user_info_html() {
   global $settings, $content;
   if (!isset($content['tweets'])) return;
- 
+
   $user = $content['tweets'][0]->user;
 
   $name = $user->name;
@@ -82,7 +82,7 @@ function list_user_html() {
 
 function list_user_page_menu() {
   global $content;
- 
+
   if ($content['previous_cursor'] != 0) {
     echo '<a href="'.get_current_path().'?cursor='.(string)$content['previous_cursor'].'">PageUp</a>';
     echo '|';

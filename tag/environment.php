@@ -22,18 +22,18 @@ function menu() {
   global $access_token;
   echo "
 <div class='menu'>
-  <a href='".make_path("user/show/".$access_token['screen_name'])."'>Profile</a> 
-| <a href='".BASE_URL."'>Home</a> 
-| <a href='".make_path("tweet/mention")."'>Mention</a> 
-| <a href='".make_path("direct")."'>Directs</a> 
-| <a href='".make_path("favor")."'>Favourite</a> 
-| <a href='".make_path("search")."'>Search</a> 
-| <a href='".make_path("user/followers")."'>Followers</a> 
-| <a href='".make_path("user/friends")."'>Friends</a> 
-| <a href='".make_path("list")."'>List</a> 
-| <a href='".make_path("settings")."'>Settings</a> 
-| <a href='".make_path("login/clear")."'>Logout</a>
-| <a href='http://code.google.com/p/yyada/issues/list' style='color:red; font-weight:bold;' >BUG REPORT</a>
+  <a href='".make_path("user/show/".$access_token['screen_name'])."'>Profile</a>
+ | <a href='".BASE_URL."'>Home</a>
+ | <a href='".make_path("tweet/mention")."'>Mention</a>
+ | <a href='".make_path("direct")."'>Directs</a>
+ | <a href='".make_path("favor")."'>Favourite</a>
+ | <a href='".make_path("search")."'>Search</a>
+ | <a href='".make_path("user/followers")."'>Followers</a>
+ | <a href='".make_path("user/friends")."'>Friends</a>
+ | <a href='".make_path("list")."'>List</a>
+ | <a href='".make_path("settings")."'>Settings</a>
+ | <a href='".make_path("login/clear")."'>Logout</a>
+ | <a href='http://code.google.com/p/yyada/issues/list' style='color:red; font-weight:bold;' >BUG REPORT</a>
 </div>
 ";
 }

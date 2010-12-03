@@ -3,8 +3,8 @@
 function direct_menu_html() {
   echo "
 <div class='direct_menu'>
-  <a href='" . make_path("direct/inbox") . "'>Inbox</a> | 
-  <a href='" . make_path("direct/sent") . "'>Sent</a>
+  <a href='" . make_path("direct/inbox") . "'>Inbox</a>
+ | <a href='" . make_path("direct/sent") . "'>Sent</a>
 </div>";
 }
 
@@ -45,7 +45,7 @@ function create_direct_html() {
     <span id='remaining'>140</span>
   </div>
 </form>
-<script type='text/javascript'> 
+<script type='text/javascript'>
   function updateCount() {
     document.getElementById('remaining').innerHTML = 140 - document.getElementById('direct').value.length;
     setTimeout(updateCount, 400);

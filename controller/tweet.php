@@ -44,7 +44,7 @@ function remove($tweet) {
 
 function mention() {
   global $content, $theme, $conn;
-  
+
   $content['tweets'] = $conn->get('statuses/mentions', $_GET);
   $content['mentioned'] = false;
   $theme->include_html('tweet_list');

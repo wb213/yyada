@@ -45,6 +45,6 @@ function default_behavior() {
   global $access_token;
 
   show($access_token['screen_name']);
-} 
+}
 
 ?>

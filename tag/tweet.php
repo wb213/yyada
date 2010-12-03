@@ -26,7 +26,7 @@ function update_html() {
       <label for='geoloc' id='lblGeo'></label>
     </span>
   </div>
-  <script type='text/javascript'> 
+  <script type='text/javascript'>
 started = false;
 chkbox = document.getElementById('geoloc');
 if (navigator.geolocation) {
@@ -41,7 +41,7 @@ function goGeo(node) {
   started = true;
   geoStatus('Locating...');
   navigator.geolocation.getCurrentPosition(geoSuccess, geoStatus);
-} 
+}
 function geoStatus(msg) {
   document.getElementById('geo').style.display = 'inline';
   document.getElementById('lblGeo').innerHTML = msg;
@@ -55,7 +55,7 @@ function updateCount() {
   setTimeout(updateCount, 400);
 }
 updateCount();
-  </script> 
+  </script>
 </form>";
 }
 
