@@ -29,4 +29,9 @@ function make_header_location($path) {
   header('Location: '.make_path($path));
 }
 
+function get_current_path() {
+  $tmp = explode('?', $_SERVER['REQUEST_URI']);
+  return $tmp[0];
+}
+
 ?>

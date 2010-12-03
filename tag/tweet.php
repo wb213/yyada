@@ -156,4 +156,21 @@ function old_retweet_html() {
   update_html();
 }
 
+function tweet_page_menu() {
+  global $content;
+
+  if (isset($_GET['page']))
+    $page = (int)$_GET['page'];
+  if (!isset($page))
+    $page = 1;
+  if ($page > 1) {
+    if ($page == 2)
+      echo '<a href="'.get_current_path().'">PageUp</a>';
+    else
+      echo '<a href="'.get_current_path().'?page='.(string)($page-1).'">PageUp</a>';
+    echo '|';
+  }
+  echo '<a href="'.get_current_path().'?page='.(string)($page+1).'">PageDown</a>';
+}
+
 ?>
