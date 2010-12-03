@@ -26,3 +26,7 @@
 10) [*]Completed   [!]Normal   [S]Complete the friends page
 
 11) [*]Completed   [!]High     [S]The hashtag URL need to perform urlencode() [N]the tashtag will start with '#' which its use for anchor control and will drop the string between '?' and '#', a quick & dirty way is to change tashtag URL start with '%23' (but if the hashtag itself contain ? or #, this way will fail)
+
+12) [*]Doing       [!]High     [S]Highlight menu item when have new tweet/direct/mentioned
+
+13) [*]Future      [!]High     [S]Add drop list of list in menu bar. [N]Enhance list usage.
