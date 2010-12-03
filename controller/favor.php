@@ -1,6 +1,6 @@
 <?php
 
-require_once('util/url.txt');
+require_once('util/url.php');
 
 function add($tweet_id) {
   global $conn;
