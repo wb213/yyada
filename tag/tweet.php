@@ -15,7 +15,7 @@ function update_html() {
   }
 
   echo "
-<form class='update' method='post' action='".make_path('tweet/update').">
+<form class='update' method='post' action='".make_path('tweet/update')."'>
   <textarea id='status' name='status' rows='3'>$reply_tweet_name</textarea>
   <div>
     <input name='in_reply_to_id' value='$reply_tweet_id' type='hidden' />

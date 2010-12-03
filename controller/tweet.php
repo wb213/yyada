@@ -8,7 +8,7 @@ function show($user = '') {
 
   if (empty($user))
     $user = $access_token['screen_name'];
-  $content['tweets'] = $conn->get('statuses/show/' . $user);
+  $content['tweets'] = array($conn->get('statuses/show/' . $user));
   $theme->include_html('tweet_list');
 }
 

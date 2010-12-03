@@ -8,7 +8,7 @@ function join_path() {
     if ($ret == '') {
       $ret = $arg;
     } else {
-      $ret = rtrim($ret, '/') . '/' . $arg;
+      $ret = rtrim($ret, '/') . '/' . ltrim($arg, '/');
     }
   }
   return $ret;
@@ -19,7 +19,7 @@ function make_url($path) {
 }
 
 function make_path($path) {
-  $url = make_url($path)
+  $url = make_url($path);
   $ret = preg_replace('/[^:\/]+:\/\/[^:\/]+/', '', $url);
   if (empty($ret)) $ret = '/';
   return $ret;
