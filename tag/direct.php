@@ -71,7 +71,7 @@ function list_direct_item_class() {
   $direct = $content['directs'][$content['iter']];
   if (($content['iter'] % 2) == 0) array_push($classes, 'even');
   if (count($classes) == 0) return '';
-  return 'class='.implode(' ', $classes);
+  echo 'class='.implode(' ', $classes);
 }
 
 function list_direct_item_html() {
