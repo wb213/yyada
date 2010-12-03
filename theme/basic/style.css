@@ -49,7 +49,7 @@ ul {
 	overflow: hidden;
 }
 
-.name, .reply, .replyall, .direct, .favor, .retweet, .time {
+.name, .reply, .replyall, .direct, .favor, .retweet, .time, .direct-reply, .direct-delete {
 	margin: 3px;
 }
 
