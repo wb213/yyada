@@ -34,7 +34,7 @@ function format_time($time, $offset) {
     }
   }
   if ($ret == '') {
-    $ret = local_date("m-d", $time, $offset);
+    $ret = local_date("d F Y", $time, $offset);
   }
   return $ret;
 }

@@ -23,9 +23,9 @@ function user_info_html() {
     echo "<img src='".$img_url."' alt='".$name."' />";
   else
     echo "<a href='".$img_url."' alt='".$name."'>Avatar</a>";
+  echo "<a class='name' href='".make_path("user/show/".$screen_name)."'>".$screen_name."</a>"."(".$name.")";
   if ($protected) echo "PROTECTED USER";
   echo "<br />";
-  echo "<a class='name' href='".make_path("user/show/".$screen_name)."'>".$screen_name."</a>"."(".$name.")";
   echo "Bio: ". $desc."<br/>";
   echo "Link: <a target='_blank' href='".$url."'>".$url."</a><br/>";
   echo "Location: ". $loc."<br/>";
