@@ -19,7 +19,7 @@ function remove($tweet_id) {
 function default_behavior() {
   global $content, $theme, $conn;
 
-  $tweets = $conn->get('favorites');
+  $tweets = $conn->get('favorites', $_GET);
   $content = array_merge($content, array('tweets' => $tweets));
   $theme->include_html('tweet_list');
 }

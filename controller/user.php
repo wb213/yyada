@@ -3,7 +3,9 @@
 function show($user) {
   global $content, $conn, $theme;
 
-  $tweets = $conn->get('statuses/user_timeline', array("screen_name" => $user));
+  $request = $_GET;
+  $request["screen_name"] = $user;
+  $tweets = $conn->get('statuses/user_timeline', $request);
   $content['reply_tweet_name'] = '@' . $user . ' ';
   $content['tweets'] = $tweets;
   $theme->include_html('user');

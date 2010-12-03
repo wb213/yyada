@@ -29,7 +29,7 @@ function remove($direct) {
 function inbox() {
   global $conn, $content, $theme;
 
-  $directs = $conn->get('direct_messages');
+  $directs = $conn->get('direct_messages', $_GET);
   $content = array_merge($content, array('directs' => $directs, 'box' => 'inbox'));
   $theme->include_html('direct_list');
 }
@@ -37,7 +37,7 @@ function inbox() {
 function sent() {
   global $conn, $content, $theme;
 
-  $directs = $conn->get('direct_messages/sent');
+  $directs = $conn->get('direct_messages/sent', $_GET);
   $content = array_merge($content, array('directs' => $directs, 'box' => 'sent'));
   $theme->include_html('direct_list');
 }
