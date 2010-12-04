@@ -47,12 +47,16 @@ function dispatch_url() {
 function init_environment() {
   global $theme, $settings, $access_token, $conn, $content;
 
+  session_start();
+
   if (cookie_get_secret('versioin', '') != COOKIE_VERSION) {
-    cookie_clear();
+    Settings::purge();
+    $_SESSION['status'] = 'logoff';
     cookie_set_secret('version', COOKIE_VERSION);
   }
 
-  session_start();
+error_log(print_r($_COOKIE, true));
+error_log(print_r($_SESSION, true));
 
   $settings = new Settings(cookie_get('config'));
   $theme = new Theme($settings->theme);
