@@ -5,7 +5,7 @@ require_once('util/tweet.php');
 function search_box_html() {
   echo "
 <form action='".make_path("/search/query")."' method='get'>
-  <input name='q' type='text' value=''/>
+  <input name='q' type='text' value='".array_get($_GET, 'q', '')."'/>
   <input type='submit' value='Search' />
 </form>";
 

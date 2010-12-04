@@ -5,8 +5,8 @@ function query() {
 
   if (! isset($_GET['q']) || empty($_GET['q'])) return;
 
-  $utf8_lead_pattern = "/([\xc0-\xdf\xe0-\xef\xf0-\xf7])/";
-  $utf8_lead_replace = ' \1';
+  $utf8_lead_pattern = "/([^ ])([\xc0-\xdf\xe0-\xef\xf0-\xf7])/";
+  $utf8_lead_replace = '\1 \2';
   $qry = preg_replace($utf8_lead_pattern, $utf8_lead_replace, $_GET['q']);
   $qry = 'q='.urlencode($qry);
 
