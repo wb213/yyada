@@ -13,6 +13,10 @@ img.avatar {
 	width: 25px;
 }
 
+.tweet .name {
+	color: #09435D;
+}
+
 .via, span.via > a {
 	color: #555;
 	font: 90% sans-serif;

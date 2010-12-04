@@ -94,7 +94,7 @@ function list_tweet_item_html() {
   }
   echo "<div class='tweet'>";
   echo "<div class='toolbar'>";
-  echo $tweet->user->name." |<a class='name' href='".make_path("user/show/".$tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>";
+  echo "<span class='name'>".$tweet->user->name."</span> |<a class='screen_name' href='".make_path("user/show/".$tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>";
   echo "<a class='reply' href='".make_path("tweet/reply/".$tweet->id_str)."'>@</a>";
   if (is_reply_all('@'.$tweet->user->screen_name.' '.$tweet->text))
     echo "<a class='replyall' href='".make_path("tweet/replyall/".$tweet->id_str)."'>@@</a>";
