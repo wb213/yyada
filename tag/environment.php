@@ -23,7 +23,7 @@ function menu() {
   echo "
 <div class='menu'>
   <a href='".make_path("user/show/".$access_token['screen_name'])."'>Profile</a>
- | <a href='".BASE_URL."'>Home</a>
+ | <a href='".make_path("/")."'>Home</a>
  | <a href='".make_path("tweet/mention")."'>Mention</a>
  | <a href='".make_path("direct")."'>Directs</a>
  | <a href='".make_path("favor")."'>Favourite</a>
