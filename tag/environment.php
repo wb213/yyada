@@ -21,7 +21,7 @@ function theme_name($echo = true) {
 function menu() {
   global $access_token, $conn;
 
-  if ($_SESSION['status'] != 'verified') {
+  if (array_get($_SESSION, 'status', '') != 'verified') {
     echo "<div class='menu'><a href='".make_path("/")."'>Home</a></div>";
     return;
   }
