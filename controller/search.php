@@ -4,7 +4,11 @@ function query() {
   global $conn, $content, $theme;
 
   if (! isset($_GET['q']) || empty($_GET['q'])) return;
-  $qry = 'q='.urlencode($_GET['q']);
+
+  $utf8_lead_pattern = "/([\xc0-\xdf\xe0-\xef\xf0-\xf7])/";
+  $utf8_lead_replace = ' \1';
+  $qry = preg_replace($utf8_lead_pattern, $utf8_lead_replace, $_GET['q']);
+  $qry = 'q='.urlencode($qry);
 
   if (isset($_GET['page']) && ! empty($_GET['page']))
     $qry .= '&page='.$_GET['page'];

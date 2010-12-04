@@ -40,9 +40,9 @@ function format_time($time, $offset) {
 
 function format_tweet($tweet) {
   $list_pattern = '/@([a-zA-Z0-9_]+)\/([a-zA-Z0-9_]+)/';
-  $list_replace = '@\1/<a href="/list/\1/\2">\2</a>';
+  $list_replace = '@\1/<a href="'.make_path('/list').'/\1/\2">\2</a>';
   $user_pattern = '/@([a-zA-Z0-9_]+)/';
-  $user_replace = '@<a href="/user/show/\1">\1</a>';
+  $user_replace = '@<a href="'.make_path('/user/show').'/\1">\1</a>';
   $url_pattern = '/((http|https)\:\/\/[a-zA-Z0-9_\-\+\.\/\?\&\$\@\:\=]+)/';
   $url_replace = '<a href="\1">\1</a>';
   $tag_pattern = '/(#[a-zA-Z0-9_]+)/';
@@ -56,7 +56,7 @@ function format_tweet($tweet) {
 }
 
 function hashtag_encode($match) {
-  return "<a href='/search/query/?q=" . urlencode($match[1]) . "'>". $match[1] . "</a>";
+  return "<a href='".make_path("/search/query")."?q=" . urlencode($match[1]) . "'>". $match[1] . "</a>";
 }
 
 function get_mentioned_users($tweet) {
