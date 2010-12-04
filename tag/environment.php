@@ -23,7 +23,6 @@ function menu() {
 
   $ret = $conn->get('account/rate_limit_status');
   $api_remain = $ret->remaining_hits;
-  $api_total = $ret->hourly_limit;
 
   echo "
 <div class='menu'>
@@ -39,7 +38,7 @@ function menu() {
  | <a href='".make_path("settings")."'>Settings</a>
  | <a href='".make_path("login/clear")."'>Logout</a>
  | <a href='http://code.google.com/p/yyada/issues/list' style='color:red; font-weight:bold;' >BUG REPORT</a>
-    API Remain: ($api_remain/$api_total)
+    API Remain: $api_remain
 </div>
 ";
 }
