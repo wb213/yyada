@@ -49,15 +49,6 @@ function init_environment() {
 
   session_start();
 
-  if (cookie_get_secret('versioin', '') != COOKIE_VERSION) {
-    Settings::purge();
-    $_SESSION['status'] = 'logoff';
-    cookie_set_secret('version', COOKIE_VERSION);
-  }
-
-error_log(print_r($_COOKIE, true));
-error_log(print_r($_SESSION, true));
-
   $settings = new Settings(cookie_get('config'));
   $theme = new Theme($settings->theme);
   $access_token = load_access_token();

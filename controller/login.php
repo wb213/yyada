@@ -65,19 +65,16 @@ function default_behavior() {
 
   switch ($_SESSION['status']) {
     case 'login_fail':
-      Settings::purge();
       $_SESSION['status'] = 'logoff';
       $content['info'] = '<div class="warning">Sign in failed, please try again.</div>';
       $content['info'] .= login_html($echo=false);
       break;
     case 'invite_fail':
-      Settings::purge();
       $_SESSION['status'] = 'logoff';
       $content['info'] = '<div class="warning">You are not invited by administrator.</div>';
       $content['info'] .= login_html($echo=false);
       break;
     case 'logoff':
-      Settings::purge();
       $content['info'] = login_html($echo=false);
       break;
   }

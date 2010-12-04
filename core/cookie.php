@@ -48,7 +48,7 @@ function cookie_clear() {
   $duration = time() - 3600;
   foreach (array_keys($_COOKIE) as $key) {
     if (in_array($key, $ignore_keys)) continue;
-    setcookie($key, NULL, $duration, '/');
+    setcookie($key, NULL, $duration, make_path('/'));
     setcookie($key, NULL, $duration);
   }
 }
