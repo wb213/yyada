@@ -10,6 +10,8 @@ global $content;
 // settings
 global $settings, $theme, $access_token, $conn;
 
+$COOKIE_VERSION = '0.9.0';
+
 function dispatch_url() {
   global $access_token;
 
@@ -45,6 +47,11 @@ function dispatch_url() {
 
 function init_environment() {
   global $theme, $settings, $access_token, $conn, $content;
+
+  if (cookie_get_secret('versioin', '') != $COOKIE_VERSION) {
+    cookie_clear();
+    cookie_set_secret('version', $COOKIE_VERSION);
+  }
 
   session_start();
 
