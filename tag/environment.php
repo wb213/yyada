@@ -21,6 +21,11 @@ function theme_name($echo = true) {
 function menu() {
   global $access_token, $conn;
 
+  if ($_SESSION['status'] != 'verified') {
+    echo "<div class='menu'><a href='".make_path("/")."'>Home</a></div>";
+    return;
+  }
+
   $ret = $conn->get('account/rate_limit_status');
   $api_remain = $ret->remaining_hits;
 
