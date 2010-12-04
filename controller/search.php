@@ -4,7 +4,11 @@ function query() {
   global $conn, $content, $theme;
 
   if (! isset($_GET['q']) || empty($_GET['q'])) return;
-  $qry = 'q='.urlencode($_GET['q']);
+
+  $utf8_lead_pattern = "/([^ ])([\xc0-\xdf\xe0-\xef\xf0-\xf7])/";
+  $utf8_lead_replace = '\1 \2';
+  $qry = preg_replace($utf8_lead_pattern, $utf8_lead_replace, $_GET['q']);
+  $qry = 'q='.urlencode($qry);
 
   if (isset($_GET['page']) && ! empty($_GET['page']))
     $qry .= '&page='.$_GET['page'];
@@ -21,14 +25,14 @@ function add($query_string) {
 
   $post_data = array('query' => urldecode($query_string));
   $conn->post('saved_searches/create', $post_data);
-  header('Location: /search');
+  make_header_location('/search');
 }
 
 function remove($saved_search_id) {
   global $conn;
 
   $conn->post('saved_searches/destroy/'.$saved_search_id);
-  header('Location: /search');
+  make_header_location('/search');
 }
 
 function default_behavior() {

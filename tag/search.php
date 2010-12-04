@@ -3,15 +3,14 @@
 require_once('util/tweet.php');
 
 function search_box_html() {
-  echo <<<HTML
-<form action='/search/query' method='get'>
-  <input name='q' type='text' value=''/>
+  echo "
+<form action='".make_path("/search/query")."' method='get'>
+  <input name='q' type='text' value='".array_get($_GET, 'q', '')."'/>
   <input type='submit' value='Search' />
-</form>
-HTML;
+</form>";
 
   if (isset($_GET['q']) && ! empty($_GET['q'])) {
-    echo "<a href='".join_path(BASE_URL, "search/add", urlencode($_GET['q']))."'> <b>Save this search</b> </a>";
+    echo "<a href='".make_path("search/add/".urlencode($_GET['q']))."'> <b>Save this search</b> </a>";
     echo "<hr />";
   }
 }
