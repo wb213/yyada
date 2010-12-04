@@ -94,7 +94,7 @@ function list_tweet_item_html() {
   }
   echo "<div class='tweet'>";
   echo "<div class='toolbar'>";
-  echo "<span class='name'>".$tweet->user->name."</span> |<a class='screen_name' href='".make_path("user/show/".$tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>";
+  echo "<a class='screen_name' href='".make_path("user/show/".$tweet->user->screen_name)."'>".$tweet->user->screen_name."</a>";
   echo "<a class='reply' href='".make_path("tweet/reply/".$tweet->id_str)."'>@</a>";
   if (is_reply_all('@'.$tweet->user->screen_name.' '.$tweet->text))
     echo "<a class='replyall' href='".make_path("tweet/replyall/".$tweet->id_str)."'>@@</a>";
@@ -114,11 +114,11 @@ function list_tweet_item_html() {
   }
   echo "<a class='time' href='".make_path("tweet/show/".$tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
   echo "</div>";
-  echo "<div class='status'>".format_tweet($tweet->text)." ";
-  echo "<span class='via'>via ".$tweet->source;
+  echo "<div class='status'>".format_tweet($tweet->text)."</div>";
+  echo "<div class='via'>via ".$tweet->user->name." @ ".$tweet->source;
   if (isset($tweet->in_reply_to_status_id_str))
     echo " <a class='reply' href='".make_path("tweet/reply/".$tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
-  echo "</span></div></div>";
+  echo "</div></div>";
 }
 
 function is_delete_tweet() {
