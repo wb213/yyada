@@ -3,6 +3,7 @@
 require_once('core/twitteroauth.php');
 require_once('core/settings.php');
 require_once('util/url.php');
+require_once('util/tweet.php');
 require_once('config.php');
 
 // environment
@@ -49,6 +50,11 @@ function init_environment() {
 
   session_start();
 
+  if ((array_get($_SESSION, 'status', '') == 'verified') && (cookie_get('version', '') !== COOKIE_VERSION)) {
+    $_SERVER['REQUEST_URI'] = make_path('/login/clear');
+    return;
+  }
+
   $settings = new Settings(cookie_get('config'));
   $theme = new Theme($settings->theme);
   $access_token = load_access_token();
@@ -57,6 +63,7 @@ function init_environment() {
     return $conn = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
   else
     $conn = null;
+  cookie_set('version', COOKIE_VERSION);
 }
 
 ?>
