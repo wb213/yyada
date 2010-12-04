@@ -18,7 +18,8 @@ img.avatar {
 }
 
 .via, span.via > a {
-	color: #555;
+	margin-top: 5px;
+	color: #888;
 	font: 90% sans-serif;
 }
 
@@ -45,6 +46,7 @@ ul {
 }
 
 .status {
+	color: 484848;
 	margin-top: 5px;
 }
 
