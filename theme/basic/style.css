@@ -13,8 +13,8 @@ img.avatar {
 	width: 25px;
 }
 
-.tweet .name {
-	color: #09435D;
+.tweet .screen_name {
+	font-weight: bolder;
 }
 
 .via, span.via > a {
