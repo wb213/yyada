@@ -2,6 +2,7 @@
 
 require_once('core/twitteroauth.php');
 require_once('core/settings.php');
+require_once('util/url.php');
 
 // environment
 global $content;
@@ -13,7 +14,7 @@ function dispatch_url() {
   global $access_token;
 
   // pharse URI
-  $base = preg_replace('/^\w+:\/+s*/' , '' , BASE_URL) . '/';
+  $base = join_path(preg_replace('/^\w+:\/+s*/' , '' , BASE_URL), '/');
   $url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
   // remove the query string
