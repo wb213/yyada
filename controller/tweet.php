@@ -89,6 +89,7 @@ function reply($tweet) {
   } else {
     $thread_start_id = $tweet;
     $deep = THREAD_DEFAULT_DEEP;
+    unset($_SESSION['reply-user']);
   }
   
   $content['tweets'] = get_reply_thread($thread_start_id, $deep);
@@ -112,6 +113,7 @@ function replyall($tweet) {
   } else {
     $thread_start_id = $tweet;
     $deep = THREAD_DEFAULT_DEEP;
+    unset($_SESSION['reply-users']);
   }
 
   $content['tweets'] = get_reply_thread($thread_start_id, $deep);
