@@ -78,7 +78,7 @@ function list_tweet_item_class() {
   if (($content['iter'] % 2) == 0)
     array_push($classes, 'even');
   if (!isset($content['mentioned']) || $content['mentioned'])
-    if (is_mentioned($tweet->text))
+    if (isset($tweet->text) && is_mentioned($tweet->text))
       array_push($classes, 'mentioned');
   if (count($classes) == 0) return '';
   echo "class='" . implode(' ', $classes) . "'";
@@ -88,6 +88,11 @@ function list_tweet_item_html() {
   global $settings, $content, $access_token;
 
   $tweet = $content['tweets'][$content['iter']];
+
+  if (isset($tweet->error)) {
+    echo "<div class='error'> Twitter API Request Error: ".$tweet->error."</div>";
+    return;
+  }
 
   if ($settings->show_avatar) {
     echo "<img class='avatar' src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
@@ -115,7 +120,8 @@ function list_tweet_item_html() {
   echo "<a class='time' href='".make_path("tweet/show/".$tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
   echo "</div>";
   echo "<div class='status'>".format_tweet($tweet->text)."</div>";
-  echo "<div class='via'>via ".$tweet->user->name." @ ".$tweet->source;
+  $source = preg_replace("/^\<a +href/" , "<a target='_blank' href" , $tweet->source);
+  echo "<div class='via'>via ".$tweet->user->name." @ ". $source;
   if (isset($tweet->in_reply_to_status_id_str))
     echo " <a class='reply' href='".make_path("tweet/reply/".$tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
   echo "</div></div>";
@@ -158,6 +164,15 @@ function old_retweet_html() {
 
 function tweet_page_menu() {
   global $content;
+
+  if (isset($content['thread-next-id']) && ! empty($content['thread-next-id'])) {
+      echo '<a href="'.get_current_path().'?next='.$content['thread-next-id'].'">PageDown</a>';
+      echo '<br />';
+      echo 'Warning: Use Pagedown function will consume maximum 10 API call each time.';
+  }
+
+  // Disable paging button for reply tweet page if no next thread tweet exist
+  if (isset($content['reply_tweet_id']) && ! empty($content['reply_tweet_id'])) return;
 
   if (isset($_GET['page']))
     $page = (int)$_GET['page'];

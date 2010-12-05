@@ -97,14 +97,19 @@ function get_reply_users($tweet_obj) {
   return implode($users, ' ').' ';
 }
 
-function get_reply_thread($tweet_id) {
-  global $conn;
+function get_reply_thread($tweet_id, $deep=0) {
+  global $conn, $content;
   $ret = array();
-  do {
+
+  for ($i = 1; $i <= $deep+1; $i++) {
     $t = $conn->get('statuses/show/'.$tweet_id);
     array_push($ret, $t);
+
+    if (isset($t->error)) break;
     $tweet_id = $t->in_reply_to_status_id_str;
-  } while (!empty($tweet_id));
+    if (empty($tweet_id)) break;
+  }
+  if (! empty($tweet_id)) $content['thread-next-id'] = $tweet_id;
   return $ret;
 }
 
