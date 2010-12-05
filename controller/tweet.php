@@ -93,7 +93,13 @@ function reply($tweet) {
   
   $content['tweets'] = get_reply_thread($thread_start_id, $deep);
   $content['reply_tweet_id'] = $tweet;
-  $content['reply_tweet_name'] = '@'.$content['tweets'][0]->user->screen_name.' ';
+
+  if (isset($_SESSION['reply-user']) && ! empty($_SESSION['reply-user'])) {
+    $content['reply_tweet_name'] = $_SESSION['reply-user'];
+  } else {
+    $content['reply_tweet_name'] = '@'.$content['tweets'][0]->user->screen_name.' ';
+    $_SESSION['reply-user'] = $content['reply_tweet_name'];
+  }
   $theme->include_html('tweet_list');
 }
 
@@ -110,7 +116,13 @@ function replyall($tweet) {
 
   $content['tweets'] = get_reply_thread($thread_start_id, $deep);
   $content['reply_tweet_id'] = $tweet;
-  $content['reply_tweet_name'] = get_reply_users($content['tweets'][0]);
+
+  if (isset($_SESSION['reply-users']) && ! empty($_SESSION['reply-users'])) {
+    $content['reply_tweet_name'] = $_SESSION['reply-users'];
+  } else {
+    $content['reply_tweet_name'] = get_reply_users($content['tweets'][0]);
+    $_SESSION['reply-users'] = $content['reply_tweet_name'];
+  }
   $theme->include_html('tweet_list');
 }
 
