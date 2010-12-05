@@ -26,15 +26,17 @@ function dispatch_url() {
 
   $uri = explode('/' , $r_uri);
 
-  if (isset($_SESSION['status']) && $_SESSION['status'] == 'verified')
-    $controller = 'tweet.php';
-  else
+  if (!isset($_SESSION['status']) || $_SESSION['status'] != 'verified') {
     $controller = 'login.php';
+  } else {
+    $controller = 'tweet.php';
+
+    if (isset($uri[0]) && !empty($uri[0]))
+      $controller = $uri[0] . ".php";
+  }
   $action = 'default_behavior';
   $args = '';
 
-  if (isset($uri[0]) && !empty($uri[0]))
-    $controller = $uri[0] . ".php";
   if (isset($uri[1]) && !empty($uri[1]))
     $action = $uri[1];
   if (isset($uri[2]) && !empty($uri[2]))
