@@ -10,6 +10,4 @@ define('CONSUMER_SECRET', 'change to your own consumer secret');
 
 define('ENABLE_INVITE', 'true'); # true for enable.
 
-define('COOKIE_VERSION', 'version'); # change it will destroy cookie forcely. Use for recover.
-
 ?>

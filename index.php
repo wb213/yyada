@@ -6,7 +6,11 @@ require_once('core/settings.php');
 require_once('core/theme.php');
 require_once('tag/include.php');
 
-init_environment();
+try {
+  init_environment();
+} catch (Exception $e) {
+  $_SERVER['REQUEST_URI'] = make_path('/login/clear');
+}
 
 dispatch_url();
 
