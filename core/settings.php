@@ -18,7 +18,7 @@ class Settings {
   }
 
   public function str() {
-    return sprintf('%s|%d|%d|%d|%s',
+    return sprintf('%s|%d|%d|%s',
                    $this->theme,
                    $this->show_avatar?1:0,
                    $this->show_img?1:0,
