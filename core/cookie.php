@@ -62,6 +62,10 @@ function load_access_token() {
     $_SESSION['status'] = 'logoff';
     throw new NoCookie('No cookie');
   }
+  if (count(explode('|', $str)) != 4) {
+    $_SESSION['status'] = 'logoff';
+    throw new Exception('fail cookie');
+  } 
   list($oauth_token, $oauth_token_secret, $user_id, $screen_name) = explode('|', $str);
   if (!check_invite($screen_name)) {
     $_SESSION['status'] = 'invite_fail';
