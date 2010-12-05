@@ -115,7 +115,8 @@ function list_tweet_item_html() {
   echo "<a class='time' href='".make_path("tweet/show/".$tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
   echo "</div>";
   echo "<div class='status'>".format_tweet($tweet->text)."</div>";
-  echo "<div class='via'>via ".$tweet->user->name." @ ".$tweet->source;
+  $source = preg_replace("/^\<a +href/" , "<a target='_blank' href" , $tweet->source);
+  echo "<div class='via'>via ".$tweet->user->name." @ ". $source;
   if (isset($tweet->in_reply_to_status_id_str))
     echo " <a class='reply' href='".make_path("tweet/reply/".$tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
   echo "</div></div>";
