@@ -89,6 +89,11 @@ function list_tweet_item_html() {
 
   $tweet = $content['tweets'][$content['iter']];
 
+  if (isset($tweet->error) {
+    echo "<div class='error'> Twitter API Request Error: ".$tweet->error."</div>";
+    return;
+  }
+
   if ($settings->show_avatar) {
     echo "<img class='avatar' src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
   }
