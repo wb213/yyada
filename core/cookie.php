@@ -59,13 +59,16 @@ function load_access_token() {
   $ret = null;
   if (!isset($_SESSION['status'])) $_SESSION['status'] = 'logoff';
   if (!isset($str)) {
+    $_SESSION['status'] = 'logoff';
     throw new NoCookie('No cookie');
   }
   list($oauth_token, $oauth_token_secret, $user_id, $screen_name) = explode('|', $str);
   if (!check_invite($screen_name)) {
+    $_SESSION['status'] = 'invite_fail';
     throw new Exception('Not invited');
   }
   if (!isset($oauth_token) || !isset($oauth_token_secret) || !isset($user_id) || !isset($screen_name)) {
+    $_SESSION['status'] = 'logoff';
     throw new Exception('fail cookie');
   }
   // should check if token still valid here
