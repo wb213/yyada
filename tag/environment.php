@@ -42,7 +42,7 @@ function menu() {
  | <a href='".make_path("list")."'>List</a>
  | <a href='".make_path("settings")."'>Settings</a>
  | <a href='".make_path("login/clear")."'>Logout</a>
- | <a href='http://code.google.com/p/yyada/issues/list' style='color:red; font-weight:bold;' >BUG REPORT</a>
+ | <a class='important' href='http://code.google.com/p/yyada/issues/list' target='_blank' >BUG REPORT</a>
     API Remain: $api_remain
 </div>
 ";
