@@ -58,7 +58,6 @@ function load_access_token() {
   $str = cookie_get_secret('access_token', null);
   $ret = null;
   if (!isset($_SESSION['status'])) $_SESSION['status'] = 'logoff';
-error_log('str:'.$str);
   if (!isset($str)) {
     throw new NoCookie('No cookie');
   }
