@@ -63,6 +63,7 @@ function load_access_token() {
     throw new NoCookie('No cookie');
   }
   if (count(explode('|', $str)) != 4) {
+    cookie_clear();
     $_SESSION['status'] = 'logoff';
     throw new Exception('fail cookie');
   } 
@@ -72,6 +73,7 @@ function load_access_token() {
     throw new Exception('Not invited');
   }
   if (!isset($oauth_token) || !isset($oauth_token_secret) || !isset($user_id) || !isset($screen_name)) {
+    cookie_clear();
     $_SESSION['status'] = 'logoff';
     throw new Exception('fail cookie');
   }
