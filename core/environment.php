@@ -36,17 +36,15 @@ function dispatch_url() {
   }
   include 'controller/' . $controller;
 
-  $action = 'default_behavior';
+  $action = 'default';
   if (isset($uri[1]) && !empty($uri[1]))
     $action = $uri[1];
-  if (!in_array($action, array_keys($controller_router)))
-    $action = 'default';
 
   $args = '';
   if (isset($uri[2]) && !empty($uri[2]))
     $args = $uri[2];
 
-  $controller_router[$action]($args);
+  array_get($controller_router, $action, 'default')($args);
 }
 
 function init_environment() {
