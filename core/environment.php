@@ -34,11 +34,14 @@ function dispatch_url() {
     if (isset($uri[0]) && !empty($uri[0]))
       $controller = $uri[0] . ".php";
   }
-  $action = 'default_behavior';
-  $args = '';
 
+  $action = 'default_behavior';
   if (isset($uri[1]) && !empty($uri[1]))
     $action = $uri[1];
+  if (!in_array($action, get_defined_functions()))
+    $action = 'default_behavior';
+
+  $args = '';
   if (isset($uri[2]) && !empty($uri[2]))
     $args = $uri[2];
 
