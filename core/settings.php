@@ -6,7 +6,6 @@ class Settings {
 
   public $theme = "basic";
   public $show_avatar = false;
-  public $is_reverse_thread = false;
   public $show_img = false;
   public $rt_format = "RT %u: %t";
 
@@ -19,10 +18,9 @@ class Settings {
   }
 
   public function str() {
-    return sprintf('%s|%d|%d|%d|%s',
+    return sprintf('%s|%d|%d|%s',
                    $this->theme,
                    $this->show_avatar?1:0,
-                   $this->is_reverse_thread?1:0,
                    $this->show_img?1:0,
                    $this->rt_format);
   }
@@ -30,10 +28,13 @@ class Settings {
   public function load($s = null) {
     if (!isset($s)) $s = cookie_get($this->cookie_key);
 
-    list($theme, $show_avatar, $is_reverse_thread, $show_img, $rt_format) = explode('|', $s);
+    $args = explode('|', $s);
+    if (count($args) != 4)
+      return;
+
+    list($theme, $show_avatar, $show_img, $rt_format) = $args;
     if (isset($theme)) $this->theme = $theme;
     if (isset($show_avatar)) $this->show_avatar = ($show_avatar == '1');
-    if (isset($is_reverse_thread)) $this->is_reverse_thread = ($is_reverse_thread == '1');
     if (isset($show_img)) $this->show_img = ($show_img == '1');
     if (isset($rt_format)) $this->rt_format = $rt_format;
   }
