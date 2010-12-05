@@ -160,6 +160,13 @@ function old_retweet_html() {
 function tweet_page_menu() {
   global $content;
 
+  if (isset($content['thread-next-id']) && ! empty($content['thread-next-id'])) {
+      echo '<a href="'.get_current_path().'?next='.$content['thread-next-id'].'">PageDown</a>';
+  }
+
+  // Disable paging button for reply tweet page if no next thread tweet exist
+  if (isset($content['reply_tweet_id']) && ! empty($content['reply_tweet_id'])) return;
+
   if (isset($_GET['page']))
     $page = (int)$_GET['page'];
   if (!isset($page))
