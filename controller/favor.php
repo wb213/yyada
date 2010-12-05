@@ -2,6 +2,13 @@
 
 require_once('util/url.php');
 
+$control_router = array(
+  "default" => "show",
+  "show" => "show",
+  "add" => "add",
+  "remove" => "remove",
+);
+
 function add($tweet_id) {
   global $conn;
 
@@ -16,7 +23,7 @@ function remove($tweet_id) {
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
-function default_behavior() {
+function show() {
   global $content, $theme, $conn;
 
   $tweets = $conn->get('favorites', $_GET);

@@ -6,6 +6,14 @@ require_once('core/cookie.php');
 require_once('core/settings.php');
 require_once('util/url.php');
 
+$control_router = array(
+  "default" => "login",
+  "oauth" => "oauth",
+  "callback" => "callback",
+  "clear" => "logout",
+  "logout" => "logout",
+);
+
 function oauth() {
   $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, NULL, NULL, OAUTH_PROXY);
   $request_token = $connection->getRequestToken(join_path(BASE_URL, 'login/callback'));
@@ -54,13 +62,13 @@ function callback() {
   make_header_location('/');
 }
 
-function clear() {
+function logout() {
   Settings::purge();
   $_SESSION['status'] = 'logoff';
   make_header_location('/');
 }
 
-function default_behavior() {
+function login() {
   global $theme, $content;
 
   switch ($_SESSION['status']) {
