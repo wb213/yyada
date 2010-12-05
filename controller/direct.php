@@ -2,6 +2,14 @@
 
 require_once('util/url.php');
 
+$controller_router = array(
+  "default" => "inbox",
+  "create" => "create",
+  "remove" => "remove",
+  "inbox" => "inbox",
+  "sent" => "sent",
+);
+
 function create($user) {
   global $conn, $content, $theme;
 

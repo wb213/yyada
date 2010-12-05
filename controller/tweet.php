@@ -3,6 +3,17 @@
 require_once('tag/include.php');
 require_once('util/tweet.php');
 
+$controller_router = array(
+  "default" => "homeline",
+  "show" => "show",
+  "update" => "update",
+  "remove" => "remove",
+  "mention" => "mention",
+  "retweet" => "retweet",
+  "reply" => "reply",
+  "replyall" => "replyall",
+);
+
 function show($user = '') {
   global $access_token, $content, $conn, $theme;
 
@@ -34,7 +45,7 @@ function remove($tweet) {
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ret = $conn->post('statuses/destroy/' . $tweet);
-    header('Location: /');
+    make_header_location('/');
   } else {
     $content['tweets'] = array($conn->get('statuses/show/' . $tweet));
     $content['delete'] = $content['tweets'][0]->id_str;
@@ -83,7 +94,7 @@ function replyall($tweet) {
   $theme->include_html('tweet_list');
 }
 
-function default_behavior() {
+function homeline() {
   global $access_token, $content, $conn, $theme;
 
   $content['tweets'] = $conn->get('statuses/home_timeline', $_GET);

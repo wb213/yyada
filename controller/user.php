@@ -1,7 +1,17 @@
 <?php
 
+$controller_router = array(
+  "default" => "show",
+  "show" => "show",
+  "followers" => "followers",
+  "friends" => "friends",
+);
+
 function show($user) {
   global $content, $conn, $theme;
+
+  if (!isset($user) || empty($user))
+    $user = $access_token['screen_name'];
 
   $request = $_GET;
   $request['screen_name'] = $user;
@@ -39,12 +49,6 @@ function friends($user) {
   $content['next_cursor'] = $user_list->next_cursor;
   $content['previous_cursor'] = $user_list->previous_cursor;
   $theme->include_html('user_list');
-}
-
-function default_behavior() {
-  global $access_token;
-
-  show($access_token['screen_name']);
 }
 
 ?>

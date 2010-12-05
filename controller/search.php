@@ -1,5 +1,12 @@
 <?php
 
+$controller_router = array(
+  "default" => "show",
+  "query" => "query",
+  "add" => "add",
+  "remove" => "remove",
+);
+
 function query() {
   global $conn, $content, $theme;
 
@@ -35,7 +42,7 @@ function remove($saved_search_id) {
   make_header_location('/search');
 }
 
-function default_behavior() {
+function show() {
   global $content, $theme, $conn;
 
   $saved_searches = $conn->get('saved_searches');
