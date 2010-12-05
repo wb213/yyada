@@ -10,9 +10,12 @@ try {
   init_environment();
 } catch (NoCookie $e) {
   error_log($e->getMessage());
+  make_header_location('/');
+  return;
 } catch (Exception $e) {
   error_log($e->getMessage());
-  $_SERVER['REQUEST_URI'] = make_path('/login/clear');
+  make_header_location('/login/clear');
+  return;
 }
 
 dispatch_url();
