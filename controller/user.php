@@ -1,10 +1,10 @@
 <?php
 
 $controller_router = array(
-  "default" => "show";
-  "show" => "show";
-  "followers" => "followers";
-  "friends" => "friends";
+  "default" => "show",
+  "show" => "show",
+  "followers" => "followers",
+  "friends" => "friends",
 );
 
 function show($user) {

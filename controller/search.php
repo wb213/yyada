@@ -1,6 +1,6 @@
 <?php
 
-$control_router = array(
+$controller_router = array(
   "default" => "show",
   "query" => "query",
   "add" => "add",

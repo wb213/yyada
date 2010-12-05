@@ -6,7 +6,7 @@ require_once('core/cookie.php');
 require_once('core/settings.php');
 require_once('util/url.php');
 
-$control_router = array(
+$controller_router = array(
   "default" => "login",
   "oauth" => "oauth",
   "callback" => "callback",

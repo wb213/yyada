@@ -2,7 +2,7 @@
 
 require_once('util/url.php');
 
-$control_router = array(
+$controller_router = array(
   "default" => "show",
   "show" => "show",
   "add" => "add",

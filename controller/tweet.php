@@ -3,7 +3,7 @@
 require_once('tag/include.php');
 require_once('util/tweet.php');
 
-$control_router = array(
+$controller_router = array(
   "default" => "homeline",
   "show" => "show",
   "update" => "update",
@@ -45,7 +45,7 @@ function remove($tweet) {
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $ret = $conn->post('statuses/destroy/' . $tweet);
-    header('Location: /');
+    make_header_location('/');
   } else {
     $content['tweets'] = array($conn->get('statuses/show/' . $tweet));
     $content['delete'] = $content['tweets'][0]->id_str;

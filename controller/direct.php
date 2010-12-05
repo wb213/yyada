@@ -2,7 +2,7 @@
 
 require_once('util/url.php');
 
-$control_router = array(
+$controller_router = array(
   "default" => "inbox",
   "create" => "create",
   "remove" => "remove",

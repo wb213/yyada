@@ -39,7 +39,7 @@ function dispatch_url() {
   $action = 'default_behavior';
   if (isset($uri[1]) && !empty($uri[1]))
     $action = $uri[1];
-  if (!in_array($action, array_keys($control_router)))
+  if (!in_array($action, array_keys($controller_router)))
     $action = 'default';
 
   $args = '';

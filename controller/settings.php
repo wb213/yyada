@@ -4,9 +4,9 @@ require_once('core/settings.php');
 require_once('core/theme.php');
 require_once('tag/setting.php');
 
-$control_router = array(
-  "default" => "show";
-)
+$controller_router = array(
+  "default" => "show",
+);
 
 function show() {
   global $content, $theme, $settings;
