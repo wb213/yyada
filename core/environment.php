@@ -44,7 +44,8 @@ function dispatch_url() {
   if (isset($uri[2]) && !empty($uri[2]))
     $args = $uri[2];
 
-  array_get($controller_router, $action, 'default')($args);
+  $func = array_get($controller_router, $action, 'default');
+  $func($args);
 }
 
 function init_environment() {
