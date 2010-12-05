@@ -80,3 +80,8 @@ ul > li.mentioned {
 	color: #333;
 	text-decoration: none;
 }
+
+.menu .important {
+	color: red;
+	font-weight: bold;
+}
