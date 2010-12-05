@@ -9,7 +9,10 @@ require_once('tag/include.php');
 try {
   init_environment();
 } catch (NoCookie $e) {
-  if ($_SERVER['REQUEST_URI'] != make_path('/')) {
+  if ($_SERVER['REQUEST_URI'] != make_path('/') ||
+      $_SERVER['REQUEST_URI'] != make_path('/login') ||
+      $_SERVER['REQUEST_URI'] != make_path('/login/oauth') ||
+      $_SERVER['REQUEST_URI'] != make_path('/login/callback')) {
     make_header_location('/');
     return;
   }
