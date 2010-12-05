@@ -167,6 +167,8 @@ function tweet_page_menu() {
 
   if (isset($content['thread-next-id']) && ! empty($content['thread-next-id'])) {
       echo '<a href="'.get_current_path().'?next='.$content['thread-next-id'].'">PageDown</a>';
+      echo '<br />';
+      echo 'Warning: Using Pagedown function will consume maximum 10 API call each time.";
   }
 
   // Disable paging button for reply tweet page if no next thread tweet exist
