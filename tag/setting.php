@@ -20,11 +20,6 @@ function settings_html($echo = true) {
   $ret .= '" />Show avatar.';
   $ret .= '</p>';
 
-  $ret .= '<p><input type="checkbox" name="reverse" value="yes"';
-  $ret .= $s->is_reverse_thread?' checked="checked"':'';
-  $ret .= '" />Reverse the conversation thread.';
-  $ret .= '</p>';
-
   $ret .= '<p><input type="checkbox" name="img" value="yes"';
   $ret .= $s->show_img?' checked="checked"':'';
   $ret .= '" />Show image.';
