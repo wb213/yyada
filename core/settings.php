@@ -53,6 +53,16 @@ class Settings {
     return $this->args[$name][1];
   }
 
+  public function __set($name, $value) {
+    $keys = array_keys($this->args);
+    if (!in_array($name, $keys)) {
+      throw new Exception("can't find setting: $name");
+      return '';
+    }
+    $this->args[$name][1] = $value;
+    settype($this->args[$name][1], $this->args[$name][0]);
+  }
+
   public function save() {
     cookie_set($this->cookie_key, $this->str());
   }
