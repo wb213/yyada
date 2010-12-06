@@ -4,10 +4,12 @@ require_once('core/cookie.php');
 
 class Settings {
 
-  public $theme = "basic";
-  public $show_avatar = false;
-  public $show_img = false;
-  public $rt_format = "RT %u: %t";
+  private $args = array(
+    "theme" => array("string", "basic"),
+    "show_avatar" => array("bool", false),
+    "show_img" => array("bool", false),
+    "rt_format" => array("string", "RT %u %t"),
+  );
 
   private $cookie_key = "config";
 
@@ -18,25 +20,37 @@ class Settings {
   }
 
   public function str() {
-    return sprintf('%s|%d|%d|%s',
-                   $this->theme,
-                   $this->show_avatar?1:0,
-                   $this->show_img?1:0,
-                   $this->rt_format);
+    $ret = "";
+    foreach ($this->args as $key => $value) {
+      $ret .= urlencode((string)$value[1]);
+      $ret .= '|';
+    }
+    return rtrim($ret, '|');
   }
 
   public function load($s = null) {
     if (!isset($s)) $s = cookie_get($this->cookie_key);
 
     $args = explode('|', $s);
-    if (count($args) != 4)
+    if (count($args) != count($this->args))
       return;
+    $keys = array_keys($this->args);
 
-    list($theme, $show_avatar, $show_img, $rt_format) = $args;
-    if (isset($theme)) $this->theme = $theme;
-    if (isset($show_avatar)) $this->show_avatar = ($show_avatar == '1');
-    if (isset($show_img)) $this->show_img = ($show_img == '1');
-    if (isset($rt_format)) $this->rt_format = $rt_format;
+    for ($i=0; $i<count($args); $i++) {
+      $temp = urldecode($args["$i"]);
+      $key = $keys["$i"];
+      if (settype($temp, $this->args[$key][0]))
+        $this->args[$key][1] = $temp;
+    }
+  }
+
+  public function __get($name) {
+    $keys = array_keys($this->args);
+    if (!in_array($name, $keys)) {
+      throw new Exception("can't find setting: $name");
+      return '';
+    }
+    return $this->args[$name][1];
   }
 
   public function save() {
