@@ -8,7 +8,7 @@ $controller_router = array(
   "follow" => "follow",
   "unfollow" => "unfollow",
   "block" => "block",
-  "unblock" => "block",
+  "unblock" => "unblock",
   "spam" => "spam"
 );
 
