@@ -36,15 +36,15 @@ function user_info_html() {
   echo $tweets;
   echo " | <a href='" . make_path("user/friends/".$screen_name) . "'>" . $friends . "</a>";
   echo " | <a href='" . make_path("user/followers/".$screen_name) . "'>" . $followers . "</a>";
-  echo " | <a href='" . make_path("favor/".$screen_name) . "'>" . $favs . "</a>";
-  echo " | <a href='" . make_path("list/".$screen_name) . "'>" . $listed . "</a>";
-  echo " | <a href='" . make_path("direct/create".$screen_name) . "'>Direct Message</a>";
+  echo " | <a href='" . make_path("favor/show/".$screen_name) . "'>" . $favs . "</a>";
+  echo " | <a href='" . make_path("list/show/".$screen_name) . "'>" . $listed . "</a>";
+  echo " | <a href='" . make_path("direct/create/".$screen_name) . "'>Direct Message</a>";
   if ($is_following)
-    echo " | <a href='" . make_path("user/unfollow".$screen_name) . "'>UnFollow</a>";
+    echo " | <a href='" . make_path("user/unfollow/".$screen_name) . "'>UnFollow</a>";
   else
-    echo " | <a href='" . make_path("user/follow".$screen_name) . "'>Follow</a>";
-  echo " | <a href='" . make_path("user/block".$screen_name) . "'>Block</a>";
-  echo " | <a href='" . make_path("user/spam".$screen_name) . "'>Report Spam</a>";
+    echo " | <a href='" . make_path("user/follow/".$screen_name) . "'>Follow</a>";
+  echo " | <a href='" . make_path("user/block/".$screen_name) . "'>Block</a>";
+  echo " | <a href='" . make_path("user/spam/".$screen_name) . "'>Report Spam</a>";
 }
 
 function has_user_list() {
