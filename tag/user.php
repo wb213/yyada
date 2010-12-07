@@ -5,6 +5,7 @@ function user_info_html() {
   if (!isset($content['tweets'])) return;
 
   $user = $content['tweets'][0]->user;
+  $friendship = $content['friendship']->relationship;
 
   $name = $user->name;
   $screen_name = $user->screen_name;
@@ -18,7 +19,7 @@ function user_info_html() {
   $followers = $user->followers_count . " followers";
   $favs = $user->favourites_count . " favs";
   $listed = $user->listed_count . " listed";
-  $is_following = $user->following;
+  $is_following = $friendship->source->following;
   $is_protected = $user->protected;
 
   if ($settings->show_avatar)

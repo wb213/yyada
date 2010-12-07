@@ -5,10 +5,12 @@ $controller_router = array(
   "show" => "show",
   "followers" => "followers",
   "friends" => "friends",
+  "follow" => "follow",
+  "unfollow" => "unfollow",
 );
 
 function show($user) {
-  global $content, $conn, $theme;
+  global $content, $conn, $theme, $access_token;
 
   if (!isset($user) || empty($user))
     $user = $access_token['screen_name'];
@@ -18,6 +20,10 @@ function show($user) {
   $tweets = $conn->get('statuses/user_timeline', $request);
   $content['reply_tweet_name'] = '@' . $user . ' ';
   $content['tweets'] = $tweets;
+
+  $request = array('target_screen_name' => $user);
+  $friendship = $conn->get('friendships/show', $request);
+  $content['friendship'] = $friendship;
   $theme->include_html('user');
 }
 
