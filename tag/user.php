@@ -21,13 +21,17 @@ function user_info_html() {
   $listed = $user->listed_count . " listed";
   $is_following = $friendship->source->following;
   $is_protected = $user->protected;
+  $is_blocked = $content['is_blocked'];
 
   if ($settings->show_avatar)
     echo "<img src='".$img_url."' alt='".$name."' />";
   else
     echo "<a href='".$img_url."' alt='".$name."'>Avatar</a>";
+
   echo "<a class='name' href='".make_path("user/show/".$screen_name)."'>".$screen_name."</a>"."(".$name.")";
+
   if ($is_protected) echo "PROTECTED USER";
+
   echo "<br />";
   echo "Bio: ". $desc."<br/>";
   echo "Link: <a target='_blank' href='".$url."'>".$url."</a><br/>";
@@ -40,11 +44,17 @@ function user_info_html() {
   echo " | <a href='" . make_path("favor/show/".$screen_name) . "'>" . $favs . "</a>";
   echo " | <a href='" . make_path("list/show/".$screen_name) . "'>" . $listed . "</a>";
   echo " | <a href='" . make_path("direct/create/".$screen_name) . "'>Direct Message</a>";
+
   if ($is_following)
     echo " | <a href='" . make_path("user/unfollow/".$screen_name) . "'>UnFollow</a>";
   else
     echo " | <a href='" . make_path("user/follow/".$screen_name) . "'>Follow</a>";
-  echo " | <a href='" . make_path("user/block/".$screen_name) . "'>Block</a>";
+
+  if ($is_blocked)
+    echo " | <a href='" . make_path("user/unblock/".$screen_name) . "'>UnBlock</a>";
+  else
+    echo " | <a href='" . make_path("user/block/".$screen_name) . "'>Block</a>";
+
   echo " | <a href='" . make_path("user/spam/".$screen_name) . "'>Report Spam</a>";
 }
 
