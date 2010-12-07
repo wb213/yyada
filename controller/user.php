@@ -51,4 +51,20 @@ function friends($user) {
   $theme->include_html('user_list');
 }
 
+function follow($user) {
+  global $conn;
+
+  $request = array('screen_name' => $user);
+  $conn->post('friendships/create', $request);
+  header("Location: {$_SERVER['HTTP_REFERER']}");
+}
+
+function unfollow($user) {
+  global $conn;
+
+  $request = array('screen_name' => $user);
+  $conn->post('friendships/destroy', $request);
+  header("Location: {$_SERVER['HTTP_REFERER']}");
+}
+
 ?>
