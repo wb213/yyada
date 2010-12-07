@@ -23,10 +23,14 @@ function remove($tweet_id) {
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
-function show() {
-  global $content, $theme, $conn;
+function show($user) {
+  global $content, $theme, $conn, $access_token;
 
-  $tweets = $conn->get('favorites', $_GET);
+  if (empty($user)) $user = $access_token['screen_name'];
+
+  $request = $_GET;
+  $request['id'] = $user;
+  $tweets = $conn->get('favorites', $request);
   $content = array_merge($content, array('tweets' => $tweets));
   $theme->include_html('tweet_list');
 }

@@ -1,9 +1,7 @@
 <?php
 
-require_once('config.php');
 require_once('core/environment.php');
-require_once('core/settings.php');
-require_once('core/theme.php');
+require_once('util/url.php');
 require_once('tag/include.php');
 
 try {
@@ -14,6 +12,12 @@ try {
   error_log($e->getMessage());
   make_header_location('/login/clear');
   return;
+}
+
+try {
+  check_new();
+} catch (Exception $e) {
+  // do nothing
 }
 
 dispatch_url();

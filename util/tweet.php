@@ -105,7 +105,11 @@ function get_reply_thread($tweet_id, $deep=0) {
     $t = $conn->get('statuses/show/'.$tweet_id);
     array_push($ret, $t);
 
-    if (isset($t->error)) break;
+    if (isset($t->error)) {
+      unset($tweet_id);
+      break;
+    }
+
     $tweet_id = $t->in_reply_to_status_id_str;
     if (empty($tweet_id)) break;
   }

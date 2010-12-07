@@ -32,9 +32,9 @@ function menu() {
   echo "
 <div class='menu'>
   <a href='".make_path("user/show/".$access_token['screen_name'])."'>Profile</a>
- | <a href='".make_path("/")."'>Home</a>
- | <a href='".make_path("tweet/mention")."'>Mention</a>
- | <a href='".make_path("direct")."'>Directs</a>
+ | <a ".(isset($_SESSION['home_new'])?"class='important' ":"")."href='".make_path("/")."'>Home</a>
+ | <a ".(isset($_SESSION['mentioned_new'])?"class='important' ":"")."href='".make_path("tweet/mention")."'>Mention</a>
+ | <a ".(isset($_SESSION['direct_new'])?"class='important' ":"")."href='".make_path("direct")."'>Directs</a>
  | <a href='".make_path("favor")."'>Favourite</a>
  | <a href='".make_path("search")."'>Search</a>
  | <a href='".make_path("user/followers")."'>Followers</a>
