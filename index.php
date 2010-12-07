@@ -2,6 +2,7 @@
 
 require_once('core/environment.php');
 require_once('util/url.php');
+require_once('tag/include.php');
 
 try {
   init_environment();

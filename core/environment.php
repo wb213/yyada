@@ -1,6 +1,7 @@
 <?php
 
 require_once('core/twitteroauth.php');
+require_once('core/theme.php');
 require_once('core/settings.php');
 require_once('util/url.php');
 require_once('util/tweet.php');
@@ -68,26 +69,31 @@ function check_new() {
 
   $last = cookie_get('check', '0');
   $url = preg_replace('/\?.*$/', '', $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+  $base = join_path(preg_replace('/^\w+:\/+s*/' , '' , BASE_URL), '/');
   $path = str_ireplace($base , '' , $url);
+  $path = trim($path, '/');
 
-  if (!isset($_SESSION['home_new']) && ($path != '/') {
+  if (!isset($_SESSION['home_new']) && ($path != '')) {
     $tweets = $conn->get('statuses/home_timeline');
     $last_tweet_time = strtotime($tweets[0]->created_at);
     if ($last_tweet_time > $last)
       $_SESSION['home_new'] = true;
   }
-  if (!isset($_SESSION['mentioned_new']) && ($path != '/tweet/mention') {
+  if (!isset($_SESSION['mentioned_new']) && ($path != 'tweet/mention')) {
     $tweets = $conn->get('statuses/mentions');
     $last_tweet_time = strtotime($tweets[0]->created_at);
     if ($last_tweet_time > $last)
       $_SESSION['mentioned_new'] = true;
   }
-  if (!isset($_SESSION['direct_new']) && ($path != '/direct') {
+  if (!isset($_SESSION['direct_new']) && ($path != 'direct')) {
     $tweets = $conn->get('direct_messages');
     $last_tweet_time = strtotime($tweets[0]->created_at);
     if ($last_tweet_time > $last)
       $_SESSION['direct_new'] = true;
   }
+
+  $now = time();
+  cookie_set('check', $now);
 }
 
 ?>
