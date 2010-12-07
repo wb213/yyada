@@ -60,6 +60,7 @@ function remove($tweet) {
 function mention() {
   global $content, $theme, $conn;
 
+  unset($_SESSION['mentioned_new']);
   $content['tweets'] = $conn->get('statuses/mentions', $_GET);
   $content['mentioned'] = false;
   $theme->include_html('tweet_list');
@@ -131,6 +132,7 @@ function replyall($tweet) {
 function homeline() {
   global $access_token, $content, $conn, $theme;
 
+  unset($_SESSION['home_new']);
   $content['tweets'] = $conn->get('statuses/home_timeline', $_GET);
   $theme->include_html('tweet_list');
 }

@@ -63,4 +63,31 @@ function init_environment() {
     $conn = null;
 }
 
+function check_new() {
+  global $conn;
+
+  $last = cookie_get('check', '0');
+  $url = preg_replace('/\?.*$/', '', $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+  $path = str_ireplace($base , '' , $url);
+
+  if (!isset($_SESSION['home_new']) && ($path != '/') {
+    $tweets = $conn->get('statuses/home_timeline');
+    $last_tweet_time = strtotime($tweets[0]->created_at);
+    if ($last_tweet_time > $last)
+      $_SESSION['home_new'] = true;
+  }
+  if (!isset($_SESSION['mentioned_new']) && ($path != '/tweet/mention') {
+    $tweets = $conn->get('statuses/mentions');
+    $last_tweet_time = strtotime($tweets[0]->created_at);
+    if ($last_tweet_time > $last)
+      $_SESSION['mentioned_new'] = true;
+  }
+  if (!isset($_SESSION['direct_new']) && ($path != '/direct') {
+    $tweets = $conn->get('direct_messages');
+    $last_tweet_time = strtotime($tweets[0]->created_at);
+    if ($last_tweet_time > $last)
+      $_SESSION['direct_new'] = true;
+  }
+}
+
 ?>
