@@ -96,3 +96,8 @@ ul > li.mentioned {
   color: red;
   font-style: italic;
 }
+
+.highlight {
+  color: red;
+  background-color: #FFFF00;
+}
