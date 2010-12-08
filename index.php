@@ -15,7 +15,9 @@ try {
 }
 
 try {
-  check_new();
+  if ($_SESSION['status'] != 'verified') {
+    check_new();
+  }
 } catch (Exception $e) {
   // do nothing
 }
