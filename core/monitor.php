@@ -52,7 +52,9 @@ class Monitor {
   }
 
   public function check_new() {
-    if ($_SESSION['status'] != 'verified') {
+    global $conn;
+
+    if ($_SESSION['status'] != 'verified')
       return;
 
     $now = time();

@@ -37,7 +37,6 @@ function remove($direct) {
 function inbox() {
   global $conn, $content, $theme;
 
-  unset($_SESSION['direct_new']);
   $directs = $conn->get('direct_messages', $_GET);
   $content = array_merge($content, array('directs' => $directs, 'box' => 'inbox'));
   $theme->include_html('direct_list');
