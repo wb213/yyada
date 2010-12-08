@@ -49,8 +49,9 @@ function format_tweet($tweet) {
   $url_replace = '<a target="_blank" href="\1">\1</a>';
   $tag_pattern = '/(#[a-zA-Z0-9_]+)/';
 
-  if (! empty($settings->highlight))
-    $tweet = keyword_highlight($settings->highlight, $tweet);
+  $highlight_pattern = $settings->highlight;
+  if (! empty($highlight_pattern))
+    $tweet = keyword_highlight($highlight_pattern, $tweet);
 
   $tweet = preg_replace($list_pattern, $list_replace, $tweet);
   $tweet = preg_replace($user_pattern, $user_replace, $tweet);
@@ -65,11 +66,14 @@ function hashtag_encode($match) {
 }
 
 function keyword_highlight($pattern, $tweet) {
-  preg_match_all($pattern, $tweet, $match, PREG_SET_ORDER);
-  $match = array_unique($match);
-  foreach ($match as $value) {
-    $tweet = str_replace($value, "<span class='highlight'>$value</span>", $tweet);
+  preg_match_all($pattern, $tweet, $match);
+  $match = array_unique($match[0]);
+  if (! empty($match)) {
+    foreach ($match as $value) {
+      $tweet = str_replace($value, "<span class='highlight'>$value</span>", $tweet);
+    }
   }
+  return $tweet;
 }
 
 function get_mentioned_users($tweet) {
