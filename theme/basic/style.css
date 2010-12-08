@@ -23,10 +23,10 @@ img.avatar {
 	font: 90% sans-serif;
 }
 
-.retweet-bar {
+.retweet-bar, .retweet-bar > a {
 	margin-top: 1px;
-	color: #888;
-	font: 90% sans-serif;
+	color: #66F;
+	font: italic 90% sans-serif;
 }
 
 body {
