@@ -3,11 +3,12 @@
 require_once('core/twitteroauth.php');
 require_once('core/theme.php');
 require_once('core/settings.php');
+require_once('core/monitor.php');
 require_once('util/url.php');
 require_once('util/tweet.php');
 
 // environment
-global $content;
+global $content, $monitor;
 
 // settings
 global $settings, $theme, $access_token, $conn;
@@ -50,7 +51,7 @@ function dispatch_url() {
 }
 
 function init_environment() {
-  global $theme, $settings, $access_token, $conn, $content;
+  global $theme, $settings, $access_token, $conn, $content, $monitor;
 
   session_start();
 
@@ -58,42 +59,11 @@ function init_environment() {
   $theme = new Theme($settings->theme);
   $access_token = load_access_token();
   $content = array();
+  $monitor = new Monitor();
   if (isset($access_token))
     return $conn = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
   else
     $conn = null;
-}
-
-function check_new() {
-  global $conn;
-
-  $last = cookie_get('check', '0');
-  $url = preg_replace('/\?.*$/', '', $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
-  $base = join_path(preg_replace('/^\w+:\/+s*/' , '' , BASE_URL), '/');
-  $path = str_ireplace($base , '' , $url);
-  $path = trim($path, '/');
-
-  if (!isset($_SESSION['home_new']) && ($path != '')) {
-    $tweets = $conn->get('statuses/home_timeline');
-    $last_tweet_time = strtotime($tweets[0]->created_at);
-    if ($last_tweet_time > $last)
-      $_SESSION['home_new'] = true;
-  }
-  if (!isset($_SESSION['mentioned_new']) && ($path != 'tweet/mention')) {
-    $tweets = $conn->get('statuses/mentions');
-    $last_tweet_time = strtotime($tweets[0]->created_at);
-    if ($last_tweet_time > $last)
-      $_SESSION['mentioned_new'] = true;
-  }
-  if (!isset($_SESSION['direct_new']) && ($path != 'direct')) {
-    $tweets = $conn->get('direct_messages');
-    $last_tweet_time = strtotime($tweets[0]->created_at);
-    if ($last_tweet_time > $last)
-      $_SESSION['direct_new'] = true;
-  }
-
-  $now = time();
-  cookie_set('check', $now);
 }
 
 ?>
