@@ -51,25 +51,27 @@ class Monitor {
     if ($_SESSION['status'] != 'verified')
       return;
 
+    foreach ($this->urls as $name => $url)
+      if ($_SERVER['REQUEST_URI'] == make_path($url['yyada']))
+        unset($_SESSION[$name]);
+
     $now = time();
     $last = cookie_get($this->time_key, '0');
-    
-    if (($now / $this->interval) <= ($last / $this->interval))
+
+    if ((int)($now / $this->interval) <= (int)($last / $this->interval))
       return;
 
     foreach ($this->urls as $name => $url) {
       if ($_SERVER['REQUEST_URI'] == make_path($url['yyada'])) {
-        unset($_SESSION[$name]);
         continue;
       }
-
       if ($this->is_new($name))
         continue;
 
       $tweets = $conn->get($url['twitter']);
       $time = strtotime($tweets[0]->created_at);
       if ($time > $last)
-        $_SESSION[$url] = true;
+        $_SESSION[$name] = true;
     }
 
     cookie_set($this->time_key, $now);

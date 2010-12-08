@@ -33,8 +33,8 @@ function menu() {
 <div class='menu'>
   <a href='".make_path("user/show/".$access_token['screen_name'])."'>Profile</a>
  | <a href='".make_path("/")."'>Home</a>
- | <a ".($monitor->is_new('statuses/mentions')?"class='important' ":"")."href='".make_path("tweet/mention")."'>Mention</a>
- | <a ".($monitor->is_new('direct_messages')?"class='important' ":"")."href='".make_path("direct")."'>Directs</a>
+ | <a ".($monitor->is_new('mention')?"class='important' ":"")."href='".make_path("tweet/mention")."'>Mention</a>
+ | <a ".($monitor->is_new('direct')?"class='important' ":"")."href='".make_path("direct")."'>Directs</a>
  | <a href='".make_path("favor")."'>Favourite</a>
  | <a href='".make_path("search")."'>Search</a>
  | <a href='".make_path("user/followers")."'>Followers</a>
