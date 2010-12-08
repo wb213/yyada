@@ -66,7 +66,7 @@ function hashtag_encode($match) {
 }
 
 function keyword_highlight($pattern, $tweet) {
-  preg_match_all($pattern, $tweet, $match);
+  preg_match_all("/$pattern/", $tweet, $match);
   $match = array_unique($match[0]);
   if (! empty($match)) {
     foreach ($match as $value) {
