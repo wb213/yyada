@@ -16,6 +16,7 @@ function show() {
     $settings->show_avatar = isset($_POST['avatar']);
     $settings->show_img = isset($_POST['img']);
     if (isset($_POST['rt_format'])) $settings->rt_format = $_POST['rt_format'];
+    if (isset($_POST['highlight'])) $settings->highlight = $_POST['highlight'];
 
     $settings->save();
     make_header_location('/');
