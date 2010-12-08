@@ -133,20 +133,22 @@ function list_tweet_item_html() {
   // tweet text
   echo "<div class='status'>".format_tweet($tweet->text)."</div>";
 
-  // retweet bar
-  if ($is_retweet || ! empty($tweet->retweet_count)) {
-    echo "<div class='retweet-bar'>";
-    if ($is_retweet) echo "retweeted to you by <a href='".make_path("user/show/".$retweet_by)."'>".$retweet_by."</a>  ";
-    if (! empty($tweet->retweet_count)) echo "retweeted ".$tweet->retweet_count." times.";
-    echo "</div>";
-  }
-
   // source bar
   $source = preg_replace("/^\<a +href/" , "<a target='_blank' href" , $tweet->source);
   echo "<div class='via'>via ".$tweet->user->name." @ ". $source;
   if (isset($tweet->in_reply_to_status_id_str))
     echo " <a class='reply' href='".make_path("tweet/reply/".$tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
-  echo "</div></div>";
+  if ($is_retweet || ! empty($tweet->retweet_count)) {
+    echo " <span class='retweet-bar'>";
+    if (! empty($tweet->retweet_count)) echo "retweeted ".$tweet->retweet_count." times";
+    if ($is_retweet) echo ", RT from <a href='".make_path("user/show/".$retweet_by)."'>".$retweet_by."</a>";
+    echo "</span>";
+  }
+  echo "</div>";
+
+  // retweet bar
+
+  echo "</div>";
 }
 
 function is_delete_tweet() {
