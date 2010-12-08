@@ -91,7 +91,7 @@ function list_tweet_item_html() {
 
   // retweet handling
   $is_retweet = false;
-  if (isset($tweet->retweeted_status) {
+  if (isset($tweet->retweeted_status)) {
     $is_retweet = true;
     $retweet_by = $tweet->user->screen_name;
     $tweet = $content['tweets'][$content['iter']]->retweeted_status;
@@ -136,7 +136,7 @@ function list_tweet_item_html() {
   // retweet bar
   if ($is_retweet || ! empty($tweet->retweet_count)) {
     echo "<div class='retweet-bar'>";
-    if ($is_retweet) echo "retweeted to you by ".$retweet_by." | ";
+    if ($is_retweet) echo "retweeted to you by <a href='".make_path("user/show/".$retweet_by)."'>".$retweet_by."</a>  ";
     if (! empty($tweet->retweet_count)) echo "retweeted ".$tweet->retweet_count." times.";
     echo "</div>";
   }
