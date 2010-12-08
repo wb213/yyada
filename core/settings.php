@@ -9,7 +9,7 @@ class Settings {
     "show_avatar" => array("bool", false),
     "show_img" => array("bool", false),
     "rt_format" => array("string", "RT %u %t"),
-    "highlight" => array("string","/RT/"),
+    "highlight" => array("string","RT"),
   );
 
   private $cookie_key = "config";
