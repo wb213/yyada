@@ -89,11 +89,21 @@ function list_tweet_item_html() {
 
   $tweet = $content['tweets'][$content['iter']];
 
+  // retweet handling
+  $is_retweet = false;
+  if (isset($tweet->retweeted_status)) {
+    $is_retweet = true;
+    $retweet_by = $tweet->user->screen_name;
+    $tweet = $content['tweets'][$content['iter']]->retweeted_status;
+  }
+
+  // error handling
   if (isset($tweet->error)) {
     echo "<div class='error'> Twitter API Request Error: ".$tweet->error."</div>";
     return;
   }
 
+  // tool bar
   if ($settings->show_avatar) {
     echo "<img class='avatar' src='".$tweet->user->profile_image_url."' alt='".$tweet->user->name."' />";
   }
@@ -119,12 +129,26 @@ function list_tweet_item_html() {
   }
   echo "<a class='time' href='".make_path("tweet/show/".$tweet->id_str)."'>".format_time(strtotime($tweet->created_at), 0)."</a>";
   echo "</div>";
+
+  // tweet text
   echo "<div class='status'>".format_tweet($tweet->text)."</div>";
+
+  // source bar
   $source = preg_replace("/^\<a +href/" , "<a target='_blank' href" , $tweet->source);
   echo "<div class='via'>via ".$tweet->user->name." @ ". $source;
   if (isset($tweet->in_reply_to_status_id_str))
     echo " <a class='reply' href='".make_path("tweet/reply/".$tweet->id_str)."'>in reply to ".$tweet->in_reply_to_screen_name."</a>";
-  echo "</div></div>";
+  if ($is_retweet || ! empty($tweet->retweet_count)) {
+    echo " <span class='retweet-bar'>";
+    if (! empty($tweet->retweet_count)) echo "retweeted ".$tweet->retweet_count." times";
+    if ($is_retweet) echo ", RT from <a href='".make_path("user/show/".$retweet_by)."'>".$retweet_by."</a>";
+    echo "</span>";
+  }
+  echo "</div>";
+
+  // retweet bar
+
+  echo "</div>";
 }
 
 function is_delete_tweet() {

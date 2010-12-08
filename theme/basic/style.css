@@ -17,10 +17,14 @@ img.avatar {
 	font-weight: bolder;
 }
 
-.via, span.via > a {
+.via, .via > a {
 	margin-top: 5px;
 	color: #888;
 	font: 90% sans-serif;
+}
+
+.retweet-bar, .retweet-bar > a {
+	color: #66F;
 }
 
 body {
