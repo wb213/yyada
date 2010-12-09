@@ -39,6 +39,8 @@ function format_time($time, $offset) {
 }
 
 function format_tweet($tweet) {
+  global $settings;
+
   $list_pattern = '/@([a-zA-Z0-9_]+)\/([a-zA-Z0-9_]+)/';
   $list_replace = '@\1/<a href="'.make_path('/list').'/\1/\2">\2</a>';
   $user_pattern = '/@([a-zA-Z0-9_]+)/';
@@ -46,6 +48,10 @@ function format_tweet($tweet) {
   $url_pattern = '/((http|https)\:\/\/[a-zA-Z0-9_\-\+\.\/\?\&\$\@\:\=]+)/';
   $url_replace = '<a target="_blank" href="\1">\1</a>';
   $tag_pattern = '/(#[a-zA-Z0-9_]+)/';
+
+  $highlight_pattern = $settings->highlight;
+  if (! empty($highlight_pattern))
+    $tweet = keyword_highlight($highlight_pattern, $tweet);
 
   $tweet = preg_replace($list_pattern, $list_replace, $tweet);
   $tweet = preg_replace($user_pattern, $user_replace, $tweet);
@@ -57,6 +63,17 @@ function format_tweet($tweet) {
 
 function hashtag_encode($match) {
   return "<a href='".make_path("/search/query")."?q=" . urlencode($match[1]) . "'>". $match[1] . "</a>";
+}
+
+function keyword_highlight($pattern, $tweet) {
+  preg_match_all("/$pattern/", $tweet, $match);
+  $match = array_unique($match[0]);
+  if (! empty($match)) {
+    foreach ($match as $value) {
+      $tweet = str_replace($value, "<span class='highlight'>$value</span>", $tweet);
+    }
+  }
+  return $tweet;
 }
 
 function get_mentioned_users($tweet) {

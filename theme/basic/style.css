@@ -86,11 +86,15 @@ ul > li.mentioned {
 }
 
 .menu .important {
-	color: red;
+	color: #F44;
 	font-weight: bold;
 }
 
 .error {
   color: red;
   font-style: italic;
+}
+
+.highlight {
+  color: #900;
 }
