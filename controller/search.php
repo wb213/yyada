@@ -21,7 +21,7 @@ function query() {
     $qry .= '&page='.$_GET['page'];
 
   $content['saved_searches'] = array();
-  $ret = $conn->http('https://search.twitter.com/search.json?'.$qry, 'GET', NULL);
+  $ret = twitter_http('https://search.twitter.com/search.json?'.$qry, 'GET', NULL);
   $results = json_decode($ret)->results;
   $content = array_merge($content, array('search_results' => $results));
   $theme->include_html('search_list');
@@ -31,21 +31,21 @@ function add($query_string) {
   global $conn;
 
   $post_data = array('query' => urldecode($query_string));
-  $conn->post('saved_searches/create', $post_data);
+  twitter_post('saved_searches/create', $post_data);
   make_header_location('/search');
 }
 
 function remove($saved_search_id) {
   global $conn;
 
-  $conn->post('saved_searches/destroy/'.$saved_search_id);
+  twitter_post('saved_searches/destroy/'.$saved_search_id);
   make_header_location('/search');
 }
 
 function show() {
   global $content, $theme, $conn;
 
-  $saved_searches = $conn->get('saved_searches');
+  $saved_searches = twitter_get('saved_searches');
   $content = array_merge($content, array('saved_searches' => $saved_searches));
   $content['search_results'] = array();
   $theme->include_html('search_list');

@@ -60,8 +60,11 @@ function init_environment() {
   $access_token = load_access_token();
   $content = array();
   $monitor = new Monitor();
-  if (isset($access_token))
-    return $conn = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+  if (isset($access_token)) {
+    $conn = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+    $conn->timeout = 10;
+    $conn->connecttimeout = 10;
+  }
   else
     $conn = null;
 }

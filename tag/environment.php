@@ -26,7 +26,7 @@ function menu() {
     return;
   }
 
-  $ret = $conn->get('account/rate_limit_status');
+  $ret = twitter_get('account/rate_limit_status');
   $api_remain = $ret->remaining_hits;
 
   echo "

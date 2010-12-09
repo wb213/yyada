@@ -18,7 +18,7 @@ function create($user) {
       $user = $_POST['to'];
 
     $post_data = array('text' => $_POST['direct'], 'screen_name' => $user);
-    $conn->post('direct_messages/new', $post_data);
+    twitter_post('direct_messages/new', $post_data);
     make_header_location('/direct/sent');
   } else {
     $content['create-direct'] = true;
@@ -30,14 +30,14 @@ function create($user) {
 function remove($direct) {
   global $conn;
 
-  $conn->post('direct_messages/destroy/' . $direct);
+  twitter_post('direct_messages/destroy/' . $direct);
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
 function inbox() {
   global $conn, $content, $theme;
 
-  $directs = $conn->get('direct_messages', $_GET);
+  $directs = twitter_get('direct_messages', $_GET);
   $content = array_merge($content, array('directs' => $directs, 'box' => 'inbox'));
   $theme->include_html('direct_list');
 }
@@ -45,7 +45,7 @@ function inbox() {
 function sent() {
   global $conn, $content, $theme;
 
-  $directs = $conn->get('direct_messages/sent', $_GET);
+  $directs = twitter_get('direct_messages/sent', $_GET);
   $content = array_merge($content, array('directs' => $directs, 'box' => 'sent'));
   $theme->include_html('direct_list');
 }

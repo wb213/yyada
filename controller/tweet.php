@@ -23,7 +23,7 @@ function show($user = '') {
 
   if (empty($user))
     $user = $access_token['screen_name'];
-  $content['tweets'] = array($conn->get('statuses/show/' . $user));
+  $content['tweets'] = array(twitter_get('statuses/show/' . $user));
   $theme->include_html('tweet_list');
 }
 
@@ -39,7 +39,7 @@ function update() {
       $post_data["lat"] = $lat;
       $post_data["long"] = $long;
     }
-    $conn->post('statuses/update', $post_data);
+    twitter_post('statuses/update', $post_data);
   }
   make_header_location('/');
 }
@@ -48,10 +48,10 @@ function remove($tweet) {
   global $content, $theme, $conn;
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $ret = $conn->post('statuses/destroy/' . $tweet);
+    $ret = twitter_post('statuses/destroy/' . $tweet);
     make_header_location('/');
   } else {
-    $content['tweets'] = array($conn->get('statuses/show/' . $tweet));
+    $content['tweets'] = array(twitter_get('statuses/show/' . $tweet));
     $content['delete'] = $content['tweets'][0]->id_str;
     $theme->include_html('tweet_list');
   }
@@ -60,7 +60,7 @@ function remove($tweet) {
 function mention() {
   global $content, $theme, $conn;
 
-  $content['tweets'] = $conn->get('statuses/mentions', $_GET);
+  $content['tweets'] = twitter_get('statuses/mentions', $_GET);
   $content['mentioned'] = false;
   $theme->include_html('tweet_list');
 }
@@ -69,10 +69,10 @@ function retweet($tweet) {
   global $conn, $content, $theme;
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $conn->post('statuses/retweet/' . $tweet);
+    twitter_post('statuses/retweet/' . $tweet);
     make_header_location('/');
   } else {
-    $tweet_obj = $conn->get('statuses/show/' . $tweet);
+    $tweet_obj = twitter_get('statuses/show/' . $tweet);
     $content['retweet_id'] = $tweet;
     $content['retweet_user'] = '@'.$tweet_obj->user->screen_name;
     $content['retweet_text'] = $tweet_obj->text;
@@ -131,7 +131,7 @@ function replyall($tweet) {
 function homeline() {
   global $access_token, $content, $conn, $theme;
 
-  $content['tweets'] = $conn->get('statuses/home_timeline', $_GET);
+  $content['tweets'] = twitter_get('statuses/home_timeline', $_GET);
   $theme->include_html('tweet_list');
 }
 

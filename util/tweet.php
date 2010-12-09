@@ -119,7 +119,7 @@ function get_reply_thread($tweet_id, $deep=0) {
   $ret = array();
 
   for ($i = 1; $i <= $deep+1; $i++) {
-    $t = $conn->get('statuses/show/'.$tweet_id);
+    $t = twitter_get('statuses/show/'.$tweet_id);
     array_push($ret, $t);
 
     if (isset($t->error)) {
