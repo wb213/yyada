@@ -1,5 +1,7 @@
 <?php
 
+require_once('core/twitter.php');
+
 $controller_router = array(
   "default" => "show",
   "show" => "show",

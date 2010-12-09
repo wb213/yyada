@@ -1,5 +1,6 @@
 <?php
 
+require_once('core/twitter.php');
 require_once('core/cookie.php');
 require_once('util/url.php');
 

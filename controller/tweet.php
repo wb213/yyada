@@ -1,5 +1,6 @@
 <?php
 
+require_once('core/twitter.php');
 require_once('tag/include.php');
 require_once('util/tweet.php');
 
