@@ -25,7 +25,7 @@ function create_direct_html() {
     $user = '';
 
   echo "<form class='create-direct' method='post' action='".make_path('/direct/create')."'>";
-  echo "To: <input type='text' name='to'>$user<br />";
+  echo "To: <input type='text' name='to' value='$user'><br />";
   echo "
   Direct Message: <br />
   <textarea id='direct' name='direct' rows='3'></textarea>
