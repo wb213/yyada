@@ -24,19 +24,8 @@ function create_direct_html() {
   else
     $user = '';
 
-  if (empty($user)) {
-    $post_action = make_path('/direct/create');
-  } else {
-    $post_action = make_path('/direct/create/'.$user);
-  }
-
-  echo "<form class='create-direct' method='post' action='$post_action'>";
-  if (empty($user)) {
-    echo "To: <input type='text' name='to'> <br />";
-  } else {
-    echo "Sending direct message to <b>$user</b><br />";
-  }
-
+  echo "<form class='create-direct' method='post' action='".make_path('/direct/create')."'>";
+  echo "To: <input type='text' name='to' value='$user'><br />";
   echo "
   Direct Message: <br />
   <textarea id='direct' name='direct' rows='3'></textarea>
