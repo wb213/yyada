@@ -48,9 +48,6 @@ class Monitor {
   public function check_new() {
     global $conn;
 
-    if ($_SESSION['status'] != 'verified')
-      return;
-
     foreach ($this->urls as $name => $url)
       if ($_SERVER['REQUEST_URI'] == make_path($url['yyada']))
         unset($_SESSION[$name]);

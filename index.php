@@ -15,7 +15,9 @@ try {
 }
 
 try {
-  $monitor->check_new();
+  if ($_SESSION['status'] == 'verified') {
+    $monitor->check_new();
+  }
 } catch (Exception $e) {
   // do nothing
 }
