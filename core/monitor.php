@@ -69,7 +69,9 @@ class Monitor {
         continue;
 
       $tweets = $conn->get($url['twitter']);
-      $time = strtotime($tweets[0]->created_at);
+      $time = 0;
+      if (count($tweets) > 0)
+        $time = strtotime($tweets[0]->created_at);
       if ($time > $last)
         $_SESSION[$name] = true;
     }
