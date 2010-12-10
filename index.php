@@ -1,6 +1,7 @@
 <?php
 
 require_once('core/environment.php');
+require_once('core/exception.php');
 require_once('util/url.php');
 require_once('tag/include.php');
 
@@ -22,6 +23,11 @@ try {
   // do nothing
 }
 
-dispatch_url();
+try {
+  dispatch_url();
+} catch (TwitterError $e) {
+  $content['info'] = $e->getMessage();
+  $theme->include_html('info');
+}
 
 ?>
