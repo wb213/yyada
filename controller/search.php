@@ -24,7 +24,7 @@ function query() {
 
   $content['saved_searches'] = array();
   $ret = twitter_http('https://search.twitter.com/search.json?'.$qry, 'GET', NULL);
-  $results = json_decode($ret)->results;
+  $results = $ret->results;
   $content = array_merge($content, array('search_results' => $results));
   $theme->include_html('search_list');
 }

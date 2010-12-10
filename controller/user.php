@@ -35,7 +35,7 @@ function show($user) {
 
   //get block information
   $request = array('screen_name' => $user);
-  $is_blocked = twitter_get('blocks/exists', $request);
+  $is_blocked = $conn->get('blocks/exists', $request);
   $content['is_blocked'] = ! isset($is_blocked->error);
 
   $theme->include_html('user');
