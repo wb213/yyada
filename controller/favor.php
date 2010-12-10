@@ -1,5 +1,6 @@
 <?php
 
+require_once('core/twitter.php');
 require_once('util/url.php');
 
 $controller_router = array(
@@ -12,14 +13,14 @@ $controller_router = array(
 function add($tweet_id) {
   global $conn;
 
-  $conn->post('favorites/create/' . $tweet_id);
+  twitter_post('favorites/create/' . $tweet_id);
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
 function remove($tweet_id) {
   global $conn;
 
-  $conn->post('favorites/destroy/' . $tweet_id);
+  twitter_post('favorites/destroy/' . $tweet_id);
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
@@ -30,7 +31,7 @@ function show($user) {
 
   $request = $_GET;
   $request['id'] = $user;
-  $tweets = $conn->get('favorites', $request);
+  $tweets = twitter_get('favorites', $request);
   $content = array_merge($content, array('tweets' => $tweets));
   $theme->include_html('tweet_list');
 }

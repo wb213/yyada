@@ -1,5 +1,6 @@
 <?php
 
+require_once('core/twitter.php');
 require_once('util/url.php');
 require_once('config.php');
 
@@ -26,8 +27,10 @@ function menu() {
     return;
   }
 
-  $ret = $conn->get('account/rate_limit_status');
-  $api_remain = $ret->remaining_hits;
+  $ret = $conn->get('account/rate_limit_status'); // it may call when exception throwed, should not throw another.
+  $api_remain = 'NA';
+  if (isset($ret->remaining_hits))
+    $api_remain = $ret->remaining_hits;
 
   echo "
 <div class='menu'>

@@ -1,5 +1,7 @@
 <?php
 
+require_once('core/twitter.php');
+
 $controller_router = array(
   "default" => "show",
   "show" => "show",
@@ -22,13 +24,13 @@ function show($user) {
   $request = $_GET;
   $request['screen_name'] = $user;
   $request['include_rts'] = true;
-  $tweets = $conn->get('statuses/user_timeline', $request);
+  $tweets = twitter_get('statuses/user_timeline', $request);
   $content['reply_tweet_name'] = '@' . $user . ' ';
   $content['tweets'] = $tweets;
 
   //get user friendship information
   $request = array('target_screen_name' => $user);
-  $friendship = $conn->get('friendships/show', $request);
+  $friendship = twitter_get('friendships/show', $request);
   $content['friendship'] = $friendship;
 
   //get block information
@@ -47,7 +49,7 @@ function followers($user) {
   $request = $_GET;
   $request['screen_name'] = $user;
   if (!isset($request['cursor'])) $request['cursor']= -1 ;
-  $user_list = $conn->get('statuses/followers', $request);
+  $user_list = twitter_get('statuses/followers', $request);
   $content['user_list'] = $user_list->users;
   $content['next_cursor'] = $user_list->next_cursor;
   $content['previous_cursor'] = $user_list->previous_cursor;
@@ -62,7 +64,7 @@ function friends($user) {
   $request = $_GET;
   $request['screen_name'] = $user;
   if (!isset($request['cursor'])) $request['cursor']= -1 ;
-  $user_list = $conn->get('statuses/friends', $request);
+  $user_list = twitter_get('statuses/friends', $request);
   $content['user_list'] = $user_list->users;
   $content['next_cursor'] = $user_list->next_cursor;
   $content['previous_cursor'] = $user_list->previous_cursor;
@@ -73,7 +75,7 @@ function follow($user) {
   global $conn;
 
   $request = array('screen_name' => $user);
-  $conn->post('friendships/create', $request);
+  twitter_post('friendships/create', $request);
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
@@ -81,7 +83,7 @@ function unfollow($user) {
   global $conn;
 
   $request = array('screen_name' => $user);
-  $conn->post('friendships/destroy', $request);
+  twitter_post('friendships/destroy', $request);
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
@@ -89,7 +91,7 @@ function block($user) {
   global $conn;
 
   $request = array('screen_name' => $user);
-  $conn->post('blocks/create', $request);
+  twitter_post('blocks/create', $request);
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
@@ -97,7 +99,7 @@ function unblock($user) {
   global $conn;
 
   $request = array('screen_name' => $user);
-  $conn->post('blocks/destroy', $request);
+  twitter_post('blocks/destroy', $request);
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
@@ -105,7 +107,7 @@ function spam($user) {
   global $conn;
 
   $request = array('screen_name' => $user);
-  $conn->post('report_spam', $request);
+  twitter_post('report_spam', $request);
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 

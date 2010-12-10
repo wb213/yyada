@@ -1,5 +1,6 @@
 <?php
 
+require_once('core/twitter.php');
 require_once('core/cookie.php');
 require_once('util/url.php');
 
@@ -65,7 +66,7 @@ class Monitor {
       if ($this->is_new($name))
         continue;
 
-      $tweets = $conn->get($url['twitter']);
+      $tweets = twitter_get($url['twitter']);
       $time = 0;
       if (count($tweets) > 0)
         $time = strtotime($tweets[0]->created_at);

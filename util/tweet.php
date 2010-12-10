@@ -1,5 +1,7 @@
 <?php
 
+require_once('core/twitter.php');
+
 function array_get($array, $key, $default=null) {
   if (isset($array[$key])) return $array[$key];
   return $default;
@@ -119,7 +121,7 @@ function get_reply_thread($tweet_id, $deep=0) {
   $ret = array();
 
   for ($i = 1; $i <= $deep+1; $i++) {
-    $t = $conn->get('statuses/show/'.$tweet_id);
+    $t = $conn->get('statuses/show/'.$tweet_id); // handle error self
     array_push($ret, $t);
 
     if (isset($t->error)) {
