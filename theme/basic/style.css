@@ -58,7 +58,7 @@ ul {
 	overflow: hidden;
 }
 
-.toolbar a {
+.toolbar > * {
 	margin: 3px;
 }
 
