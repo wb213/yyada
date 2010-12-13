@@ -26,7 +26,7 @@ function dispatch_url() {
   // get the relative URI based on the BASE URL
   $r_uri = str_ireplace($base , '' , $url);
 
-  $uri = explode('/' , $r_uri);
+  $uri = explode('/' , $r_uri, 3);
 
   if (!isset($_SESSION['status']) || $_SESSION['status'] != 'verified') {
     $controller = 'login.php';
