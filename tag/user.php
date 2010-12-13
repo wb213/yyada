@@ -98,11 +98,9 @@ function list_user_html() {
         echo "<img class='avatar' src='".$img_url."' alt='".$name."' />";
   }
 
-  echo $name." |<a class='name' href='".make_path("user/show/".$screen_name)."'>".$screen_name."</a>";
-  echo "<br />";
-  echo "Bio: " . $desc;
-  echo "<br />";
-  echo "Info: " . $tweets . ", " . $friends . ", " . $followers . ", " . $favs . ", " . $lists;
+  echo "<div class='toolbar'>".$name." |<a class='name' href='".make_path("user/show/".$screen_name)."'>".$screen_name."</a></div>";
+  echo "<div class='bio'>Bio: ".$desc."</div>";
+  echo "<div class='info'>Info: ".$tweets.", ".$friends.", ".$followers.", ".$favs.", ".$lists."</div>";
 }
 
 function list_user_page_menu() {

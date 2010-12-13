@@ -89,12 +89,13 @@ function list_direct_item_html() {
   if ($settings->show_avatar) {
         echo "<img class='avatar' src='".$img_url."' alt='".$name."' />";
   }
-  echo "<div class='direct-message'>";
-  echo "<div class='direct-toolbar'>";
-  echo $name." |<a class='name' href='".make_path("user/show/".$screen_name)."'>".$screen_name."</a>";
-  echo "<a class='direct-reply' href='".make_path("direct/create/".$screen_name)."'>DM</a>";
-  echo "<a class='direct-delete' href='".make_path("direct/remove/".$direct->id)."'>DEL</a>";
-  echo " | <span class='direct-time'>".format_time(strtotime($direct->created_at), 0)."</span>";
+  echo "<div class='direct'>";
+  echo "<div class='toolbar'>";
+  echo "<span class='name'>".$name."</span>|";
+  echo "<a class='screen_name' href='".make_path("user/show/".$screen_name)."'>".$screen_name."</a>";
+  echo "<a class='reply' href='".make_path("direct/create/".$screen_name)."'>DM</a>";
+  echo "<a class='delete' href='".make_path("direct/remove/".$direct->id)."'>DEL</a>";
+  echo "|<span class='time'>".format_time(strtotime($direct->created_at), 0)."</span>";
   echo "</div>";
   echo "<div class='direct-text'>".format_tweet($direct->text)."</div>";
   echo "</div>";

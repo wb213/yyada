@@ -13,7 +13,7 @@ img.avatar {
 	width: 25px;
 }
 
-.tweet .screen_name {
+.toolbar .screen_name {
 	font-weight: bolder;
 }
 
@@ -58,7 +58,7 @@ ul {
 	overflow: hidden;
 }
 
-.name, .reply, .replyall, .direct, .favor, .retweet, .time, .direct-reply, .direct-delete {
+.toolbar > * {
 	margin: 3px;
 }
 
