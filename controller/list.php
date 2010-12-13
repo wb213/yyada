@@ -17,8 +17,10 @@ function show_user_lists($user) {
   global $content, $theme;
 
   $lists = twitter_get($user."/lists");
-  $content['lists'] = $lists;
-error_log(print_r($lists, true));
+  $content['lists'] = $lists->lists;
+
+  $lists = twitter_get($user."/lists/subscriptions");
+  $content['lists'] = array_merge($content['lists'], $lists->lists);
 
   $theme->include_html('lists_list');
 }
@@ -26,10 +28,9 @@ error_log(print_r($lists, true));
 function show_list($list) {
   global $content, $theme;
 
-  $user, $id = explode('/', $list);
-  $tweets = twitter_get($user.'/lists/'.$id);
+  list($user, $id) = explode('/', $list, 2);
+  $tweets = twitter_get($user.'/lists/'.$id.'/statuses', $_GET);
   $content['tweets'] = $tweets;
-error_log(print_r($tweets, true));
 
   $theme->include_html('tweet_list');
 }
@@ -37,10 +38,13 @@ error_log(print_r($tweets, true));
 function show($list = null) {
   global $access_token;
 
-  if (!isset($list) 
+  if (empty($list))
     $list = $access_token['screen_name'];
+
   if (strstr($list, '/'))
     show_list($list);
   else
     show_user_lists($list);
 }
+
+?>

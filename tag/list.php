@@ -25,7 +25,14 @@ function list_lists_item_html() {
 
   $list = $content['lists'][$content['iter']];
 
-  
+  echo "<div class='toolbar'>";
+  echo "<a class='screen_name' href='".make_path(join_path('list/show', $list->uri))."'>".$list->full_name."</a>";
+  echo "<a class='edit' href=''>Edit</a>";
+  echo "<a class='member' href=''>Members(".$list->member_count.")</a>";
+  echo "<a class='suber' href=''>Subers(".$list->subscriber_count.")</a>";
+  echo "<a class='monitor' href=''>Monitor</a>";
+  echo "</div>";
+  echo "<div class='desc'>".$list->description."</div>";
 }
 
 ?>
