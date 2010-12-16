@@ -7,6 +7,7 @@ require_once('util/tweet.php');
 $controller_router = array(
   "default" => "show",
   "show" => "show",
+  "edit" => "edit",
   "add" => "add",
   "delete" => "delete",
   "sub" => "sub",
@@ -45,6 +46,21 @@ function show($list = null) {
     show_list($list);
   else
     show_user_lists($list);
+}
+
+function edit($list) {
+  global $access_token, $content, $theme;
+
+  list($user, $id) = explode('/', $list, 2);
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    twitter_post($user.'/lists/'.$id, $POST);
+    make_header_location('/list');
+    return;
+  } else {
+    $list = twitter_get($user.'/lists/'.$id);
+    $content['list'] = $list;
+    $theme->include_html('list_edit');
+  }
 }
 
 ?>
