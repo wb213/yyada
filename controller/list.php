@@ -23,6 +23,7 @@ function show_user_lists($user) {
   $lists = twitter_get($user."/lists/subscriptions");
   $content['lists'] = array_merge($content['lists'], $lists->lists);
 
+error_log(print_r($content['lists'], true));
   $theme->include_html('lists_list');
 }
 
@@ -53,7 +54,7 @@ function edit($list) {
 
   list($user, $id) = explode('/', $list, 2);
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    twitter_post($user.'/lists/'.$id, $POST);
+    twitter_post($user.'/lists/'.$id, $_POST);
     make_header_location('/list');
     return;
   } else {

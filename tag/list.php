@@ -27,10 +27,11 @@ function list_lists_item_html() {
 
   echo "<div class='toolbar'>";
   echo "<a class='screen_name' href='".make_path(join_path('list/show', $list->uri))."'>".$list->full_name."</a>";
-  echo "<a class='edit' href=''>Edit</a>";
-  echo "<a class='member' href=''>Members(".$list->member_count.")</a>";
-  echo "<a class='suber' href=''>Subers(".$list->subscriber_count.")</a>";
-  echo "<a class='monitor' href=''>Monitor</a>";
+  if ($list->user->screen_name == $access_token['screen_name'])
+    echo "<a class='edit' href='".make_path(join_path('list/edit', $list->uri))."'>Edit</a>";
+  echo "<a class='member' href='".make_path(join_path('list/member', $list->uri))."'>Members(".$list->member_count.")</a>";
+  echo "<a class='suber' href='".make_path(join_path('list/suber', $list->uri))."'>Subers(".$list->subscriber_count.")</a>";
+  echo "<a class='monitor' href='".make_path(join_path('mointor/add_list', $list->uri))."'>Monitor</a>";
   echo "</div>";
   echo "<div class='desc'>".$list->description."</div>";
 }
