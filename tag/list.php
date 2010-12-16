@@ -35,4 +35,22 @@ function list_lists_item_html() {
   echo "<div class='desc'>".$list->description."</div>";
 }
 
+function list_edit_html() {
+  global $content;
+
+  $list = $content['list'];
+  echo "
+<form class='update' method='post' action='".make_path('list/edit'.$list->uri)."'>
+  <div class='name'>
+    <span class='title'>Name: </span><textarea class='input' name='name' rows='1'>".$list->slug."</textarea>
+  </div>
+  <div class='desciption'>
+    <span class=title'>Description: </span><textarea class='input' name='description' rows='1'>".$list->description."</textarea>
+  <div class='mode'>
+    <input class='input' type='checkbox' name='mode'".($list->mode=='private'?" checked='checked'":"")." /><span class='title'> Is private?</span>
+  </div>
+  <input type='submit' value='Submit' />
+</form>";
+}
+
 ?>

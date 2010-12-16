@@ -35,7 +35,7 @@ function settings_html($echo = true) {
   $ret .= '" />';
   $ret .= '</p>';
 
-  $ret .= '<input type="submit" value="Submit">';
+  $ret .= '<input type="submit" value="Submit" />';
   $ret .= '</form>';
 
   if ($echo) echo $ret;
