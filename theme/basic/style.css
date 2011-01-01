@@ -37,6 +37,7 @@ body {
 li {
 	list-style-type: none;
 	padding: 5px;
+	min-height: 58px;
 }
 
 ul {
