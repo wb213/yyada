@@ -1,10 +1,9 @@
 Here is the rewrite config example for apache and nginx
 1. Please rename the config file name according to your sever type
-	Apache : rename apache -> .htaccess
+	Apache : rename apache.htaccess -> ../.htaccess
 	nginx  : rename nginx  -> (any name according to your nginx setup)
 
 2. the example assume you install the yyada into the root path of the domain(e.g., yyada.domain.com/), if you install it under folder (e.g., domain.com/yyada), please change as following
-	Apache : (assume your folder name is 'folder'
-			change "RewriteBase /" -> "RewriteBase /foler"
-			change "RewriteRule . /index.php [L]" -> change "RewriteRule . /folder/index.php [L]"
+	Apache : (assume your base url is 'http://domain/some/path'
+			change "RewriteRule . /[your_base_url_path]/index.php [L]" -> change "RewriteRule . /some/path/index.php [L]"
 	ngingx : //TODO
