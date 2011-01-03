@@ -40,7 +40,7 @@ class Monitor {
       $name = urldecode($name);
       list($obj, $user, $list_id) = explode('/', $name);
       $twitter_url = $user."/lists/".$list_id.'/statuses';
-      $yyada_url = 'list/show'.$user.'/'.$list_id;
+      $yyada_url = 'list/show/'.$user.'/'.$list_id;
       $this->add($name, $twitter_url, $yyada_url);
     }
   }
@@ -84,9 +84,12 @@ class Monitor {
     if (!isset($_SESSION['monitor']))
       $_SESSION['monitor'] = array();
 
-    foreach ($this->urls as $name => $url)
+    foreach ($this->urls as $name => $url) {
+error_log($_SERVER['REQUEST_URI']);
+error_log(make_path($url['yyada']));
       if ($_SERVER['REQUEST_URI'] == make_path($url['yyada']))
         unset($_SESSION['monitor'][$name]);
+    }
 
     $now = time();
     $last = cookie_get($this->time_key, '0');

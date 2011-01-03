@@ -20,14 +20,26 @@ function theme_name($echo = true) {
 }
 
 function monitor_list() {
+  $count = 0;
+  foreach ($_SESSION['monitor'] as $key => $value) {
+    if ($key == 'mention' || $key == 'direct')
+      continue;
+    $count++;
+  }
+  if ($count == 0) {
+    return '';
+  }
+
   $ret = "
-<form method='get' action='/$php_self'>
-  <select name='page' onchange='if(this.selectedIndex && this.selectedIndex!=0 && this.selectedIndex!=<?=$page?>){window.location=this.value;}'>
+<form class='monitor' method='get' action=''>
+  <select name='page' onchange='if(this.selectedIndex && this.selectedIndex!=0){window.location=this.value;}'>
     <option selected='selected'>New Tweet</option>";
   foreach ($_SESSION['monitor'] as $key => $value) {
+    if ($key == 'mention' || $key == 'direct')
+      continue;
     if ($value) {
       list($object, $user, $list) = explode('/', $key);
-      $ret .= "<option value='".make_url('/list/show/'.$user.'/'.$list).">".$list."</option>";
+      $ret .= "<option value='".make_path('/list/show/'.$user.'/'.$list)."'>".$list."</option>";
     }
   }
   $ret .= "</select></form>";
@@ -58,11 +70,11 @@ function menu() {
  | <a href='".make_path("user/followers")."'>Followers</a>
  | <a href='".make_path("user/friends")."'>Friends</a>
  | <a href='".make_path("list")."'>List</a>
- | ".monitor_list()."
  | <a href='".make_path("settings")."'>Settings</a>
  | <a href='".make_path("login/clear")."'>Logout</a>
  | <a class='important' href='http://code.google.com/p/yyada/issues/list' target='_blank' >BUG REPORT</a>
-    API Remain: $api_remain
+ | API Remain: $api_remain
+ ".monitor_list()."
 </div>
 ";
 }
