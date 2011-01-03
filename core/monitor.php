@@ -13,7 +13,7 @@ class Monitor {
 
   private $urls_key = 'monitor';
   private $time_key = 'check';
-  private $interval = 3; // 5 * 60 seconds
+  private $interval = 300; // 5 * 60 seconds
 
   public function __construct() {
     $this->load();
