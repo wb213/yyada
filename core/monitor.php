@@ -13,7 +13,7 @@ class Monitor {
 
   private $urls_key = 'monitor';
   private $time_key = 'check';
-  private $interval = 300; // 5 * 60 seconds
+  private $interval = 3; // 5 * 60 seconds
 
   public function __construct() {
     $this->load();
@@ -39,7 +39,7 @@ class Monitor {
     foreach (explode("|", $save_str) as $name) {
       $name = urldecode($name);
       list($obj, $user, $list_id) = explode('/', $name);
-      $twitter_url = $user."/lists/".$list_id.'status';
+      $twitter_url = $user."/lists/".$list_id.'/statuses';
       $yyada_url = 'list/show'.$user.'/'.$list_id;
       $this->add($name, $twitter_url, $yyada_url);
     }
@@ -82,7 +82,7 @@ class Monitor {
     global $conn;
 
     if (!isset($_SESSION['monitor']))
-      $_SESSION['monitor'] = array()
+      $_SESSION['monitor'] = array();
 
     foreach ($this->urls as $name => $url)
       if ($_SERVER['REQUEST_URI'] == make_path($url['yyada']))
