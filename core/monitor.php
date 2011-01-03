@@ -15,7 +15,7 @@ class Monitor {
   private $time_key = 'check';
   private $interval = 300; // 5 * 60 seconds
 
-  public __construct() {
+  public function __construct() {
     $this->load();
   }
 
@@ -37,6 +37,7 @@ class Monitor {
       return;
 
     foreach (explode("|", $save_str) as $name) {
+      $name = urldecode($name);
       list($obj, $user, $list_id) = explode('/', $name);
       $twitter_url = $user."/lists/".$list_id.'status';
       $yyada_url = 'list/show'.$user.'/'.$list_id;

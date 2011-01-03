@@ -11,8 +11,10 @@ $controller_router = array(
 function show() {
   global $content, $monitor, $theme;
 
-  $content['monitors'] = array();
+  $content['monitor'] = array();
   foreach ($monitor->urls as $name => $key) {
+    if ($name == 'mention' || $name == 'direct')
+      continue;
     array_push($content['monitor'], $name);
   }
 
@@ -28,8 +30,9 @@ function add_list($list) {
   $yyada_url = 'list/show/'.$list;
 
   $monitor->add($name, $twitter_url, $yyada_url);
+  $monitor->save();
 
-  header("Location: {$_SERVER['HTTP_REFERER']}");
+  header("Location: ".make_path("monitor"));
 }
 
 function remove_list($list) {
@@ -38,9 +41,10 @@ function remove_list($list) {
   $name = "list/" . $list;
   if ($monitor->find($name)) {
     $monitor->remove($name);
-  ]
+    $monitor->save();
+  }
 
-  header("Location: {$_SERVER['HTTP_REFERER']}");
+  header("Location: ".make_path("monitor"));
 }
 
 ?>
