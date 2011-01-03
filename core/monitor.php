@@ -66,7 +66,9 @@ class Monitor {
   }
 
   public function is_new($name) {
-    return isset($_SESSION[$name]);
+    if (!isset($_SESSION['monitor']))
+      return false;
+    return isset($_SESSION['monitor'][$name]);
   }
 
   public function remove($name) {
@@ -79,9 +81,12 @@ class Monitor {
   public function check_new() {
     global $conn;
 
+    if (!isset($_SESSION['monitor']))
+      $_SESSION['monitor'] = array()
+
     foreach ($this->urls as $name => $url)
       if ($_SERVER['REQUEST_URI'] == make_path($url['yyada']))
-        unset($_SESSION[$name]);
+        unset($_SESSION['monitor'][$name]);
 
     $now = time();
     $last = cookie_get($this->time_key, '0');
@@ -101,7 +106,7 @@ class Monitor {
       if (count($tweets) > 0)
         $time = strtotime($tweets[0]->created_at);
       if ($time > $last)
-        $_SESSION[$name] = true;
+        $_SESSION['monitor'][$name] = true;
     }
 
     cookie_set($this->time_key, $now);
