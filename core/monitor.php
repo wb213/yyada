@@ -13,7 +13,37 @@ class Monitor {
 
   private $urls_key = 'monitor';
   private $time_key = 'check';
-  private $interval = 300; // 5 * 60 seconds
+  private $interval = 3; // 5 * 60 seconds
+
+  public function __construct() {
+    $this->load();
+  }
+
+  public function save() {
+    $save_str = '';
+    foreach ($this->urls as $name => $urls) {
+      if ($name == 'mention' || $name == 'direct')
+        continue;
+
+      $save_str .= '|'.urlencode($name);
+    }
+
+    cookie_set('monitor', trim($save_str, '|'));
+  }
+
+  public function load() {
+    $save_str = cookie_get('monitor');
+    if (empty($save_str))
+      return;
+
+    foreach (explode("|", $save_str) as $name) {
+      $name = urldecode($name);
+      list($obj, $user, $list_id) = explode('/', $name);
+      $twitter_url = $user."/lists/".$list_id.'/statuses';
+      $yyada_url = 'list/show/'.$user.'/'.$list_id;
+      $this->add($name, $twitter_url, $yyada_url);
+    }
+  }
 
   public __construct() {
     $this->load();
@@ -65,7 +95,9 @@ class Monitor {
   }
 
   public function is_new($name) {
-    return isset($_SESSION[$name]);
+    if (!isset($_SESSION['monitor']))
+      return false;
+    return isset($_SESSION['monitor'][$name]);
   }
 
   public function remove($name) {
@@ -78,9 +110,15 @@ class Monitor {
   public function check_new() {
     global $conn;
 
-    foreach ($this->urls as $name => $url)
+    if (!isset($_SESSION['monitor']))
+      $_SESSION['monitor'] = array();
+
+    foreach ($this->urls as $name => $url) {
+error_log($_SERVER['REQUEST_URI']);
+error_log(make_path($url['yyada']));
       if ($_SERVER['REQUEST_URI'] == make_path($url['yyada']))
-        unset($_SESSION[$name]);
+        unset($_SESSION['monitor'][$name]);
+    }
 
     $now = time();
     $last = cookie_get($this->time_key, '0');
@@ -100,7 +138,7 @@ class Monitor {
       if (count($tweets) > 0)
         $time = strtotime($tweets[0]->created_at);
       if ($time > $last)
-        $_SESSION[$name] = true;
+        $_SESSION['monitor'][$name] = true;
     }
 
     cookie_set($this->time_key, $now);
