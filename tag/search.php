@@ -42,7 +42,7 @@ function list_saved_search_html() {
   $saved = $content['saved_searches'][$content['iter']];
 
   echo "<a class='search' href='".make_path("search/query?q=".urlencode($saved->query))."'>". $saved->name ."</a>";
-  echo "  <a class='search' href='".make_path("search/remove/".$saved->id_str)."'>". "DEL</a>";
+  echo "<a class='search' href='".make_path("search/remove/".$saved->id_str)."'>". "DEL</a>";
 }
 
 function has_search_result_list() {

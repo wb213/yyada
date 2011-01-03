@@ -48,7 +48,7 @@ function show() {
   global $content, $theme, $conn;
 
   $saved_searches = twitter_get('saved_searches');
-  $content = array_merge($content, array('saved_searches' => $saved_searches));
+  $content['saved_searches'] = $saved_searches;
   $content['search_results'] = array();
   $theme->include_html('search_list');
 }

@@ -6,7 +6,7 @@ require_once('util/url.php');
 
 class Monitor {
 
-  private $urls = array(
+  public $urls = array(
     'mention' => array('twitter' => 'statuses/mentions', 'yyada' => 'tweet/mention'),
     'direct' => array('twitter' => 'direct_messages', 'yyada' => 'direct'),
   );
@@ -14,6 +14,35 @@ class Monitor {
   private $urls_key = 'monitor';
   private $time_key = 'check';
   private $interval = 300; // 5 * 60 seconds
+
+  public __construct() {
+    $this->load();
+  }
+
+  public function save() {
+    $save_str = '';
+    foreach ($this->urls as $name => $urls) {
+      if ($name == 'mention' || $name == 'direct')
+        continue;
+
+      $save_str .= '|'.urlencode($name);
+    }
+
+    cookie_set('monitor', trim($save_str, '|'));
+  }
+
+  public function load() {
+    $save_str = cookie_get('monitor');
+    if (empty($save_str))
+      return;
+
+    foreach (explode("|", $save_str) as $name) {
+      list($obj, $user, $list_id) = explode('/', $name);
+      $twitter_url = $user."/lists/".$list_id.'status';
+      $yyada_url = 'list/show'.$user.'/'.$list_id;
+      $this->add($name, $twitter_url, $yyada_url);
+    }
+  }
 
   public function find($name) {
     $keys = array_keys($this->urls);
