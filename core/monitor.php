@@ -45,35 +45,6 @@ class Monitor {
     }
   }
 
-  public __construct() {
-    $this->load();
-  }
-
-  public function save() {
-    $save_str = '';
-    foreach ($this->urls as $name => $urls) {
-      if ($name == 'mention' || $name == 'direct')
-        continue;
-
-      $save_str .= '|'.urlencode($name);
-    }
-
-    cookie_set('monitor', trim($save_str, '|'));
-  }
-
-  public function load() {
-    $save_str = cookie_get('monitor');
-    if (empty($save_str))
-      return;
-
-    foreach (explode("|", $save_str) as $name) {
-      list($obj, $user, $list_id) = explode('/', $name);
-      $twitter_url = $user."/lists/".$list_id.'status';
-      $yyada_url = 'list/show'.$user.'/'.$list_id;
-      $this->add($name, $twitter_url, $yyada_url);
-    }
-  }
-
   public function find($name) {
     $keys = array_keys($this->urls);
     for ($i=0; $i<count($this->urls); $i++)
@@ -114,8 +85,6 @@ class Monitor {
       $_SESSION['monitor'] = array();
 
     foreach ($this->urls as $name => $url) {
-error_log($_SERVER['REQUEST_URI']);
-error_log(make_path($url['yyada']));
       if ($_SERVER['REQUEST_URI'] == make_path($url['yyada']))
         unset($_SESSION['monitor'][$name]);
     }
