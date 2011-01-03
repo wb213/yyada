@@ -26,7 +26,7 @@ function list_monitor_item_html() {
   $monitor = $content['monitor'][$content['iter']];
 
   echo "<div class='toolbar'>";
-  echo "<a class='remove' href='".make_path(join_path('monitor/remove_list', $monitor))."'>RM</a>";
+  echo "<a class='remove' href='".make_path('monitor/remove_'.$monitor)."'>RM</a>";
   echo "</div>";
   echo "<div class='name'>".$monitor."</div>";
 }
