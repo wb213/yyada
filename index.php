@@ -9,6 +9,8 @@ try {
   init_environment();
 } catch (NoCookie $e) {
   // do nothing
+} catch (NoInvited $e) {
+  // do nothing
 } catch (Exception $e) {
   error_log($e->getMessage());
   make_header_location('/login/clear');
