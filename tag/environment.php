@@ -20,21 +20,15 @@ function theme_name($echo = true) {
 }
 
 function monitor_list() {
-  $count = 0;
-  foreach ($_SESSION['monitor'] as $key => $value) {
-    if ($key == 'mention' || $key == 'direct')
-      continue;
-    $count++;
-  }
-  if ($count == 0) {
-    return '';
-  }
+  global $monitor;
 
   $ret = "";
-  foreach ($_SESSION['monitor'] as $key => $value) {
+  foreach ($monitor->urls as $key => $value) {
     if ($key == 'mention' || $key == 'direct')
       continue;
-    $ret .= " | <a ".($value?"class='important' ":"")."href='".make_path('/list/show/'.$user.'/'.$list)."'>".$list."</a>";
+error_log($key);
+    list($object, $user, $list) = explode('/', $key);
+    $ret .= " | <a ".($monitor->is_new($key)?"class='important' ":"")."href='".make_path('/list/show/'.$user.'/'.$list)."'>".$list."</a>";
   }
   return $ret;
 }
@@ -63,8 +57,8 @@ function menu() {
  | <a href='".make_path("user/followers")."'>Followers</a>
  | <a href='".make_path("user/friends")."'>Friends</a>
  | <a href='".make_path("list")."'>List</a>
- | <a href='".make_path("settings")."'>Settings</a>
 ".monitor_list()."
+ | <a href='".make_path("settings")."'>Settings</a>
  | <a href='".make_path("login/clear")."'>Logout</a>
  | <a class='important' href='http://code.google.com/p/yyada/issues/list' target='_blank' >BUG REPORT</a>
  | API Remain: $api_remain
