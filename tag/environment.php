@@ -30,19 +30,12 @@ function monitor_list() {
     return '';
   }
 
-  $ret = "
-<form class='monitor' method='get' action=''>
-  <select name='page' onchange='if(this.selectedIndex && this.selectedIndex!=0){window.location=this.value;}'>
-    <option selected='selected'>New Tweet</option>";
+  $ret = "";
   foreach ($_SESSION['monitor'] as $key => $value) {
     if ($key == 'mention' || $key == 'direct')
       continue;
-    if ($value) {
-      list($object, $user, $list) = explode('/', $key);
-      $ret .= "<option value='".make_path('/list/show/'.$user.'/'.$list)."'>".$list."</option>";
-    }
+    $ret .= " | <a ".($value?"class='important' ":"")."href='".make_path('/list/show/'.$user.'/'.$list)."'>".$list."</a>";
   }
-  $ret .= "</select></form>";
   return $ret;
 }
 
@@ -71,10 +64,10 @@ function menu() {
  | <a href='".make_path("user/friends")."'>Friends</a>
  | <a href='".make_path("list")."'>List</a>
  | <a href='".make_path("settings")."'>Settings</a>
+".monitor_list()."
  | <a href='".make_path("login/clear")."'>Logout</a>
  | <a class='important' href='http://code.google.com/p/yyada/issues/list' target='_blank' >BUG REPORT</a>
  | API Remain: $api_remain
- ".monitor_list()."
 </div>
 ";
 }
