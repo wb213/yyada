@@ -21,7 +21,7 @@ function list_lists_item_class() {
 }
 
 function list_lists_item_html() {
-  global $content, $access_token;
+  global $monitor, $content, $access_token;
 
   $list = $content['lists'][$content['iter']];
 
@@ -32,7 +32,7 @@ function list_lists_item_html() {
   echo "<a class='member' href='".make_path(join_path('list/member', $list->uri))."'>Members(".$list->member_count.")</a>";
   echo "<a class='suber' href='".make_path(join_path('list/suber', $list->uri))."'>Subers(".$list->subscriber_count.")</a>";
   $monitor_name = 'list'.$list->uri;
-  if ($monitor->find($monitor_name))
+  if ($monitor->find($monitor_name) != -1)
     echo "<a class='monitor' href='".make_path(join_path('monitor/remove_list', $list->uri))."'>UnMonitor</a>";
   else
     echo "<a class='monitor' href='".make_path(join_path('monitor/add_list', $list->uri))."'>Monitor</a>";
