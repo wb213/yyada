@@ -72,7 +72,7 @@ function load_access_token() {
   list($oauth_token, $oauth_token_secret, $user_id, $screen_name) = $args;
   if (!check_invite($screen_name)) {
     $_SESSION['status'] = 'invite_fail';
-    throw new Exception('Not invited');
+    throw new NoInvited('Not invited');
   }
   if (!isset($oauth_token) || !isset($oauth_token_secret) || !isset($user_id) || !isset($screen_name)) {
     cookie_clear();
