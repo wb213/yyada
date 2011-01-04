@@ -32,7 +32,7 @@ function add_list($list) {
   $monitor->add($name, $twitter_url, $yyada_url);
   $monitor->save();
 
-  header("Location: ".make_path("monitor"));
+  header("Location: ".make_path("list"));
 }
 
 function remove_list($list) {
@@ -44,7 +44,7 @@ function remove_list($list) {
     $monitor->save();
   }
 
-  header("Location: ".make_path("monitor"));
+  header("Location: ".make_path("list"));
 }
 
 ?>
