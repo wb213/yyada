@@ -31,17 +31,20 @@ function show($user = '') {
 function update() {
   global $access_token, $content, $conn, $theme;
 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $post_data = array("status" => $_POST['status']);
-    if (!empty($_POST['in_reply_to_id']))
-      $post_data["in_reply_to_status_id"] = $_POST['in_reply_to_id'];
-    if (!empty($_POST['location'])) {
-      list($lat, $long) = explode(',', $_POST['location']);
-      $post_data["lat"] = $lat;
-      $post_data["long"] = $long;
-    }
-    twitter_post('statuses/update', $post_data);
+  if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+    $_POST = $_GET;
   }
+
+  $post_data = array("status" => $_POST['status']);
+  if (!empty($_POST['in_reply_to_id']))
+    $post_data["in_reply_to_status_id"] = $_POST['in_reply_to_id'];
+  if (!empty($_POST['location'])) {
+    list($lat, $long) = explode(',', $_POST['location']);
+    $post_data["lat"] = $lat;
+    $post_data["long"] = $long;
+  }
+  twitter_post('statuses/update', $post_data);
+
   make_header_location('/');
 }
 
