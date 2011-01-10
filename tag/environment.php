@@ -26,7 +26,6 @@ function monitor_list() {
   foreach ($monitor->urls as $key => $value) {
     if ($key == 'mention' || $key == 'direct')
       continue;
-error_log($key);
     list($object, $user, $list) = explode('/', $key);
     $ret .= " | <a ".($monitor->is_new($key)?"class='important' ":"")."href='".make_path('/list/show/'.$user.'/'.$list)."'>".$list."</a>";
   }
@@ -59,6 +58,7 @@ function menu() {
  | <a href='".make_path("list")."'>List</a>
 ".monitor_list()."
  | <a href='".make_path("settings")."'>Settings</a>
+".monitor_list()."
  | <a href='".make_path("login/clear")."'>Logout</a>
  | <a class='important' href='http://code.google.com/p/yyada/issues/list' target='_blank' >BUG REPORT</a>
  | API Remain: $api_remain
