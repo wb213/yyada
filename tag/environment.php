@@ -26,7 +26,6 @@ function monitor_list() {
   foreach ($monitor->urls as $key => $value) {
     if ($key == 'mention' || $key == 'direct')
       continue;
-error_log($key);
     list($object, $user, $list) = explode('/', $key);
     $ret .= " | <a ".($monitor->is_new($key)?"class='important' ":"")."href='".make_path('/list/show/'.$user.'/'.$list)."'>".$list."</a>";
   }
