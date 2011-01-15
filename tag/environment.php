@@ -56,9 +56,13 @@ function menu() {
  | <a href='".make_path("user/followers")."'>Followers</a>
  | <a href='".make_path("user/friends")."'>Friends</a>
  | <a href='".make_path("list")."'>List</a>
+<<<<<<< HEAD
 ".monitor_list()."
  | <a href='".make_path("settings")."'>Settings</a>
+=======
+>>>>>>> fix monitor in menu
 ".monitor_list()."
+ | <a href='".make_path("settings")."'>Settings</a>
  | <a href='".make_path("login/clear")."'>Logout</a>
  | <a class='important' href='http://code.google.com/p/yyada/issues/list' target='_blank' >BUG REPORT</a>
  | API Remain: $api_remain
