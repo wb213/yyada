@@ -58,6 +58,7 @@ function menu() {
  | <a href='".make_path("list")."'>List</a>
 ".monitor_list()."
  | <a href='".make_path("settings")."'>Settings</a>
+".monitor_list()."
  | <a href='".make_path("login/clear")."'>Logout</a>
  | <a class='important' href='http://code.google.com/p/yyada/issues/list' target='_blank' >BUG REPORT</a>
  | API Remain: $api_remain
