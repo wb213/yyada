@@ -111,4 +111,43 @@ function spam($user) {
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
+function add($user_id) {
+  global $conn;
+
+  if (!isset($_POST['list'])) $_POST = $_GET;
+  if (isset($_POST['list'])) {
+    $request = array('id' => $user_id);
+    twitter_post($access_token['screen_name'].'/'.$_POST['list'].'/members.json', $request);
+  }
+  header("Location: {$_SERVER['HTTP_REFERER']}");
+}
+
+function remove($useri_id) {
+  global $conn;
+
+  if (!isset($_POST['list'])) $_POST = $_GET;
+  if (isset($_POST['list'])) {
+    $request = array('id' => $user_id, '_method' => 'DELETE');
+    twitter_post($access_token['screen_name'].'/'.$_POST['list'].'/members.json', $request);
+  }
+  header("Location: {$_SERVER['HTTP_REFERER']}");
+}
+
+function manage_list($user) {
+  global $access_token, $theme, $content;
+
+  $cur_user = $access_token['screen_name'];
+
+  $lists_json = twitter_get($cur_user.'/lists.json');
+  $lists = array();
+  foreach ($lists_json as $list_json) {
+    list($u, $l) = explode('/', $list_json->full_name);
+    $is_member = twitter_get($cur_user./.$l./.'members'./.$user.'.json');
+error_log(print_r($is_member, true));
+    $lists[$l] = false;
+  }
+
+  $theme->include_html('manage_list');
+}
+
 ?>

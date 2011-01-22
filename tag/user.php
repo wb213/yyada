@@ -45,6 +45,7 @@ function user_info_html() {
   echo " | <a href='" . make_path("list/show/".$screen_name) . "'>" . $listed . "</a>";
   echo " | <a href='" . make_path("direct/create/".$screen_name) . "'>Direct Message</a>";
 
+  echo " | <a href='" . make_path("user/manage_list/".$screen_name) . "'>Manage List</a>";
   if ($is_following)
     echo " | <a href='" . make_path("user/unfollow/".$screen_name) . "'>UnFollow</a>";
   else
