@@ -11,7 +11,10 @@ $controller_router = array(
   "unfollow" => "unfollow",
   "block" => "block",
   "unblock" => "unblock",
-  "spam" => "spam"
+  "spam" => "spam",
+  "add" => "add",
+  "remove" => "remove",
+  "manage_list" => "manage_list",
 );
 
 function show($user) {
@@ -112,40 +115,48 @@ function spam($user) {
 }
 
 function add($user_id) {
-  global $conn;
+  global $access_token, $conn;
 
   if (!isset($_POST['list'])) $_POST = $_GET;
   if (isset($_POST['list'])) {
     $request = array('id' => $user_id);
-    twitter_post($access_token['screen_name'].'/'.$_POST['list'].'/members.json', $request);
+    twitter_post($access_token['screen_name'].'/'.$_POST['list'].'/members', $request);
   }
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
-function remove($useri_id) {
-  global $conn;
+function remove($user_id) {
+  global $access_token, $conn;
 
   if (!isset($_POST['list'])) $_POST = $_GET;
   if (isset($_POST['list'])) {
     $request = array('id' => $user_id, '_method' => 'DELETE');
-    twitter_post($access_token['screen_name'].'/'.$_POST['list'].'/members.json', $request);
+    twitter_post($access_token['screen_name'].'/'.$_POST['list'].'/members', $request);
   }
   header("Location: {$_SERVER['HTTP_REFERER']}");
 }
 
-function manage_list($user) {
+function manage_list($user_id) {
   global $access_token, $theme, $content;
 
   $cur_user = $access_token['screen_name'];
-
-  $lists_json = twitter_get($cur_user.'/lists.json');
+  $lists_json = twitter_get($cur_user.'/lists');
   $lists = array();
-  foreach ($lists_json as $list_json) {
-    list($u, $l) = explode('/', $list_json->full_name);
-    $is_member = twitter_get($cur_user./.$l./.'members'./.$user.'.json');
-error_log(print_r($is_member, true));
-    $lists[$l] = false;
+  foreach ($lists_json->lists as $list_json) {
+    $t = explode('/', $list_json->full_name);
+    $l = $t[1];
+    $is_member = true;
+    try {
+      twitter_get($cur_user.'/'.$l.'/members/'.$user_id);
+      $is_member = true;
+    } catch (TwitterError $e) {
+      $is_member = false;
+    }
+    array_push($lists, array($list_json, $is_member));
   }
+
+  $content['lists'] = $lists;
+  $content['user_id'] = $user_id;
 
   $theme->include_html('manage_list');
 }

@@ -34,8 +34,7 @@ function list_manage_item_html() {
     echo "<a class='screen_name' href='".make_path(join_path('user/remove', $content['user_id'])."?list=".$list_name)."'>Remove from</a>";
   else
     echo "<a class='screen_name' href='".make_path(join_path('user/add', $content['user_id'])."?list=".$list_name)."'>Add to</a>";
-  echo "<div class='name'>".$list->full_name."</div>";
-  echo "<div class='desc'>".$list->description."</div>";
+  echo "<div class='name'>".$list->full_name." | ".$list->description."</div>";
 }
 
 ?>
