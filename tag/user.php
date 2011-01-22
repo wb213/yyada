@@ -8,6 +8,7 @@ function user_info_html() {
   $friendship = $content['friendship']->relationship;
 
   $name = $user->name;
+  $name_id = $user->id_str;
   $screen_name = $user->screen_name;
   $img_url = $user->profile_image_url;
   $desc = $user->description;
@@ -45,6 +46,7 @@ function user_info_html() {
   echo " | <a href='" . make_path("list/show/".$screen_name) . "'>" . $listed . "</a>";
   echo " | <a href='" . make_path("direct/create/".$screen_name) . "'>Direct Message</a>";
 
+  echo " | <a href='" . make_path("user/manage_list/".$name_id) . "'>Manage List</a>";
   if ($is_following)
     echo " | <a href='" . make_path("user/unfollow/".$screen_name) . "'>UnFollow</a>";
   else
