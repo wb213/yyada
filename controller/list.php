@@ -9,7 +9,7 @@ $controller_router = array(
   "show" => "show",
   "edit" => "edit",
   "add" => "add",
-  "delete" => "delete",
+  "remove" => "remove",
   "sub" => "sub",
   "subers" => "subers",
 );
@@ -60,6 +60,32 @@ function edit($list) {
     $list = twitter_get($user.'/lists/'.$id);
     $content['list'] = $list;
     $theme->include_html('list_edit');
+  }
+}
+
+function add() {
+  global $theme;
+
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    twitter_post($user.'/lists', $_POST);
+    make_header_location('/list');
+    return;
+  } else {
+    $theme->include_html('list_new');
+  }
+}
+
+function remove($list) {
+  global $theme, $access_token, $content;
+
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $request = array('_method' => 'DELETE');
+    twitter_post($user.'/lists/'.$list, $request);
+    make_header_location('/list');
+    return;
+  } else {
+    $content['list'] = $list;
+    $theme->include_html('list_remove');
   }
 }
 
