@@ -64,10 +64,10 @@ function edit($list) {
 }
 
 function add() {
-  global $theme;
+  global $access_token, $theme;
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    twitter_post($user.'/lists', $_POST);
+    twitter_post($access_token['screen_name'].'/lists', $_POST);
     make_header_location('/list');
     return;
   } else {
@@ -78,9 +78,10 @@ function add() {
 function remove($list) {
   global $theme, $access_token, $content;
 
+  list($user, $id) = explode('/', $list, 2);
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $request = array('_method' => 'DELETE');
-    twitter_post($user.'/lists/'.$list, $request);
+    twitter_post($access_token['screen_name'].'/lists/'.$id, $request);
     make_header_location('/list');
     return;
   } else {
