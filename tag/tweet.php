@@ -131,7 +131,7 @@ function list_tweet_item_html() {
   echo "</div>";
 
   // tweet text
-  echo "<div class='status'>".format_tweet($tweet->text)."</div>";
+  echo "<div class='status'>".htmlentities(format_tweet($tweet->text))."</div>";
 
   // source bar
   $source = preg_replace("/^\<a +href/" , "<a target='_blank' href" , $tweet->source);
