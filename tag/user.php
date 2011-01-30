@@ -31,7 +31,7 @@ function user_info_html() {
 
   echo "<a class='name' href='".make_path("user/show/".$screen_name)."'>".$screen_name."</a>"."(".$name.")";
 
-  if ($is_protected) echo "PROTECTED USER";
+  if ($is_protected) echo "  !PROTECTED USER!  ";
 
   echo "<br />";
   echo "Bio: ". $desc."<br/>";
