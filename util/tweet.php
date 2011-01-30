@@ -51,6 +51,8 @@ function format_tweet($tweet) {
   $url_replace = '<a target="_blank" href="\1">\1</a>';
   $tag_pattern = '/(#[a-zA-Z0-9_]+)/';
 
+  $tweet = nl2br($tweet);
+
   $highlight_pattern = $settings->highlight;
   if (! empty($highlight_pattern))
     $tweet = keyword_highlight($highlight_pattern, $tweet);
