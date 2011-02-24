@@ -1,0 +1,29 @@
+<?php include('header.html') ?>
+
+<div class='search_box'>
+<?php search_box_html() ?>
+</div>
+
+<div class='saved_searches'>
+  <ul>
+    <?php while (has_saved_search_list()) : ?>
+    <li <?php list_saved_search_class() ?>>
+      <?php list_saved_search_html() ?>
+    </li>
+    <?php endwhile; ?>
+  </ul>
+</div>
+
+<div class='tweets'>
+  <ul>
+    <?php while (has_search_result_list()) : ?>
+    <li <?php list_search_result_class() ?>>
+      <?php list_search_result_html() ?>
+    </li>
+    <?php endwhile; ?>
+  </ul>
+</div>
+
+<?php search_page_menu() ?>
+
+<?php include('footer.html') ?>
