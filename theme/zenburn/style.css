@@ -104,10 +104,10 @@ ul > li.mentioned {
 
 .highlight {
      color: #6f9f9f;
-	 font-weight: bolder;
+     font-weight: bolder;
 }
 .update textarea {
-  background-color: #284F28;
-    colour: #DCDCCC
-  width: 99%;
+    background-color: #284F28;
+    color: #DCDCCC;
+    width: 99%;
 }
