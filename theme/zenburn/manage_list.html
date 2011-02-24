@@ -1,0 +1,13 @@
+<?php include('header.html') ?>
+
+<div class='lists'>
+  <ul>
+    <?php while (has_manage_list()) : ?>
+    <li <?php list_manage_item_class() ?>>
+      <?php list_manage_item_html() ?>
+    </li>
+    <?php endwhile; ?>
+  </ul>
+</div>
+
+<?php include('footer.html') ?>
