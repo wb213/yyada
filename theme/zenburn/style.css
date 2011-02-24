@@ -7,28 +7,28 @@
 
 
 a {
-     color: #CCCCCC;
+	color: #CCCCCC;
 }
 
 form {
-     margin: 5px;
+	margin: 5px;
 }
 
 img.avatar {
-     float: left;
-     height: 40px;
-     padding-right: 5px;
-     width: 40px;
+	float: left;
+	height: 40px;
+	padding-right: 5px;
+	width: 40px;
 }
 
 .toolbar .screen_name {
-     font-weight: bolder;
+	font-weight: bolder;
 }
 
 .via, .via > a {
-     color: #DCA3A3;
-     font: 90% sans-serif;
-     margin-top: 5px;
+	color: #DCA3A3;
+	font: 90% sans-serif;
+	margin-top: 5px;
 }
 
 .retweet-bar, .retweet-bar > a {
@@ -36,78 +36,78 @@ img.avatar {
 }
 
 body {
-     background: #3F3F3F;
-     color: #F0DFAF;
-     font: 90% sans-serif;
-     margin: 0pt;
+	background: #3F3F3F;
+	color: #F0DFAF;
+	font: 90% sans-serif;
+	margin: 0pt;
 }
 
 li {
-     list-style-type: none;
-     min-height: 48px;
-     padding: 5px;
+	list-style-type: none;
+	min-height: 48px;
+	padding: 5px;
 }
 
 ul {
-     margin: 0px;
-     padding: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
 .update textarea {
-     width: 99%;
+	width: 99%;
 }
 
 .status {
-     margin-top: 5px;
+	margin-top: 5px;
 }
 
 .tweet {
-     display: block;
-     overflow: hidden;
+	display: block;
+	overflow: hidden;
 }
 
 .toolbar > * {
-     margin: 3px;
+	margin: 3px;
 }
 
 ul > li {
 }
 
 ul > li.even {
-     background: #2f2f2f;
+	background: #2f2f2f;
 }
 
 ul > li.mentioned {
-     background: #4C4C2F;
+	background: #4C4C2F;
 }
 
 .menu {
-     background: #3F3F3F;
-     color: #8F8F8F;
-     padding: 2px;
+	background: #3F3F3F;
+	color: #8F8F8F;
+	padding: 2px;
 }
 
 .menu a {
-     color: #dcdcdc;
-     text-decoration: none;
+	color: #dcdcdc;
+	text-decoration: none;
 }
 
 .menu .important {
-     color: #BFCAA9;
-     font-weight: bold;
+	color: #BFCAA9;
+	font-weight: bold;
 }
 
 .error {
-     color: red;
-     font-style: italic;
+	color: red;
+	font-style: italic;
 }
 
 .highlight {
-     color: #6f9f9f;
-	 font-weight: bolder;
+	color: #6f9f9f;
+	font-weight: bolder;
 }
 .update textarea {
-  background-color: #284F28;
-    colour: #DCDCCC
-  width: 99%;
+	background-color: #284F28;
+	colour: #DCDCCC;
+	width: 99%;
 }
