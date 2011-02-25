@@ -1,0 +1,15 @@
+<?php include('header.html') ?>
+
+<?php list_new() ?>
+
+<div class='lists'>
+  <ul>
+    <?php while (has_lists_list()) : ?>
+    <li <?php list_lists_item_class() ?>>
+      <?php list_lists_item_html() ?>
+    </li>
+    <?php endwhile; ?>
+  </ul>
+</div>
+
+<?php include('footer.html') ?>

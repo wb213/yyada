@@ -1,0 +1,113 @@
+/*      Android Colorscheme For Yyada                       */
+/*      Via @beckyeeky http://about.me/beck                 */
+/*      Yyada Project Page: http://code.google.com/p/yyada/ */
+/*      Thanks to:                                          */
+/*      @JaHiy Netputweets Lite                             */
+
+
+
+
+a {
+	color: #67753A;
+}
+
+form {
+	margin: 5px;
+}
+
+img.avatar {
+	float: left;
+	height: 45px;
+	padding-right: 5px;
+	width: 45px;
+}
+
+.toolbar .screen_name {
+	font-weight: bolder;
+}
+
+.via, .via > a {
+	color: #69495C;
+	font: 90% sans-serif;
+	margin-top: 5px;
+}
+
+.retweet-bar, .retweet-bar > a {
+    color: #9C5436
+}
+
+body {
+	background: #F0F0F0;
+	color: #2c3342;
+	font: 90% sans-serif;
+	margin: 0pt;
+}
+
+li {
+	list-style-type: none;
+	min-height: 48px;
+	padding: 5px;
+}
+
+ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+.update textarea {
+	width: 99%;
+}
+
+.status {
+	margin-top: 5px;
+}
+
+.tweet {
+	display: block;
+	overflow: hidden;
+}
+
+.toolbar > * {
+	margin: 3px;
+}
+
+ul > li {
+	background: #F5F5F5;
+}
+
+ul > li.even {
+	background: #E8F0CD;
+}
+
+ul > li.mentioned {
+	background: #D1E29C;
+}
+
+.menu {
+	background: #A4C639;
+	color: #FFF;
+	padding: 2px;
+}
+
+.menu a {
+	color: #FFF;
+	text-decoration: none;
+}
+
+.menu .important {
+	color: #6C4F10;
+	font-weight: bold;
+}
+
+.error {
+	color: red;
+	font-style: italic;
+}
+
+.highlight {
+	color: #6f9f9f;
+	font-weight: bolder;
+}
+.update textarea {
+	width: 99%;
+}
