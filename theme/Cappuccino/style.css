@@ -1,0 +1,86 @@
+a {
+	color: #86723D;
+}
+form {
+	margin: 5px;
+}
+img.avatar {
+	float: left;
+	height: 48px;
+	padding-right: 5px;
+	width: 48px;
+	-moz-border-radius: 9px;
+	border-radius: 9px;
+}
+.toolbar .screen_name {
+	font-weight: bolder;
+}
+.via, .via > a {
+	color: #635f29;
+	font: 90% sans-serif;
+	margin-top: 5px;
+}
+.retweet-bar, .retweet-bar > a {
+}
+body {
+	background: #E1DCA8;
+	color: #645531;
+	font: 90% Tahoma;
+	margin: 0;
+}
+li {
+	list-style-type: none;
+	min-height: 48px;
+	padding: 5px;
+}
+ul {
+	margin: 0;
+	padding: 0;
+}
+.update textarea {
+	width: 99%;
+}
+.status {
+	margin-top: 5px;
+}
+.tweet {
+	display: block;
+	overflow: hidden;
+}
+.toolbar > * {
+	margin: 3px;
+}
+ul > li {
+}
+ul > li.even {
+	background: #C3B984;
+}
+ul > li.mentioned {
+	background: #4C4C2F;
+}
+.menu {
+	background: #684F19;
+	color: #8F8F8F;
+	padding: 2px;
+}
+.menu a {
+	color: #DCDCDC;
+	text-decoration: none;
+}
+.menu .important {
+	color: #BFCAA9;
+	font-weight: bold;
+}
+.error {
+	color: red;
+	font-style: italic;
+}
+.highlight {
+	color: #584321;
+	font-weight: bolder;
+}
+.update textarea {
+	-moz-border-radius: 10px;
+	width: 99%;
+	border-radius: 10px;
+}
