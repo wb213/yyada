@@ -1,0 +1,13 @@
+<?php include('header.html') ?>
+
+<div class='monitor'>
+  <ul>
+    <?php while (has_monitor_list()) : ?>
+    <li <?php list_monitor_item_class() ?>>
+      <?php list_monitor_item_html() ?>
+    </li>
+    <?php endwhile; ?>
+  </ul>
+</div>
+
+<?php include('footer.html') ?>

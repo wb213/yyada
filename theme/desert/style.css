@@ -1,0 +1,92 @@
+/* Desert Colorscheme For Yyada */
+/* Via @1wingedangel */
+/* Base on Basic Colorscheme */
+
+a {
+    color: darkkhaki;
+}
+form {
+    margin: 5px;
+}
+img.avatar {
+    float: left;
+    height: auto;
+    padding-right: 2px;
+    width: 48px;
+}
+.toolbar .screen_name {
+    font-weight: bolder;
+}
+.via, .via > a {
+    color: #888888;
+    font: 90% sans-serif;
+    margin-top: 5px;
+}
+.retweet-bar, .retweet-bar > a {
+    color: seagreen;
+}
+body {
+    background-color: #333333;
+    color: white;
+    font: 90% sans-serif;
+    margin: 0;
+}
+li {
+    list-style-type: none;
+    min-height: 48px;
+    padding: 5px;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+.update textarea {
+    background-color: #666666;
+    color: white;
+    max-width: 400px;
+    width: 99%;
+}
+.status {
+    margin-top: 5px;
+}
+.tweet {
+    display: block;
+    overflow: hidden;
+}
+.toolbar > * {
+    margin: 3px;
+}
+ul > li {
+    color: navajowhite;
+}
+ul > li.even {
+    background: none repeat scroll 0 0 #4D4D4D;
+    color: lightblue;
+}
+ul > li.mentioned {
+    background: none repeat scroll 0 0 slategrey;
+    color: khaki;
+}
+ul > li.mentioned .via, li.mentioned .via a {
+    color: peru;
+}
+.menu {
+    background-color: #C2BFA5;
+    color: #808080;
+    padding: 2px;
+}
+.menu a {
+    color: #808080;
+    text-decoration: none;
+}
+.menu .important {
+    color: black;
+    font-weight: bold;
+}
+.error {
+    color: red;
+    font-style: italic;
+}
+.highlight {
+    color: indianred;
+}
