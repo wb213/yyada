@@ -34,8 +34,6 @@ class Settings {
     if (!isset($s)) $s = cookie_get($this->cookie_key);
 
     $args = explode('|', $s);
-    if (count($args) != count($this->args))
-      return;
     $keys = array_keys($this->args);
 
     for ($i=0; $i<count($args); $i++) {
