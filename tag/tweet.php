@@ -89,6 +89,14 @@ function list_tweet_item_html() {
 
   $tweet = $content['tweets'][$content['iter']];
 
+  // filter handling
+  $filter = $settings->filter;
+  preg_match_all("/$filter/", $tweet, $match);
+  if (! empty($match)) {
+    $content['iter']++;
+  }
+  return;
+
   // retweet handling
   $is_retweet = false;
   if (isset($tweet->retweeted_status)) {
