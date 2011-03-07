@@ -30,8 +30,13 @@ function settings_html($echo = true) {
   $ret .= '" />';
   $ret .= '</p>';
 
-  $ret .= '<p>Keyword Highlight: <input type="text" name="highlight" maxlength="140" value="';
+  $ret .= '<p>Keyword for Highlight: <input type="text" name="highlight" maxlength="140" value="';
   $ret .= $s->highlight;
+  $ret .= '" />';
+  $ret .= '</p>';
+
+  $ret .= '<p>Keyword for Filter: <input type="text" name="filter" maxlength="140" value="';
+  $ret .= $s->filter;
   $ret .= '" />';
   $ret .= '</p>';
 

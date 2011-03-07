@@ -8,8 +8,9 @@ class Settings {
     "theme" => array("string", "basic"),
     "show_avatar" => array("bool", false),
     "show_img" => array("bool", false),
-    "rt_format" => array("string", "RT %u %t"),
+    "rt_format" => array("string", "RT %u: %t"),
     "highlight" => array("string","RT"),
+    "filter" => array("string",""),
   );
 
   private $cookie_key = "config";
