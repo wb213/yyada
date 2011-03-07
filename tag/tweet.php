@@ -89,13 +89,13 @@ function list_tweet_item_html() {
 
   $tweet = $content['tweets'][$content['iter']];
 
-  // filter handling
+  // filter handling, not filter user self tweet
   $filter = $settings->filter;
-  preg_match_all("/$filter/", $tweet, $match);
-  if (! empty($match)) {
-    $content['iter']++;
+  preg_match_all("/$filter/", $tweet->text, $match);
+  if (! empty($match[0]) and $tweet->user->screen_name != $access_token['screen_name']) {
+    echo "<div class='filter'> This tweet has been filtered. </div>";
+    return;
   }
-  return;
 
   // retweet handling
   $is_retweet = false;
