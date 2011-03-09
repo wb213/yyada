@@ -3,6 +3,7 @@
 define('BASE_URL', 'http://your.own.domain');
 define('SECRET_KEY', 'Sample Key - Change!');
 
+# use https://api.twitter.com/oauth if no proxy
 define('OAUTH_PROXY', 'http://your.own.oauth.proxy');
 
 define('CONSUMER_KEY', 'change to your own consumer key');
