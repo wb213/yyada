@@ -90,18 +90,18 @@ function list_tweet_item_html() {
   $tweet = $content['tweets'][$content['iter']];
 
   // filter handling, not filter user self tweet
-  if empty($_GET['unfilter']) {
+  if (empty($_GET['unfilter'])) {
     $filter = $settings->filter;
     if (! empty($filter)) {
       preg_match_all("/$filter/", $tweet->text, $match);
       if (! empty($match[0]) and $tweet->user->screen_name != $access_token['screen_name']) {
         $match = array_unique($match[0]);
         foreach ($match as $value) {
-          $filter_str .= $value;
+          $filter_str .= $value . ', ';
         }
         echo "<div class='filter'> This tweet has been filtered due to hit following rule: ";
         echo $filter_str;
-        echo "</div><br />";
+        echo "</div>";
         echo "<a href='".make_path("tweet/show/".$tweet->id_str)."?unfilter=yes'>"."Display the filtered tweet"."</a>";
         return;
       }
