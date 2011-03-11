@@ -94,7 +94,13 @@ function list_tweet_item_html() {
   if (! empty($filter)) {
     preg_match_all("/$filter/", $tweet->text, $match);
     if (! empty($match[0]) and $tweet->user->screen_name != $access_token['screen_name']) {
-      echo "<div class='filter'> This tweet has been filtered. </div>";
+      $match = array_unique($match[0]);
+      foreach ($match as $value) {
+        $filter_str .= $value;
+      }
+      echo "<div class='filter'> This tweet has been filtered due to hit following rule:";
+      echo $value;
+      echo "</div>"
       return;
     }
   }
