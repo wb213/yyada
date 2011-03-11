@@ -96,6 +96,7 @@ function list_tweet_item_html() {
       preg_match_all("/$filter/", $tweet->text, $match);
       if (! empty($match[0]) and $tweet->user->screen_name != $access_token['screen_name']) {
         $match = array_unique($match[0]);
+        $filter_str = '';
         foreach ($match as $value) {
           $filter_str .= $value . ', ';
         }
