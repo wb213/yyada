@@ -26,7 +26,7 @@ function create($user) {
       //check if target user following you
       $request = array('target_screen_name' => $user);
       $friendship = twitter_get('friendships/show', $request);
-      $is_followed_by = $friendship->source->followed_by;
+      $is_followed_by = $friendship->relationship->source->followed_by;
       $content['is_followed_by'] = $is_followed_by;
   }
 
