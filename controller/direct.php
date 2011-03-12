@@ -22,6 +22,14 @@ function create($user) {
     twitter_post('direct_messages/new', $post_data);
     make_header_location('/direct/sent');
   } else {
+    if (!empty ($user)) {
+      //check if target user following you
+      $request = array('target_screen_name' => $user);
+      $friendship = twitter_get('friendships/show', $request);
+      $is_followed_by = $friendship->source->followed_by;
+      $content['is_followed_by'] = $is_followed_by;
+  }
+
     $content['create-direct'] = true;
     $content['create-to'] = $user;
     $theme->include_html('direct_list');

@@ -18,6 +18,10 @@ function is_create_direct() {
 
 function create_direct_html() {
   global $content;
+  if (! empty($content['followed_by'])) {
+    echo "<div class='warning'>Sorry, Target user not following you, you can't send the DM to him/her.";
+    return;
+  }
 
   if (isset($content['create-to']) && ! empty($content['create-to']))
     $user = $content['create-to'];
