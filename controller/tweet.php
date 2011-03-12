@@ -80,6 +80,7 @@ function retweet($tweet) {
     $content['retweet_id'] = $tweet;
     $content['retweet_user'] = '@'.$tweet_obj->user->screen_name;
     $content['retweet_text'] = $tweet_obj->text;
+    $content['is_protect'] = $tweet_obj->user->protected;
     $theme->include_html('retweet');
   }
 }

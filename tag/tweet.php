@@ -192,6 +192,11 @@ function delete_html() {
 function new_retweet_html() {
   global $content;
 
+  if ($content['is_protect']) {
+  echo "<div class='warning'> This is a protected tweet, can't use offical retweet";
+  return;
+  }
+  
   echo "<form action='".make_path("tweet/retweet/".$content['retweet_id'])."' method='post'>";
   echo "<input type='submit' value='Twitter Retweet' />";
   echo "</form>";
