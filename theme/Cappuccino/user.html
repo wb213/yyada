@@ -1,0 +1,25 @@
+<?php include('header.html') ?>
+
+<div class='update'>
+  <?php update_html() ?>
+</div>
+
+<div class='info'>
+  <?php user_info_html() ?>
+</div>
+<hr />
+<div class='tweets'>
+  <ul>
+    <?php while (has_tweet_list()) : ?>
+    <li <?php list_tweet_item_class() ?>>
+      <?php list_tweet_item_html() ?>
+    </li>
+    <?php endwhile; ?>
+  </ul>
+</div>
+
+<div class='page'>
+  <?php tweet_page_menu() ?>
+</div>
+
+<?php include('footer.html') ?>

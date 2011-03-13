@@ -1,13 +1,14 @@
-/* Zenburn Colorscheme For Yyada  */
-/* Via @beckyeeky http://about.me/beck */
-/* Yyada Project Page: http://code.google.com/p/yyada/ */
-/* Thanks to: */
-/* @Soli http://twitter.com/sylvain_soliman/statuses/4914803545 */
-/* slav0nic http://djangobb.org/browser/static/forum/css/hljs_styles/zenburn.css?rev=0%3A6431110c4d92 */
+/*      Android Colorscheme For Yyada                       */
+/*      Via @beckyeeky http://about.me/beck                 */
+/*      Yyada Project Page: http://code.google.com/p/yyada/ */
+/*      Thanks to:                                          */
+/*      @JaHiy Netputweets Lite                             */
+
+
 
 
 a {
-	color: #CCCCCC;
+	color: #67753A;
 }
 
 form {
@@ -16,9 +17,9 @@ form {
 
 img.avatar {
 	float: left;
-	height: 40px;
+	height: 45px;
 	padding-right: 5px;
-	width: 40px;
+	width: 45px;
 }
 
 .toolbar .screen_name {
@@ -26,18 +27,18 @@ img.avatar {
 }
 
 .via, .via > a {
-	color: #DCA3A3;
+	color: #69495C;
 	font: 90% sans-serif;
 	margin-top: 5px;
 }
 
 .retweet-bar, .retweet-bar > a {
-    
+    color: #9C5436
 }
 
 body {
-	background: #3F3F3F;
-	color: #F0DFAF;
+	background: #F0F0F0;
+	color: #2c3342;
 	font: 90% sans-serif;
 	margin: 0pt;
 }
@@ -71,29 +72,30 @@ ul {
 }
 
 ul > li {
+	background: #F5F5F5;
 }
 
 ul > li.even {
-	background: #2f2f2f;
+	background: #E8F0CD;
 }
 
 ul > li.mentioned {
-	background: #4C4C2F;
+	background: #D1E29C;
 }
 
 .menu {
-	background: #3F3F3F;
-	color: #8F8F8F;
+	background: #A4C639;
+	color: #FFF;
 	padding: 2px;
 }
 
 .menu a {
-	color: #dcdcdc;
+	color: #FFF;
 	text-decoration: none;
 }
 
 .menu .important {
-	color: #BFCAA9;
+	color: #6C4F10;
 	font-weight: bold;
 }
 
@@ -107,7 +109,5 @@ ul > li.mentioned {
 	font-weight: bolder;
 }
 .update textarea {
-	background-color: #284F28;
-	color: #DCDCCC;
 	width: 99%;
 }

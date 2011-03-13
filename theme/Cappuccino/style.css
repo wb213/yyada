@@ -1,113 +1,86 @@
-/* Zenburn Colorscheme For Yyada  */
-/* Via @beckyeeky http://about.me/beck */
-/* Yyada Project Page: http://code.google.com/p/yyada/ */
-/* Thanks to: */
-/* @Soli http://twitter.com/sylvain_soliman/statuses/4914803545 */
-/* slav0nic http://djangobb.org/browser/static/forum/css/hljs_styles/zenburn.css?rev=0%3A6431110c4d92 */
-
-
 a {
-	color: #CCCCCC;
+	color: #86723D;
 }
-
 form {
 	margin: 5px;
 }
-
 img.avatar {
 	float: left;
-	height: 40px;
+	height: 48px;
 	padding-right: 5px;
-	width: 40px;
+	width: 48px;
+	-moz-border-radius: 9px;
+	border-radius: 9px;
 }
-
 .toolbar .screen_name {
 	font-weight: bolder;
 }
-
 .via, .via > a {
-	color: #DCA3A3;
+	color: #635f29;
 	font: 90% sans-serif;
 	margin-top: 5px;
 }
-
 .retweet-bar, .retweet-bar > a {
-    
 }
-
 body {
-	background: #3F3F3F;
-	color: #F0DFAF;
-	font: 90% sans-serif;
-	margin: 0pt;
+	background: #E1DCA8;
+	color: #645531;
+	font: 90% Tahoma;
+	margin: 0;
 }
-
 li {
 	list-style-type: none;
 	min-height: 48px;
 	padding: 5px;
 }
-
 ul {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
-
 .update textarea {
 	width: 99%;
 }
-
 .status {
 	margin-top: 5px;
 }
-
 .tweet {
 	display: block;
 	overflow: hidden;
 }
-
 .toolbar > * {
 	margin: 3px;
 }
-
 ul > li {
 }
-
 ul > li.even {
-	background: #2f2f2f;
+	background: #C3B984;
 }
-
 ul > li.mentioned {
 	background: #4C4C2F;
 }
-
 .menu {
-	background: #3F3F3F;
+	background: #684F19;
 	color: #8F8F8F;
 	padding: 2px;
 }
-
 .menu a {
-	color: #dcdcdc;
+	color: #DCDCDC;
 	text-decoration: none;
 }
-
 .menu .important {
 	color: #BFCAA9;
 	font-weight: bold;
 }
-
 .error {
 	color: red;
 	font-style: italic;
 }
-
 .highlight {
-	color: #6f9f9f;
+	color: #584321;
 	font-weight: bolder;
 }
 .update textarea {
-	background-color: #284F28;
-	color: #DCDCCC;
+	-moz-border-radius: 10px;
 	width: 99%;
+	border-radius: 10px;
 }
