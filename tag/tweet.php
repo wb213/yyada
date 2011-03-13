@@ -89,6 +89,14 @@ function list_tweet_item_html() {
 
   $tweet = $content['tweets'][$content['iter']];
 
+  // retweet handling
+  $is_retweet = false;
+  if (isset($tweet->retweeted_status)) {
+    $is_retweet = true;
+    $retweet_by = $tweet->user->screen_name;
+    $tweet = $content['tweets'][$content['iter']]->retweeted_status;
+  }
+
   // filter handling, not filter user self tweet
   if (empty($_GET['unfilter'])) {
     $filter = $settings->filter;
@@ -107,14 +115,6 @@ function list_tweet_item_html() {
         return;
       }
     }
-  }
-
-  // retweet handling
-  $is_retweet = false;
-  if (isset($tweet->retweeted_status)) {
-    $is_retweet = true;
-    $retweet_by = $tweet->user->screen_name;
-    $tweet = $content['tweets'][$content['iter']]->retweeted_status;
   }
 
   // error handling
