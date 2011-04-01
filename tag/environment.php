@@ -53,8 +53,6 @@ function menu() {
  | <a ".($monitor->is_new('direct')?"class='important' ":"")."href='".make_path("direct")."'>Directs</a>
  | <a href='".make_path("favor")."'>Favourite</a>
  | <a href='".make_path("search")."'>Search</a>
- | <a href='".make_path("user/followers")."'>Followers</a>
- | <a href='".make_path("user/friends")."'>Friends</a>
  | <a href='".make_path("list")."'>List</a>
 ".monitor_list()."
  | <a href='".make_path("settings")."'>Settings</a>
