@@ -23,7 +23,7 @@ function oauth() {
 
   switch ($connection->http_code) {
   case 200:
-    $url = $connection->getAuthorizeURL($token);
+    $url = $connection->getAuthorizeURL($token, false);
     header('Location: ' . $url);
     break;
   default:
