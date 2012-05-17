@@ -58,7 +58,7 @@ class TwitterOAuth {
    * construct TwitterOAuth object
    */
   function __construct($consumer_key, $consumer_secret, $oauth_token = NULL, $oauth_token_secret = NULL, $oauth_proxy = NULL) {
-    if (isset($oauth_proxy)) {
+    if (!empty($oauth_proxy)) {
       $this->oauth_proxy = rtrim($oauth_proxy, '/');
     }
     $this->sha1_method = new OAuthSignatureMethod_HMAC_SHA1();
