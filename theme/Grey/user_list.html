@@ -1,0 +1,15 @@
+<?php include('header.html') ?>
+
+<div class='users'>
+  <ul>
+    <?php while (has_user_list()) : ?>
+    <li <?php list_user_class() ?>>
+      <?php list_user_html() ?>
+    </li>
+    <?php endwhile; ?>
+  </ul>
+</div>
+
+<?php list_user_page_menu() ?>
+
+<?php include('footer.html') ?>

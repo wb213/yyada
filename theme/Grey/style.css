@@ -1,0 +1,132 @@
+a {
+	color: #1481B1;
+}
+
+form {
+	margin: 5px;
+}
+
+img.avatar {
+	margin-right: 5px;
+padding:1px;
+border: 1px solid #bbb;
+	float: left;
+	height: 36px;
+	width: 36px;
+}
+
+.toolbar .screen_name {
+	font-weight: bolder;
+}
+
+.via, .via > a {
+	margin-top: 5px;
+	color: #888;
+	font: 90% sans-serif;
+}
+
+.retweet-bar, .retweet-bar > a {
+	color: #66F;
+}
+
+body {
+	background: #fafafa;
+	color: #333;
+	margin: 0;
+	font: 12px/16px "Droid Serif", sans-serif;
+}
+
+li {
+	list-style-type: none;
+	padding: 5px;
+	min-height: 48px;
+}
+
+ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+.update textarea {
+width:99%;
+margin:0;
+}
+
+.update div {
+margin: 4px 0;
+}
+
+.status {
+	margin-top: 5px;
+}
+
+.tweet {
+	display: block;
+	overflow: hidden;
+}
+
+.toolbar > * {
+	margin: 3px;
+}
+
+ul > li {
+	background: #efefef;
+margin: 5px;
+padding: 5px;
+border: 1px dotted #ddd;
+}
+
+ul > li.even {
+	background: #fcfcfc;
+}
+
+ul > li.mentioned {
+	background: #FFA;
+}
+
+.menu {
+	color: #FFF;
+	background: #999;
+	padding: 2px 6px;
+}
+
+.menu a {
+	color: #FFF;
+	text-decoration: none;
+}
+
+.menu .important {
+	color: #6cf;
+	font-weight: bold;
+}
+
+.error {
+  color: red;
+  font-style: italic;
+}
+
+.highlight {
+  color: #900;
+}
+
+.page {
+padding: 0 10px 5px 10px;
+}
+
+input[type="submit"] {
+background: none;
+border: 1px solid #999;
+padding: 3px 12px;
+margin:0;
+}
+
+.info{
+padding:10px;
+}
+
+.info > img {
+padding:1px;
+border: 1px solid #ccc;
+float: left;
+margin: 0 10px 10px 0;
+}
