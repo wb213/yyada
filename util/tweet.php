@@ -47,6 +47,7 @@ function format_tweet($tweet) {
   $list_replace = '@\1/<a href="'.make_path('/list').'/\1/\2">\2</a>';
   $user_pattern = '/@([a-zA-Z0-9_]+)/';
   $user_replace = '@<a href="'.make_path('/user/show').'/\1">\1</a>';
+  $shortened_pattern = '/((http|https)\:\/\/t\.co\/[a-zA-Z0-9_\-\+\.\/\?\&\$\@\:\=\#\%]+)/';
   $url_pattern = '/((http|https)\:\/\/[a-zA-Z0-9_\-\+\.\/\?\&\$\@\:\=\#\%]+)/';
   $url_replace = '<a target="_blank" href="\1">\1</a>';
   $tag_pattern = '/(#[a-zA-Z0-9_]+)/';
@@ -59,10 +60,26 @@ function format_tweet($tweet) {
 
   $tweet = preg_replace($list_pattern, $list_replace, $tweet);
   $tweet = preg_replace($user_pattern, $user_replace, $tweet);
+  $tweet = preg_replace_callback($shortened_pattern, 'unshorten_url', $tweet);
   $tweet = preg_replace($url_pattern, $url_replace, $tweet);
   $tweet = preg_replace_callback($tag_pattern, 'hashtag_encode', $tweet);
 
   return $tweet;
+}
+
+// http://jonathonhill.net/2012-05-18/unshorten-urls-with-php-and-curl/
+function unshorten_url($url) {
+    $ch = curl_init($url[1]);
+    curl_setopt_array($ch, array(
+        CURLOPT_FOLLOWLOCATION => TRUE,  // the magic sauce
+        CURLOPT_RETURNTRANSFER => TRUE,
+        CURLOPT_SSL_VERIFYHOST => FALSE, // suppress certain SSL errors
+        CURLOPT_SSL_VERIFYPEER => FALSE,
+    ));
+    curl_exec($ch);
+    $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+    curl_close($ch);
+    return $url;
 }
 
 function hashtag_encode($match) {
