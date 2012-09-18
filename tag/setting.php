@@ -25,6 +25,11 @@ function settings_html($echo = true) {
   $ret .= '" />Show image.';
   $ret .= '</p>';
 
+  $ret .= '<p><input type="checkbox" name="url_expand" value="yes"';
+  $ret .= $s->url_expand?' checked="checked"':'';
+  $ret .= '" />Expand URL.';
+  $ret .= '</p>';
+  
   $ret .= '<p>RT format: <input type="text" name="rt_format" maxlength="140" value="';
   $ret .= $s->rt_format;
   $ret .= '" />';

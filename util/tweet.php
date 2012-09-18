@@ -55,12 +55,13 @@ function format_tweet($tweet) {
   $tweet = nl2br($tweet);
 
   $highlight_pattern = $settings->highlight;
+  $url_expand = $settings->url_expand;
   if (! empty($highlight_pattern))
     $tweet = keyword_highlight($highlight_pattern, $tweet);
 
   $tweet = preg_replace($list_pattern, $list_replace, $tweet);
   $tweet = preg_replace($user_pattern, $user_replace, $tweet);
-  $tweet = preg_replace_callback($shortened_pattern, 'unshorten_url', $tweet);
+  if ($url_expand) $tweet = preg_replace_callback($shortened_pattern, 'unshorten_url', $tweet);
   $tweet = preg_replace($url_pattern, $url_replace, $tweet);
   $tweet = preg_replace_callback($tag_pattern, 'hashtag_encode', $tweet);
 

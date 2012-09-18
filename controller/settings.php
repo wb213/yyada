@@ -15,6 +15,7 @@ function show() {
     if (isset($_POST['theme'])) $settings->theme = $_POST['theme'];
     $settings->show_avatar = isset($_POST['avatar']);
     $settings->show_img = isset($_POST['img']);
+    $settings->url_expand = isset($_POST['url_expand']);
     if (isset($_POST['rt_format'])) $settings->rt_format = $_POST['rt_format'];
     if (isset($_POST['highlight'])) $settings->highlight = $_POST['highlight'];
     if (isset($_POST['filter'])) $settings->filter = $_POST['filter'];

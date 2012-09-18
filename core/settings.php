@@ -11,6 +11,7 @@ class Settings {
     "rt_format" => array("string", "RT %u: %t"),
     "highlight" => array("string","RT"),
     "filter" => array("string",""),
+    "url_expand" => array("string",false),
   );
 
   private $cookie_key = "config";
